@@ -14,7 +14,7 @@ public class Artwork implements Serializable{
     private int price;
 	private int likeCnt;
 	private int isSoldOut;	
-	///추가된 애들...
+	///추가된 애들
 	private int isInWishList;
 	private int isInCart;
 
