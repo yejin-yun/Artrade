@@ -6,7 +6,7 @@ public class ArtworkOrder implements Serializable{
     // 주문 번호(primary key가 될 것.)
     // 상품정보(ArrayList<ArtWorks>, 여러개 구매할 수 있으니까)
     // 배송받을 주소, 수취자, 전화번호, 결제수단(카드결제, 무통장입금(입금자명, 입금은행), 휴대폰결제, 실시간 계좌이체(예금주명)) 
-    // 결재금액 
+    // 결제금액
 
     private int ArtworkOrderNo;
     private int userNo;
