@@ -1,6 +1,6 @@
 
 <% response.sendRedirect(request.getContextPath() + "/main"); 
-    //test...........................................ìœ ë‚˜,,,
+    //test...........................................ìœ ë  yunatest‚˜,,,
     %>
 
 
