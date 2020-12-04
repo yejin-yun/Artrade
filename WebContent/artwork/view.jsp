@@ -41,7 +41,7 @@
 	       form.submit();
 	    }
     
-	   	function clickLike(targetUri) {
+	   	function clickLike() {
 				//var like = document.getElementById("like_img");
 				//console.log("test: " + like.src);
 				//if(like.src = "/artrade/images/bagic/heart-full.png")
@@ -49,7 +49,8 @@
 				//else
 				//	like.src = "/artrade/images/bagic/heart-full.png";
 				alert(targetUri);
-				moveTarget(targetUri);
+				//moveTarget(targetUri);
+				form.submit();
 			}
     </script>
 </head>
@@ -131,7 +132,7 @@
 	        						<c:param name="artworkNo" value="${artworkNo}" />
 	        						</c:url>">
 	                            	<img src="<c:url value='${like_src}' />" id="like_img"
-	                                	alt="하트(좋아요)" class="heart" onclick="clickLike'<c:url value='/user/wishlistLike' />')"
+	                                	alt="하트(좋아요)" class="heart" onclick="clickLike()"
 	                                	style="padding-bottom: 10px; float: right; padding-right: 10px;"/>
 	                            </form>
 	                            <p><%= artwork.getArtistName() %></p>
