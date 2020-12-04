@@ -132,7 +132,8 @@ public class ArtworkDAO {
 		
 		String sql = "SELECT artworkNo, image, title, artistName, price " + 
 					" FROM ARTWORK  " + 
-					" WHERE isOrderAvailable != 0 ";	
+					" WHERE isOrderAvailable != 0 "
+					+ "ORDER BY artworkNo ";	
 
 		jdbcUtil.setSqlAndParameters(sql, null);
 					
@@ -171,7 +172,8 @@ public class ArtworkDAO {
 					" FROM ARTWORK a, WISHARTWORK w " + 
 					" WHERE a.artworkNo = w.artworkNo (+) "
 					+ " AND w.userNo (+) = ?"
-					+ " AND a.isOrderAvailable != 0 ";	
+					+ " AND a.isOrderAvailable != 0 "
+					+ "ORDER BY artworkNo ";
 
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});
 					

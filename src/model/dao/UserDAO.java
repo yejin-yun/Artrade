@@ -735,7 +735,7 @@ public class UserDAO {
 					+ "a.receiver AS receiver, a.phone AS phone "
 					+ "FROM USERINFO u , ARTWORKORDER a "
 					+ "WHERE u.userNo = a.userNo "
-					+ "u.userNo = ?";
+					+ "AND u.userNo = ?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil�� query�� ����
 					
 		try {
