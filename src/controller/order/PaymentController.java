@@ -26,6 +26,8 @@ public class PaymentController implements Controller {
         
     	// 결제로 넘어가는 페이지에서는 userNo과 isInCart값, artworkNo or artworList(setAtt로 보내주기..)를 PaymentController쪽으로 넘겨줘야 한다...
     	
+    	System.out.println("isInCart = " + request.getParameter("isInCart"));
+    	System.out.println("userNo = " + request.getParameter("userNo"));
     	int isInCart = Integer.parseInt((String)request.getParameter("isInCart"));
     	int userNo = Integer.parseInt(request.getParameter("userNo"));
     	
@@ -69,6 +71,11 @@ public class PaymentController implements Controller {
     	
     	manager.createArtworkOrder(artworkOrder, artworkList);
 		
+    	for(Artwork a : artworkList) {
+    		manager.updateSoldOut(a.getArtworkNo());
+    	}
+    	
+    	
     	return "redirect:/order/list";
 	}
 

@@ -168,7 +168,8 @@
         	</c:url>" id="payment_form">
             <div class="menu"> --%>
             <form method="POST" action="<c:url value='/order/payment'>
-            	<c:param name='isInCart' value='${isInCart}' /></c:url>" id="payment_form" name="form">
+            	<c:param name='isInCart' value='${isInCart}' /><c:param name='userNo' value='${userNo}' /><c:param name='artworkNo' value='${artworkNo}' /></c:url>" id="payment_form" name="form">
+            	
             <div class="menu">
                     <h3>상품 정보</h3>
                     <a><button type="button" class="btn btn-info" id="submenu_click" style="margin-bottom: 30px; margin-top: 10px;">주문 상품 보기</button></a>
