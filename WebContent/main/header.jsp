@@ -81,7 +81,7 @@
                 	<li><a href="<c:url value='/user/logout' />">LogOut</a></li>
                 </c:if>
                 <li><a href="../user/cart.jsp">Cart</a></li>
-                <li><a href="../user/wishlist.jsp">Wishlist</a></li>
+                <li><a href="<c:url value='/user/wishlist' />">Wishlist</a></li>
                 <li><a href="../user/mypage.jsp">Mypage</a></li>
             </ul>
         </div>

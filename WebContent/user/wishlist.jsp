@@ -24,14 +24,16 @@
 
     <script>
         //위시리스트
-        function target(targetUri) {
-            form.action = targetUri; // 삭제면 삭제, 카트 이동이면 카드 이동
-            form.submit();
-         }
+         function moveTarget(targetUri) {
+       		//alert(targetUri);
+           form.action = targetUri; // 삭제면 삭제, 카트 이동이면 카드 이동
+           form.submit();
+        }
         
        function deletes(targetUri) {
+    	   //alert(targetUri);
 	       var isChk = false;
-	       var products = document.getElementsByName("wishArtwork");
+	       var products = document.getElementsByName("checkArtwork");
 	       console.log('console' + products[0]);
 	       for(var i=0;i<products.length;i++){
 	           if(products[i].checked == true) {
@@ -44,8 +46,10 @@
 	         return false;
 	     }
 	     
-	     target(targetUri);
+	     moveTarget(targetUri);
        }
+        
+      
      
     </script>
     <script>
@@ -56,16 +60,16 @@
   <%@ include file="../main/header.jsp" %>
     <div class="section">
     <section>
-    	<form method="POST" action="<c:url value=' ' />" id="payment_form" name="form">
-           <table>
+    	<form method="POST" action="<c:url value='/user/wishlist' />" id="payment_form" name="form">
            <%
+           		out.println("<table>");
                  System.out.println("here is....view.jsp");
                  List<Artwork> wishlist = (List<Artwork>)request.getAttribute("wishlist");
                  
                  //System.out.println("size = " + wishlist.size());
                  
                  if(wishlist == null) {
-                    out.println("<p style='text-align:center;'>상품이 없습니다.</p>");
+                    out.println("<p style='text-align:center;'>위시리스트가 없습니다.</p>");
                     return;
                  }
                  int total = wishlist.size();
@@ -94,11 +98,11 @@
                     }
            %>
                  <td>
-                  <label> <%-- detail.jsp?artworkNo=${ads.artwork.artworkNo}&isLogined=1&userNo=${ads.artwork(심플아트워크 담는 객체 변수의 이름).userNo} --%>
-                    <input type="checkbox" name="wishArtwork" value="<%= i %>"/>    
+                  <label> <%-- detail.jsp?artworkNo=${ads.artwork.artworkNo}&isLogined=1&userNo=${ads.artwork(심플아트워크 담는 객체 변수의 이름).userNo} --%>   
                     <div class="w3-card-4 work card">
-                        <c:set var="artworkNo" value="<%= wishArtwork.getArtworkNo() %>" />    
-                        <c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 
+                   		<c:set var="artworkNo" value="<%= wishArtwork.getArtworkNo() %>" />    
+                       	<c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 
+                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}"/> 	
                            <div class="img_div">
                            	<a href="<c:url value='/artwork/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />" > 
                                <img class="main_img" src="<c:url value='<%= wishArtwork.getImage() %>' />" /></a>
@@ -108,11 +112,10 @@
                             <h2><%= wishArtwork.getTitle() %></h2>
                             <h2><%= wishArtwork.getArtistName() %></h2>
                             <h2><%= wishArtwork.getPrice() %></h2></a> 
-                          <%--<form method="post" id="wish_form"
-                            action="<c:url value="/user/wishlist/like" var="wish"> --%>  
                            <div>
-                           <input type="button" value="삭제" onClick="target('<c:url value='/user/deletewishlist' />')"/>
-                           <input type="button" value="장바구니로 이동" onClick="target('<c:url value='/user/fromWishToCart' />')"/>
+                           <input type="button" value="삭제" onClick="moveTarget('<c:url value='/user/deletewishlist' />')" >
+                           <input type="button" value="장바구니로 이동" onClick="moveTarget('<c:url value='/user/fromWishToCart' />')" >
+                          
                            </div>
                         </div>
                     </div>
@@ -126,7 +129,7 @@
                  out.println("</table>");
          %>
          <div class="w3-center"> 
-			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')"/>
+			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
 		 </div>
          <%
                  if(total != 0) {

@@ -61,7 +61,7 @@
             <a href=""><button type="button" id="cart">장바구니에 담기</button></a>
             <%--  <c:set var="wish_val" value="<%= artwork.getIsInWishlist() %>" /> --%> 
             <c:set var="artworkNo" value="<%= artwork.getArtworkNo() %>" /> 
-            <a href="<c:url value="/user/wishlist/like" var="wish">
+            <a href="<c:url value="/user/wishlistLike" var="wish">
                             	<c:if test="${wish_val == 0}" >
         							<c:param name="like" value="1" />
         						</c:if>

@@ -21,6 +21,7 @@ public class WishlistUpdateController implements Controller {
           return "redirect:/user/login";
         } 
        
+       System.out.println("in WishlistUpdateController");
        String userId = UserSessionUtils.getLoginUserId(request.getSession());
         
       User user = manager.findUserById(userId);

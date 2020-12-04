@@ -35,14 +35,21 @@
         });
     </script>
     <script>
-	   	function clickLike() {
+	    function moveTarget(targetUri) {
+	   		//alert(targetUri);
+	       form.action = targetUri; // 삭제면 삭제, 카트 이동이면 카드 이동
+	       form.submit();
+	    }
+    
+	   	function clickLike(targetUri) {
 				//var like = document.getElementById("like_img");
 				//console.log("test: " + like.src);
 				//if(like.src = "/artrade/images/bagic/heart-full.png")
 				//	like.src = "/artrade/images/bagic/heart-thin.png";
 				//else
 				//	like.src = "/artrade/images/bagic/heart-full.png";
-				document.getElementById("wish_form").submit();
+				alert(targetUri);
+				moveTarget(targetUri);
 			}
     </script>
 </head>
@@ -112,7 +119,7 @@
 	        					<c:if test="${wish_val == 0}" >
 	        						<c:set var="like_src" value="/images/bagic/heart-thin.png" />
 	        					</c:if>
-	                            <form method="post" style="display: inline;" id="wish_form"
+	                            <form method="post"  name="form" style="display: inline;"
 	                            action="<c:url value="/user/wishlistLike">
 	                            	<c:if test="${wish_val == 0}" >
 	        							<c:param name="like" value="1" />
@@ -124,7 +131,7 @@
 	        						<c:param name="artworkNo" value="${artworkNo}" />
 	        						</c:url>">
 	                            	<img src="<c:url value='${like_src}' />" id="like_img"
-	                                	alt="하트(좋아요)" class="heart" onclick="clickLike()"
+	                                	alt="하트(좋아요)" class="heart" onclick="clickLike'<c:url value='/user/wishlistLike' />')"
 	                                	style="padding-bottom: 10px; float: right; padding-right: 10px;"/>
 	                            </form>
 	                            <p><%= artwork.getArtistName() %></p>
