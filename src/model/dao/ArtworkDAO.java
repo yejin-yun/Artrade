@@ -311,17 +311,17 @@ public class ArtworkDAO {
 			
 			jdbcUtil.setSqlAndParameters(sql2, new Object[] {artworkNo, userNo});
 			ResultSet rs2 = jdbcUtil.executeQuery();
-			//boolean found = rs2.next();
-			if(rs.isBeforeFirst() && rs2.next()) {
-				if( rs.getInt("wishArtworkNo") != 0 ) artwork.setIsInWishList(1);
+			//boolean found = rs2.next();rs.isBeforeFirst() && 
+			if(rs2.next()) {
+				if( rs2.getInt("wishArtworkNo") != 0 ) artwork.setIsInWishList(1);
 			} else {
 				artwork.setIsInWishList(0);
 			}
 			
 			jdbcUtil.setSqlAndParameters(sql3, new Object[] {artworkNo, userNo});
 			ResultSet rs3 = jdbcUtil.executeQuery();
-			if(rs.isBeforeFirst() && rs3.next()) {
-				if( rs.getInt("cartArtworkNo") != 0 ) artwork.setIsInCart(1);
+			if(rs3.next()) {
+				if( rs3.getInt("cartArtworkNo") != 0 ) artwork.setIsInCart(1);
 			} else {
 				artwork.setIsInCart(0);
 			}
