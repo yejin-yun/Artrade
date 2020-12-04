@@ -90,11 +90,15 @@ public class ArtworkDAO {
 	/** Artwork 테이블에 새로운 행을 생성하고 PK를 반환해주는 메소드*/
 	public int insertArtwork(Artwork artwork) throws SQLException {
 		
-		String sql = "INSERT INTO ARTWORK (artworkNo, image, workSize, title, price, artistName, description, isSoldOut)"+
-					"VALUES (seq_pk.nextval, ?, ?, ?, ?, ?, ?, ?)";	
+		//수정본
+//		String sql = "INSERT INTO ARTWORK (artworkNo, image, workSize, title, price, artistName, description, isSoldOut)"+
+//					"VALUES (seq_pk.nextval, ?, ?, ?, ?, ?, ?, ?)";	
+		String sql = "INSERT INTO ARTWORK (artworkNo, image, workSize, title, price, artistName, description, isSoldOut, sellerNo)"+
+					"VALUES (seq_pk.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";	
 		
 		Object[] param = new Object[] { artwork.getImage(), artwork.getWorkSize(), artwork.getTitle(),
-										artwork.getPrice(), artwork.getArtistName(), artwork.getDescription(), artwork.getIsSoldOut()};
+										artwork.getPrice(), artwork.getArtistName(), artwork.getDescription(), artwork.getIsSoldOut()
+										, artwork.getSellerNo()};
 		
 		jdbcUtil.setSqlAndParameters(sql, param);
 		
@@ -223,7 +227,11 @@ public class ArtworkDAO {
 	
 	/** 비로그인/비사용자용  작품 detail 페이지*/
 	public Artwork getArtworkByNoForNotUser(int artworkNo) throws SQLException{
-		String sql = "SELECT artworkNo, image, workSize, title, price, likeCnt, artistName, description, isSoldOut "
+//		String sql = "SELECT artworkNo, image, workSize, title, price, likeCnt, artistName, description, isSoldOut "
+//				+ " FROM ARTWORK "
+//				+ " WHERE artworkNo = ?";
+		//수정본
+		String sql = "SELECT artworkNo, image, workSize, title, price, likeCnt, artistName, description, isSoldOut, sellerNo "
 				+ " FROM ARTWORK "
 				+ " WHERE artworkNo = ?";
 		
@@ -245,6 +253,8 @@ public class ArtworkDAO {
 				artwork.setArtistName(rs.getString("artistName"));
 				artwork.setDescription(rs.getString("description"));
 				artwork.setIsSoldOut(rs.getInt("isSoldOut"));
+				//수정
+				artwork.setSellerNo(rs.getInt("sellerNo"));
 				
 				return artwork;
 			}
@@ -262,7 +272,8 @@ public class ArtworkDAO {
 	/** artworkNo(입력값)에 해당하는 Artwork테이블의 행을 artwork 객체로 반환*/
 	public Artwork getArtworkByNoForUser(int userNo, int artworkNo) throws SQLException{
 		
-		String sql = "SELECT artworkNo, image, workSize, title, price, likeCnt, artistName, description, isSoldOut "
+		//수정본
+		String sql = "SELECT artworkNo, image, workSize, title, price, likeCnt, artistName, description, isSoldOut, sellerNo "
 					+ " FROM ARTWORK "
 					+ " WHERE artworkNo = ?";
 		
@@ -293,13 +304,15 @@ public class ArtworkDAO {
 				artwork.setArtistName(rs.getString("artistName"));
 				artwork.setDescription(rs.getString("description"));
 				artwork.setIsSoldOut(rs.getInt("isSoldOut"));
-				
+				//수정
+				artwork.setSellerNo(rs.getInt("sellerNo"));
 				//return artwork;
 			}
 			
 			jdbcUtil.setSqlAndParameters(sql2, new Object[] {artworkNo, userNo});
 			ResultSet rs2 = jdbcUtil.executeQuery();
-			if(rs2.next()) {
+			//boolean found = rs2.next();
+			if(rs.isBeforeFirst() && rs2.next()) {
 				if( rs.getInt("wishArtworkNo") != 0 ) artwork.setIsInWishList(1);
 			} else {
 				artwork.setIsInWishList(0);
@@ -307,7 +320,7 @@ public class ArtworkDAO {
 			
 			jdbcUtil.setSqlAndParameters(sql3, new Object[] {artworkNo, userNo});
 			ResultSet rs3 = jdbcUtil.executeQuery();
-			if(rs3.next()) {
+			if(rs.isBeforeFirst() && rs3.next()) {
 				if( rs.getInt("cartArtworkNo") != 0 ) artwork.setIsInCart(1);
 			} else {
 				artwork.setIsInCart(0);

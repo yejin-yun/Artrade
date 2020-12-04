@@ -17,10 +17,25 @@ public class Artwork implements Serializable{
 	///추가된 애들...
 	private int isInWishList;
 	private int isInCart;
+	//새로 추가
+	private int sellerNo;
 
-    public Artwork() { //defualt 
+	
+	public Artwork() { //defualt 
     }
     
+	
+    public int getSellerNo() {
+		return sellerNo;
+	}
+
+
+	public void setSellerNo(int sellerNo) {
+		this.sellerNo = sellerNo;
+	}
+
+
+	
 
 	public int getArtworkNo() {
 		return artworkNo;

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
+import controller.user.UserSessionUtils;
 import model.Artwork;
 import model.User;
 import model.service.ExistingUserException;
@@ -30,7 +31,11 @@ public class RegisterArtworkController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+    	
+      // 로그인 여부 확인
+      if (!UserSessionUtils.hasLogined(request.getSession())) {
+         return "redirect:/user/login";		// login form 요청으로 redirect
+      }
       
       if(request.getMethod().equals("GET")){
          return "/artwork/registerForm.jsp";
@@ -124,7 +129,8 @@ public class RegisterArtworkController implements Controller {
           }catch(Exception e) {            
                   e.printStackTrace();
           }
-              
+          
+          Manager manager = Manager.getInstance();
           artwork = new Artwork();
           
           System.out.println(dir+"/"+filename);
@@ -137,10 +143,15 @@ public class RegisterArtworkController implements Controller {
           artwork.setPrice(Integer.parseInt(price));
           artwork.setIsSoldOut(0);
           artwork.setLikeCnt(0);
+          //수정
+          String userId = UserSessionUtils.getLoginUserId(request.getSession());
+          User user = manager.findUserById(userId);
+          int userNo = user.getUserNo();
+          artwork.setSellerNo(userNo);
           
           log.debug("Create Artwork : {}", artwork);
           
-          Manager manager = Manager.getInstance();
+          
           int artworkNo = manager.createArtwork(artwork);
           
           manager.createKeyword(artworkNo, keyword); //추후 수정 -> 키워드 별로 나눠서 넣기.
