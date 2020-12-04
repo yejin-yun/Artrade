@@ -48,7 +48,7 @@
 				//	like.src = "/artrade/images/bagic/heart-thin.png";
 				//else
 				//	like.src = "/artrade/images/bagic/heart-full.png";
-				alert(targetUri);
+				//alert(targetUri);
 				//moveTarget(targetUri);
 				form.submit();
 			}
@@ -120,8 +120,7 @@
 	        					<c:if test="${wish_val == 0}" >
 	        						<c:set var="like_src" value="/images/bagic/heart-thin.png" />
 	        					</c:if>
-	                            <form method="post"  name="form" style="display: inline;"
-	                            action="<c:url value="/user/wishlistLike">
+	                            <a href="<c:url value='/user/wishlistLike'>
 	                            	<c:if test="${wish_val == 0}" >
 	        							<c:param name="like" value="1" />
 	        						</c:if>
@@ -132,9 +131,9 @@
 	        						<c:param name="artworkNo" value="${artworkNo}" />
 	        						</c:url>">
 	                            	<img src="<c:url value='${like_src}' />" id="like_img"
-	                                	alt="하트(좋아요)" class="heart" onclick="clickLike()"
+	                                	alt="하트(좋아요)" class="heart"
 	                                	style="padding-bottom: 10px; float: right; padding-right: 10px;"/>
-	                            </form>
+	                            </a>
 	                            <p><%= artwork.getArtistName() %></p>
 	                            <p><%= artwork.getPrice() %>원</p>
                         </div>
