@@ -15,7 +15,6 @@
     <meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
-    <link type="text/css" rel="stylesheet" href="<c:url value='/css/detail.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
     <style>
 

@@ -1,6 +1,2 @@
 
-<% response.sendRedirect(request.getContextPath() + "/main"); 
-	//add update test
-	//yeji...
-	//wow...success...
-%>
+<% response.sendRedirect(request.getContextPath() + "/main"); %>

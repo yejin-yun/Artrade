@@ -52,7 +52,7 @@
 <body>
 	<%@ include file="../main/header.jsp" %>   
     <section>
-    	<div id="exhImage" class="w3-center w3-content w3-display-container">
+    	<div id="exhImage" class="w3-center w3-content w3-display-container position-with-menu">
     		<c:if test="${!(empty main_exh)}"> 
     			<a class="trigger" data-toggle="modal" data-target="#myModal"><img class="mySlides" src="<c:url value='${main_exh.image}' />" ></a>
     		</c:if>

@@ -12,15 +12,15 @@ import model.User;
 import model.service.Manager;
 
 public class ListWishlistController implements Controller {
-	// private static final int countPerPage = 100;	// 한 화면에 출력할 사용자 수
+	// private static final int countPerPage = 100;	// �븳 �솕硫댁뿉 異쒕젰�븷 �궗�슜�옄 �닔
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
     	Manager manager = Manager.getInstance();
 		
-		// 로그인 여부 확인
+		// 濡쒓렇�씤 �뿬遺� �솗�씤
     	if (!UserSessionUtils.hasLogined(request.getSession())) {
-            return "redirect:/user/login";		// login form 요청으로 redirect
+            return "redirect:/user/login";		// login form �슂泥��쑝濡� redirect
         }
 
     	
@@ -34,7 +34,7 @@ public class ListWishlistController implements Controller {
 		request.setAttribute("sIndex", request.getParameter("sIndex"));
 		System.out.println("lac_sindex = " + request.getParameter("sIndex"));
 		
-		// 유저 아이디에 해당하는 userNo도 넘겨줘야 함. 
+		// �쑀�� �븘�씠�뵒�뿉 �빐�떦�븯�뒗 userNo�룄 �꽆寃⑥쨾�빞 �븿. 
 
 		return "/user/wishlist.jsp"; 
  

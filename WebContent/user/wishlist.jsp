@@ -15,7 +15,6 @@
     <meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
-    <link type="text/css" rel="stylesheet" href="<c:url value='/css/detail.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
     <style>
 
@@ -29,7 +28,25 @@
             form.action = targetUri; // 삭제면 삭제, 카트 이동이면 카드 이동
             form.submit();
          }
-         
+        
+       function deletes(targetUri) {
+	       var isChk = false;
+	       var products = document.getElementsByName("wishArtwork");
+	       console.log('console' + products[0]);
+	       for(var i=0;i<products.length;i++){
+	           if(products[i].checked == true) {
+	               isChk = true;
+	               break;
+	           }
+	       }
+	     if(!isChk) {
+	    	 alert("상품을 한개 이상 선택해주세요.");
+	         return false;
+	     }
+	     
+	     target(targetUri);
+       }
+     
     </script>
     <script>
 
@@ -39,6 +56,7 @@
   <%@ include file="../main/header.jsp" %>
     <div class="section">
     <section>
+    	<form method="POST" action="<c:url value=' ' />" id="payment_form" name="form">
            <table>
            <%
                  System.out.println("here is....view.jsp");
@@ -76,25 +94,29 @@
                     }
            %>
                  <td>
-                    <div class="w3-card-4 work">
+                  <label> <%-- detail.jsp?artworkNo=${ads.artwork.artworkNo}&isLogined=1&userNo=${ads.artwork(심플아트워크 담는 객체 변수의 이름).userNo} --%>
+                    <input type="checkbox" name="wishArtwork" value="<%= i %>"/>    
+                    <div class="w3-card-4 work card">
                         <c:set var="artworkNo" value="<%= wishArtwork.getArtworkNo() %>" />    
                         <c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 
-                        <a href="detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}" > 
                            <div class="img_div">
-                               <img class="main_img" src="<c:url value='<%= wishArtwork.getImage() %>' />" />
+                           	<a href="<c:url value='/artwork/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />" > 
+                               <img class="main_img" src="<c:url value='<%= wishArtwork.getImage() %>' />" /></a>
                            </div>
                         	<div class="content">
+                        	<a href="<c:url value='/artwork/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />" > 
                             <h2><%= wishArtwork.getTitle() %></h2>
                             <h2><%= wishArtwork.getArtistName() %></h2>
-                            <h2><%= wishArtwork.getPrice() %></h2></a>  
+                            <h2><%= wishArtwork.getPrice() %></h2></a> 
                           <%--<form method="post" id="wish_form"
                             action="<c:url value="/user/wishlist/like" var="wish"> --%>  
-                            <form method="post" id="wish_form">
-                               <input type="button" value="삭제" onClick="target('<c:url value='/user/deletewishlist' />')"/>
-                               <input type="button" value="장바구니로 이동" onClick="target('<c:url value='/user/fromWishToCart' />')"/>
-                            </form>  
+                           <div>
+                           <input type="button" value="삭제" onClick="target('<c:url value='/user/deletewishlist' />')"/>
+                           <input type="button" value="장바구니로 이동" onClick="target('<c:url value='/user/fromWishToCart' />')"/>
+                           </div>
                         </div>
                     </div>
+                    </label>
                   </td>
          <%
                if((i + 1) % 3 == 0) {
@@ -102,6 +124,11 @@
                   }
                }
                  out.println("</table>");
+         %>
+         <div class="w3-center"> 
+			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')"/>
+		 </div>
+         <%
                  if(total != 0) {
                     out.println("<div class='w3-center' style='margin-top: 50px;'>");
                     for(int i = 1; i <= allPage; i++) {
@@ -129,6 +156,7 @@
                  //out.println("<a href='<c:url value=\'/artwork/list\' var=\'artlist\'>
                //      <c:param name=\'sindex\' value=\'i\' /></c:url>'>" + i + "</a>");
          %>
+         </form>
     </section>
     </div>
     <div class="footer">
