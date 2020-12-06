@@ -1,11 +1,13 @@
 package model;
 
-public class ExhibitionBuyTicket{
+import java.io.Serializable;
+
+public class ExhibitionBuyTicket implements Serializable{
 	
 	private int ticketNo;
 	private int userNo;
 	private int exhibitionNo;
-	private int title;
+	private String title;
 	private String image;
 	
 	public ExhibitionBuyTicket() {}
@@ -19,11 +21,11 @@ public class ExhibitionBuyTicket{
 
 	
 	
-	public int getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(int title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
