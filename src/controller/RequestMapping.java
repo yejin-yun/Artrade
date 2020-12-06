@@ -74,13 +74,16 @@ public class RequestMapping {
         mappings.put("/exhibition/list", new ListExhibitionController()); //clear
         mappings.put("/exhibition/entrance", new EnterExhibitionController());//half-clear
         mappings.put("/exhibition/detail", new ForwardController("/exhibition/detail.jsp")); //clear
+        
+        mappings.put("/exhibition/search", new ExhibitionSearchController());
+        
 //        //mappings.put("exhibition/detail", new DetailArtworkInExhController());
 //        
 //        mappings.put("/trade/list", new ListTradeController()); //clear
 //        mappings.put("/trade/register", new RegisterTradeController()); //clear
 //        mappings.put("/trade/participantRegister", new RegisterParticipantTradeController());//clear
         
-        
+        mappings.put("/search", new SearchAllContentsController());
 
         logger.info("Initialized Request Mapping!");
     }
