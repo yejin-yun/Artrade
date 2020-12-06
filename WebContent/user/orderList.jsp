@@ -77,7 +77,7 @@
            %>
 	        <tr>
 	            <td><%= artworkOrder.getArtworkOrderNo() %></td>
-	            <td><img style="height: 50px;"src="<%= artworkOrder.getArtworks().get(0).getImage() %>"></td>
+	            <td><img style="height: 50px;" src="<c:url value='<%= artworkOrder.getArtworks().get(0).getImage() %>' />"></td>
 	            <td><%= artworkOrder.getArtworks().get(0).getTitle() %></td>
 	            <td><a href="/user/orderDetail.jsp?ArtworkOrderNo=${ArtworkOrderNo}&isLogined=${isLogined}&userNo=${userNo}">
 	            <button type="button" class="btn btn-default" style="margin-bottom: 20px; margin-top: 5px;">구매내역보기</button></a></td> <%-- isLogined, 주문번호 넘기기, 유저 번호 --%>
