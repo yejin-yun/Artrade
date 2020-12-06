@@ -42,10 +42,9 @@ public class ListOrderController implements Controller {
 
       // cartArtworkList 객체와 현재 로그인한 사용자 ID를 request에 저장하여 전달
       request.setAttribute("artworkOrderList", artworkOrderList);            
-      request.setAttribute("curUserId", 
-            UserSessionUtils.getLoginUserId(request.getSession()));      
+      request.setAttribute("userNo", userNo);      
 
-      return "/order/list.jsp"; 
+      return "/user/orderList.jsp"; 
       
    }
 
