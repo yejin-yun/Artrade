@@ -758,27 +758,51 @@ public class UserDAO {
 				artworkOrder.setReceiver(rs.getString("receiver"));
 				artworkOrder.setPhone(rs.getString("phone"));
 				
-				/** 주문번호에 해당하는 모든 Artwork들을 리스트로 반환하여 ArtworkOrder객체에 저장*/
-				jdbcUtil.setSqlAndParameters(sql2, new Object[] {artworkOrder.getArtworkOrderNo()});
+				artworkOrderList.add(artworkOrder);
+			}	
+			
+			/** 주문번호에 해당하는 모든 Artwork들을 리스트로 반환하여 ArtworkOrder객체에 저장*/
+			for(int i = 0; i < artworkOrderList.size(); i++) {
+				ArtworkOrder a = artworkOrderList.get(i);
+				jdbcUtil.setSqlAndParameters(sql2, new Object[] {a.getArtworkOrderNo()});
 				ResultSet rs2 = jdbcUtil.executeQuery();
 				
 				List<SimpleArtworkInfo> artworks = new ArrayList<SimpleArtworkInfo>();
-				while(rs.next()) {
+				while(rs2.next()) {
 					SimpleArtworkInfo simpleArtwork = new SimpleArtworkInfo();
 					
-					simpleArtwork.setArtworkNo(rs.getInt("artworkNo"));
-					simpleArtwork.setArtistName(rs.getString("artistName"));
-					simpleArtwork.setTitle(rs.getString("title"));
-					simpleArtwork.setImage(rs.getString("image"));
-					simpleArtwork.setPrice(rs.getInt("price"));
+					simpleArtwork.setArtworkNo(rs2.getInt("artworkNo"));
+					simpleArtwork.setArtistName(rs2.getString("artistName"));
+					simpleArtwork.setTitle(rs2.getString("title"));
+					simpleArtwork.setImage(rs2.getString("image"));
+					simpleArtwork.setPrice(rs2.getInt("price"));
 					
 					artworks.add(simpleArtwork);
 				}
-				artworkOrder.setArtworks(artworks);
+				a.setArtworks(artworks);
 				
+				artworkOrderList.set(i, a);
+			}
+			/*
+			for(ArtworkOrder a : artworkOrderList) {
+				jdbcUtil.setSqlAndParameters(sql2, new Object[] {a.getArtworkOrderNo()});
+				ResultSet rs2 = jdbcUtil.executeQuery();
 				
-				artworkOrderList.add(artworkOrder);
-			}		
+				List<SimpleArtworkInfo> artworks = new ArrayList<SimpleArtworkInfo>();
+				while(rs2.next()) {
+					SimpleArtworkInfo simpleArtwork = new SimpleArtworkInfo();
+					
+					simpleArtwork.setArtworkNo(rs2.getInt("artworkNo"));
+					simpleArtwork.setArtistName(rs2.getString("artistName"));
+					simpleArtwork.setTitle(rs2.getString("title"));
+					simpleArtwork.setImage(rs2.getString("image"));
+					simpleArtwork.setPrice(rs2.getInt("price"));
+					
+					artworks.add(simpleArtwork);
+				}
+				a.setArtworks(artworks);
+			}*/
+			
 			return artworkOrderList;					
 			
 		} catch (Exception ex) {
