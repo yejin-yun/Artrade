@@ -9,6 +9,7 @@ import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.Artwork;
 import model.ArtworkOrder;
+import model.ExhibitionBuyTicket;
 import model.User;
 import model.service.Manager;
 
@@ -38,11 +39,13 @@ public class ListOrderController implements Controller {
       int userNo = user.getUserNo();
        
       List<ArtworkOrder> artworkOrderList = manager.findArtworkOrderByUserNo(userNo);
+      List<ExhibitionBuyTicket> ticketList = manager.findExhBuyTicketList(userNo);
       // List<User> userList = manager.findUserList(currentPage, countPerPage);
 
       request.setAttribute("sIndex", request.getParameter("sIndex"));
       // cartArtworkList 객체와 현재 로그인한 사용자 ID를 request에 저장하여 전달
-      request.setAttribute("artworkOrderList", artworkOrderList);            
+      request.setAttribute("artworkOrderList", artworkOrderList);  
+      request.setAttribute("exhBuyTicketList", ticketList);  
       request.setAttribute("userNo", userNo);      
 
       return "/user/orderList.jsp"; 
