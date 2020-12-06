@@ -34,18 +34,18 @@
    
    <!-- 전시회 제목으로 검색/사용자가 전시회 입장권을 구매했는지 ticketNo를 통해 체크 -->
    <select id="selectExhibitionByTitleForUser" resultType="Exhibition">
-      SELECT exhibitionNo, 
-            title, 
-            description, 
-            period, 
-            price, 
-            visitor, 
-            image,
+       SELECT e.exhibitionNo AS exhibitionNo, 
+            e.title AS title, 
+            e.description AS description, 
+            e.period AS period, 
+            e.price AS price, 
+            e.visitor AS visitor, 
+            e.image AS image,
             NVL(t.ticketNo, 0) AS isHaveTicket
       FROM EXHIBITION e, EXHIBITIONBUYTICKET t
       WHERE t.userNo (+) = #{param1}
          AND e.title LIKE '%'||#param2#||'%'
-         AND e.exhibitionNo = t.exhibitionNo
+         AND e.exhibitionNo = t.exhibitionNo (+)
    </select>
    
    
