@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class ArtworkOrder implements Serializable{
     // 주문 번호(primary key가 될 것.)
@@ -13,8 +14,10 @@ public class ArtworkOrder implements Serializable{
     private String destination;
     private String receiver;
     private String phone;
+    private List<SimpleArtworkInfo> artworks;
 
-    public ArtworkOrder(){
+
+	public ArtworkOrder(){
     	
     }
     
@@ -25,6 +28,14 @@ public class ArtworkOrder implements Serializable{
         this.receiver = receiver;
         this.phone = phone;
     }
+
+    public List<SimpleArtworkInfo> getArtworks() {
+  		return artworks;
+  	}
+
+  	public void setArtworks(List<SimpleArtworkInfo> artworks) {
+  		this.artworks = artworks;
+  	}
 
 	public int getArtworkOrderNo() {
 		return this.ArtworkOrderNo;

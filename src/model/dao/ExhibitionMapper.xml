@@ -113,11 +113,14 @@
    </insert>
    
    
-   <select id="selectAllExhBuyTicket" resultType="ExhibitionBuyTicket">
-      SELECT ticketNo AS ticketNo, 
-            userNo AS userNo, 
-            exhibitionNo AS exhibitionNo
-      FROM ExhibitionBuyTicket
+   <select id="selectAllExhBuyTicketForUser" parameterType="int"  resultType="ExhibitionBuyTicket">
+      SELECT t.ticketNo AS ticketNo, 
+            t.userNo AS userNo, 
+            t.exhibitionNo AS exhibitionNo,
+            e.title AS title,
+            e.image AS image
+      FROM ExhibitionBuyTicket t, Exhibition e
+      WHERE t.exhibitionno = e.exhibitionno AND t.userno = #{userNo}
    </select>
    
    

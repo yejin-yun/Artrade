@@ -143,10 +143,10 @@ public class ExhibitionDAO {
 		}
 	}
 
-	public List<ExhibitionBuyTicket> findExhBuyTicketList() {
+	public List<ExhibitionBuyTicket> findExhBuyTicketList(int userNo) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			return sqlSession.getMapper(ExhibitionMapper.class).selectAllExhBuyTicket();			
+			return sqlSession.getMapper(ExhibitionMapper.class).selectAllExhBuyTicketForUser(userNo);			
 		} finally {
 			sqlSession.close();
 		}

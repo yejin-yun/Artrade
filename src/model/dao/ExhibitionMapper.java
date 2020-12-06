@@ -26,7 +26,7 @@ public interface ExhibitionMapper {
 	
 	public int insertExhBuyTicket(ExhibitionBuyTicket ebt);
 	
-	public List<ExhibitionBuyTicket> selectAllExhBuyTicket();
+	public List<ExhibitionBuyTicket> selectAllExhBuyTicketForUser(int userNo);
 	
 	
 }

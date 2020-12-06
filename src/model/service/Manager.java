@@ -247,8 +247,8 @@ public class Manager {
       return exhDao.insertExhBuyTicket(ebt);
    }
    
-   public List<ExhibitionBuyTicket> findExhBuyTicketList() throws SQLException{
-      return exhDao.findExhBuyTicketList();
+   public List<ExhibitionBuyTicket> findExhBuyTicketList(int userNo) throws SQLException{
+      return exhDao.findExhBuyTicketList(userNo);
    }
    
    public int increaseOneVisitorInExhibition(int exhibitionNo) throws SQLException{

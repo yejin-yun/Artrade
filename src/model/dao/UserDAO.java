@@ -10,6 +10,7 @@ import java.util.List;
 import model.Artwork;
 import model.ArtworkOrder;
 import model.Exhibition;
+import model.SimpleArtworkInfo;
 //import model.Onedayclass;
 //import model.TradeWork;
 import model.User;
@@ -736,8 +737,14 @@ public class UserDAO {
 					+ "FROM USERINFO u , ARTWORKORDER a "
 					+ "WHERE u.userNo = a.userNo "
 					+ "AND u.userNo = ?";
+		
+		String sql2 = "SELECT a.artworkNo AS artworkNo, image, title , artistName, price "
+				+ "FROM odrartworklist o, artwork a "
+				+ "WHERE o.artworkorderno = ? "
+				+ "AND o.artworkno = a.artworkno";
+		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil�� query�� ����
-					
+		
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		
 			List<ArtworkOrder> artworkOrderList = new ArrayList<ArtworkOrder>();
@@ -750,6 +757,25 @@ public class UserDAO {
 				artworkOrder.setDestination(rs.getString("destination"));
 				artworkOrder.setReceiver(rs.getString("receiver"));
 				artworkOrder.setPhone(rs.getString("phone"));
+				
+				/** 주문번호에 해당하는 모든 Artwork들을 리스트로 반환하여 ArtworkOrder객체에 저장*/
+				jdbcUtil.setSqlAndParameters(sql2, new Object[] {artworkOrder.getArtworkOrderNo()});
+				ResultSet rs2 = jdbcUtil.executeQuery();
+				
+				List<SimpleArtworkInfo> artworks = new ArrayList<SimpleArtworkInfo>();
+				while(rs.next()) {
+					SimpleArtworkInfo simpleArtwork = new SimpleArtworkInfo();
+					
+					simpleArtwork.setArtworkNo(rs.getInt("artworkNo"));
+					simpleArtwork.setArtistName(rs.getString("artistName"));
+					simpleArtwork.setTitle(rs.getString("title"));
+					simpleArtwork.setImage(rs.getString("image"));
+					simpleArtwork.setPrice(rs.getInt("price"));
+					
+					artworks.add(simpleArtwork);
+				}
+				artworkOrder.setArtworks(artworks);
+				
 				
 				artworkOrderList.add(artworkOrder);
 			}		
