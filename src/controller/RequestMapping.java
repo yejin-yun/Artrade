@@ -10,6 +10,7 @@ import controller.artwork.ListArtworkController;
 import controller.artwork.RegisterArtworkController;
 import controller.exhibition.EnterExhibitionController;
 import controller.exhibition.ListExhibitionController;
+import controller.exhibition.SearchExhibitionController;
 import controller.user.CartAddController;
 import controller.user.CartRemoveController;
 import controller.user.DeleteUserController;
@@ -75,7 +76,7 @@ public class RequestMapping {
         mappings.put("/exhibition/entrance", new EnterExhibitionController());//half-clear
         mappings.put("/exhibition/detail", new ForwardController("/exhibition/detail.jsp")); //clear
         
-        mappings.put("/exhibition/search", new ExhibitionSearchController());
+        mappings.put("/exhibition/search", new SearchExhibitionController());
         
 //        //mappings.put("exhibition/detail", new DetailArtworkInExhController());
 //        

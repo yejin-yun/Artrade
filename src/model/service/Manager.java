@@ -238,7 +238,7 @@ public class Manager {
       return exhDao.getExhibitionByTitleForUser(userNo, title);
    }
    
-   public List<Exhibition> findExhibitionListByTitleForUser(String title) throws SQLException{
+   public List<Exhibition> findExhibitionListByTitleForNotUser(String title) throws SQLException{
       return exhDao.getExhibitionByTitleForNotUser(title);
    }
    
