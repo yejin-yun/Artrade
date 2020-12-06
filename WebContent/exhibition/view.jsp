@@ -107,7 +107,7 @@
    
     	<div id="search" class="w3-center" style="position:relative; margin-bottom: 10px;">
     		<h1>전시 목록 검색</h1>
-    		<form method="GET" id="searchForm" action="<c:url value='/search' />">
+    		<form method="GET" id="searchForm" action="<c:url value='/exhibition/search' />">
     			 <input type="text" class="form-control" name="exhSearch" placeholder= "전시회명을 검색하세요." style="width: 30%; margin-right: auto; margin-left: auto; margin-top: 50px;" />
     			 <input type="submit" class="btn btn-info" value="검색" style="margin-bottom: 50px;"/>
     		</form>

@@ -17,8 +17,8 @@ public class SearchExhibitionController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		//사용자가 입력한 검색어
-		String searchKey = (String)request.getAttribute("searchKey"); //attribute로 넘어올 시
-		//String sKey = request.getParameter("searchKey"); //parameter로 넘어올 시
+		//String searchKey = (String)request.getAttribute("searchKey"); //attribute로 넘어올 시
+		String searchKey = request.getParameter("exhSearch"); //parameter로 넘어올 시
 		
 		if (!UserSessionUtils.hasLogined(request.getSession())) {
 			//로그인 안되어 있는 경우
@@ -29,7 +29,7 @@ public class SearchExhibitionController implements Controller {
 	        
 			request.setAttribute("exhibitionList", exhList);
 			
-			return "/exhibition/search.jsp";
+			return "/exhibition/searchResult.jsp";
 	    }
 		
 		//로그인 되어 있는 경우
@@ -44,7 +44,7 @@ public class SearchExhibitionController implements Controller {
 		
 		request.setAttribute("exhibitionList", exhList);
 		
-		return "/exhibition/search.jsp";
+		return "/exhibition/searchResult.jsp";
 	}
 
 }
