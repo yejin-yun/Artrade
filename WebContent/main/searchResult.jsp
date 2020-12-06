@@ -64,41 +64,45 @@
            		List<SimpleArtworkInfo> artworkList = (List<SimpleArtworkInfo>)request.getAttribute("artworkList");
            		List<Exhibition> exhList = (List<Exhibition>)request.getAttribute("exhList");
 
-           		if(artworkList == null) {
+           		if(artworkList == null && exhList == null) {
            			out.println("<p style='text-align:center;'>검색결과가 없습니다.</p>");
-           			return;
+           			return;           			
            		}
-           		if(exhList == null) {
-           			System.out.println("exhList is null");
-           			return;
-           		}
-           		int total = artworkList.size();
+           		int total = -1;
            		int rpp = 9; // 한 페이지에 보이는 작품의 수
            		int allPage = 0; //전체 몇 페이지인지.
            		int curPage = 0;
            		int startIndex = 0; 
            		int lastIndex = 0;
-           		System.out.println("test_curPage = " + curPage);
-           		System.out.println("test_sIndex = " + request.getAttribute("sIndex"));
-           		if(request.getAttribute("sIndex") != null && !request.getAttribute("sIndex").equals("")) {
-           			System.out.println("if pass");
-           			curPage = Integer.parseInt((String)request.getAttribute("sIndex"));
-           			System.out.println("sIndex = " + curPage);
-           		} else { //널이라면 페이지를 처음 방문한 것임.
-           			curPage = 1;
-           		}
+           		int i = -1;
            		
-           		//page=1, rpp=9라면 시작인덱스는 0이고, 마지막인덱스는 8이어야 함.
-           		startIndex = rpp * (curPage - 1);
-           		lastIndex = rpp * curPage - 1;
-           		
-           		allPage = (artworkList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
-           		int i;
-           		for(i = startIndex; i <= lastIndex && i <total; i++) {
-           			SimpleArtworkInfo artwork = artworkList.get(i);
-           			if((i + 1) % 3 == 1) {
-           				out.println("<tr style='margin-bottom: 30px;'>");
-           			}
+           		if(artworkList != null) {
+					System.out.println("artworkList is not null");
+
+	           		total = artworkList.size();
+	           		
+	           		System.out.println("test_curPage = " + curPage);
+	           		System.out.println("test_sIndex = " + request.getAttribute("sIndex"));
+	           		if(request.getAttribute("sIndex") != null && !request.getAttribute("sIndex").equals("")) {
+	           			System.out.println("if pass");
+	           			curPage = Integer.parseInt((String)request.getAttribute("sIndex"));
+	           			System.out.println("sIndex = " + curPage);
+	           		} else { //널이라면 페이지를 처음 방문한 것임.
+	           			curPage = 1;
+	           		}
+	           		
+	           		//page=1, rpp=9라면 시작인덱스는 0이고, 마지막인덱스는 8이어야 함.
+	           		startIndex = rpp * (curPage - 1);
+	           		lastIndex = rpp * curPage - 1;
+	           		
+	           		allPage = (artworkList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
+
+	           		for(i = startIndex; i <= lastIndex && i <total; i++) {
+	           			SimpleArtworkInfo artwork = artworkList.get(i);
+	           			if((i + 1) % 3 == 1) {
+	           				out.println("<tr style='margin-bottom: 30px;'>");
+	           			}
+
            %>
            		<td>
            			<div class="w3-card-4 work">
@@ -141,16 +145,29 @@
                     </div>
                   </td>
 			<%
-					if((i + 1) % 3 == 0) {
-		   				out.println("</tr>");
-		   			}
+						if((i + 1) % 3 == 0) {
+		   					out.println("</tr>");
+		   				}
+           			}
            		}
-           		allPage = (artworkList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
-           		for(int j = i; j <= lastIndex && j <total; j++) {
-           			Exhibition exhibition = exhList.get(j);
-           			if((j + 1) % 3 == 1) {
-           				out.println("<tr style='margin-bottom: 30px;'>");
-           			}		
+           		if(exhList != null) {
+           			if(i == -1) {
+    	           		if(request.getAttribute("sIndex") != null && !request.getAttribute("sIndex").equals("")) {
+    	           			curPage = Integer.parseInt((String)request.getAttribute("sIndex"));
+    	           		} else { //널이라면 페이지를 처음 방문한 것임.
+    	           			curPage = 1;
+    	           		}
+    	           		
+    	           		i = rpp * (curPage - 1);
+    	           		lastIndex = rpp * curPage - 1;
+           			}
+           			total = exhList.size();
+	           		allPage = (exhList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
+	           		for(int j = i; j <= lastIndex && j <total; j++) {
+	           			Exhibition exhibition = exhList.get(j);
+	           			if((j + 1) % 3 == 1) {
+	           				out.println("<tr style='margin-bottom: 30px;'>");
+	           			}		
            %>
            	<td>
            			<div class="w3-card-4 work">
@@ -188,10 +205,11 @@
                     </div>
                   </td>
            <%
-		       		if((j + 1) % 3 == 0) {
-		  				out.println("</tr>");
-		  			}
-		  		}
+			       		if((j + 1) % 3 == 0) {
+			  				out.println("</tr>");
+			  			}
+			  		}
+           		}
            		out.println("</table>");
            		if(total != 0) {
            			out.println("<div class='w3-center' style='margin-top: 50px;'>");
