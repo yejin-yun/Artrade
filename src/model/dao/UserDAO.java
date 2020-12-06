@@ -763,14 +763,14 @@ public class UserDAO {
 				ResultSet rs2 = jdbcUtil.executeQuery();
 				
 				List<SimpleArtworkInfo> artworks = new ArrayList<SimpleArtworkInfo>();
-				while(rs.next()) {
+				while(rs2.next()) {
 					SimpleArtworkInfo simpleArtwork = new SimpleArtworkInfo();
 					
-					simpleArtwork.setArtworkNo(rs.getInt("artworkNo"));
-					simpleArtwork.setArtistName(rs.getString("artistName"));
-					simpleArtwork.setTitle(rs.getString("title"));
-					simpleArtwork.setImage(rs.getString("image"));
-					simpleArtwork.setPrice(rs.getInt("price"));
+					simpleArtwork.setArtworkNo(rs2.getInt("artworkNo"));
+					simpleArtwork.setArtistName(rs2.getString("artistName"));
+					simpleArtwork.setTitle(rs2.getString("title"));
+					simpleArtwork.setImage(rs2.getString("image"));
+					simpleArtwork.setPrice(rs2.getInt("price"));
 					
 					artworks.add(simpleArtwork);
 				}

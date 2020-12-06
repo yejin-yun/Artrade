@@ -1,2 +1,2 @@
 
-<% response.sendRedirect(request.getContextPath() + "/order/list"); %>
+<% response.sendRedirect(request.getContextPath() + "/main"); %>

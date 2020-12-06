@@ -82,7 +82,7 @@
                 </c:if>
                 <li><a href="../user/cart.jsp">Cart</a></li>
                 <li><a href="<c:url value='/user/wishlist' />">Wishlist</a></li>
-                <li><a href="../user/mypage.jsp">Mypage</a></li>
+                <li><a href="<c:url value='/user/mypage' />">Mypage</a></li>
             </ul>
         </div>
         

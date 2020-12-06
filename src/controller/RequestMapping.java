@@ -20,6 +20,7 @@ import controller.user.ListWishlistController;
 import controller.user.LoginController;
 import controller.user.LogoutController;
 import controller.user.MoveFromWishToCartController;
+import controller.user.MyPageController;
 import controller.user.RegisterUserController;
 import controller.user.WishlistUpdateController;
 import controller.order.ListOrderController;
@@ -58,6 +59,7 @@ public class RequestMapping {
           mappings.put("/user/fromWishToCart", new MoveFromWishToCartController());
           mappings.put("/user/cartAdd", new CartAddController()); 
           mappings.put("/user/cartRemove", new CartRemoveController()); 
+          mappings.put("/user/mypage", new MyPageController()); 
  
 //
         mappings.put("/order/product", new OrderProductsController()); //clear //�뤃�됤꼻占쎄땀占쎈열占쎄맒占쎄쉭癰귣떯由� // /user/ or /order/

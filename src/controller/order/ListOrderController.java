@@ -40,6 +40,7 @@ public class ListOrderController implements Controller {
       List<ArtworkOrder> artworkOrderList = manager.findArtworkOrderByUserNo(userNo);
       // List<User> userList = manager.findUserList(currentPage, countPerPage);
 
+      request.setAttribute("sIndex", request.getParameter("sIndex"));
       // cartArtworkList 객체와 현재 로그인한 사용자 ID를 request에 저장하여 전달
       request.setAttribute("artworkOrderList", artworkOrderList);            
       request.setAttribute("userNo", userNo);      

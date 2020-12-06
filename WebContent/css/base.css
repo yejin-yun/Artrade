@@ -95,6 +95,11 @@ header ul li a{
     background-color: #F3F3F3;
 }
 
+.main_menu {
+	width: 100%;
+	display:inline;
+}
+
 .main_menu > li {
     /*display:inline; 가로로 나열*/
     float: left;
@@ -104,6 +109,8 @@ header ul li a{
     letter-spacing:10px; /*글씨를 띄워놓음*/
     font-size: 1.5vw;
     font-family: '맑은 고딕', 'Nanum Gothic';
+    margin-right: 300px;
+    margin-left: auto;
 }
 .main_menu > li > a {
    display: block;
