@@ -62,7 +62,7 @@
            <%
            		System.out.println("here is....view.jsp");
            		List<SimpleArtworkInfo> artworkList = (List<SimpleArtworkInfo>)request.getAttribute("artworkList");
-           		List<Exhibition> exhList = (List<Exhibition>)request.getAttribute("exhList");
+           		List<Exhibition> exhList = (List<Exhibition>)request.getAttribute("exhibitionList");
 
            		if(artworkList == null && exhList == null) {
            			out.println("<p style='text-align:center;'>검색결과가 없습니다.</p>");
@@ -151,6 +151,7 @@
            			}
            		}
            		if(exhList != null) {
+           			System.out.println("exhList is not null");
            			if(i == -1) {
     	           		if(request.getAttribute("sIndex") != null && !request.getAttribute("sIndex").equals("")) {
     	           			curPage = Integer.parseInt((String)request.getAttribute("sIndex"));
