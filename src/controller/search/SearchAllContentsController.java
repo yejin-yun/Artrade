@@ -18,8 +18,8 @@ public class SearchAllContentsController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		//사용자가 입력한 검색어
-		String searchKey = (String)request.getAttribute("searchKey"); //attribute로 넘어올 시
-		//String sKey = request.getParameter("searchKey"); //parameter로 넘어올 시
+		//String searchKey = (String)request.getAttribute("searchKey"); //attribute로 넘어올 시
+		String searchKey = request.getParameter("searchKey"); //parameter로 넘어올 시
 				
 		if (!UserSessionUtils.hasLogined(request.getSession())) {
 			//로그인 안되어 있는 경우
@@ -34,7 +34,7 @@ public class SearchAllContentsController implements Controller {
 			request.setAttribute("exhibitionList", exhList);
 			request.setAttribute("artworkList", artworkList);
 			
-			return "/main/search.jsp";
+			return "/main/searchResult.jsp";
 		}
 				
 		//로그인 되어 있는 경우
@@ -53,7 +53,7 @@ public class SearchAllContentsController implements Controller {
 		request.setAttribute("exhibitionList", exhList);
 		request.setAttribute("artworkList", artworkList);
 				
-		return "/main/search.jsp";		
+		return "/main/searchResult.jsp";		
 		
 	}
 

@@ -44,7 +44,7 @@
             NVL(t.ticketNo, 0) AS isHaveTicket
       FROM EXHIBITION e, EXHIBITIONBUYTICKET t
       WHERE t.userNo (+) = #{param1}
-         AND e.title LIKE '%'||#param2#||'%'
+         AND e.title LIKE '%'||#{param2}||'%'
          AND e.exhibitionNo = t.exhibitionNo (+)
    </select>
    
@@ -59,7 +59,7 @@
             visitor, 
             image
       FROM EXHIBITION 
-      WHERE e.title LIKE '%'||#title#||'%'
+      WHERE title LIKE '%'||#{title}||'%'
    </select>
    
    <!-- 전시회 내의 전시 작품들을 반환 -->

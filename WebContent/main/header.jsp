@@ -35,8 +35,8 @@
 <header>
         <div class="search_header">
             <a href="#"><img id="serch_btn" src="<c:url value='/images/index/magnifier-32.png' />"  style="padding-left: 40px; padding-top: 10px;"></a>
-            <form method="get" action="/search" style="display: inline-block; margin-left: 20px; margin-top:20px; width:80%; height: 50%;">
-                <input type="text" class="keyword" placeholder="작가 또는 작품명을 검색하세요" style="width:100%; height: 100%; border:0; background:#f3f3f3 " >
+            <form method="get" action="<c:url value='/search' />" style="display: inline-block; margin-left: 20px; margin-top:20px; width:80%; height: 50%;">
+                <input type="text" name="searchKey" class="keyword" placeholder="작가 또는 작품명을 검색하세요" style="width:100%; height: 100%; border:0; background:#f3f3f3 " >
             </form>
         </div>
         <div class="wrapper">
