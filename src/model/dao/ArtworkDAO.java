@@ -428,11 +428,9 @@ public class ArtworkDAO {
 	/** #키워드가 아닌 일반 작품제목/작가명 검색*/
 	public List<SimpleArtworkInfo> searchArtworkByKey(String key) throws SQLException
 	{
-		String sql = "SELECT artworkNo, image, title , artistName, price, NVL(w.wishArtworkNo, 0) AS wishArtworkNo "
-				+ "FROM ARTWORK a, KEYWORD k, WISHARTWORK w "
-				+ "WHERE a.artworkNo = w.artworkNo (+) "
-				+ "AND a.artworkNo = k.artworkNo "
-				+ "AND a.title LIKE ? OR a.artistName LIKE ? ";
+		String sql = "SELECT artworkNo, image, title , artistName, price "
+				+ "FROM ARTWORK "
+				+ "WHERE title LIKE ? OR artistName LIKE ?"; 
 
 		Object[] param = new Object[] { "%"+key+"%", "%"+key+"%"};
 	
@@ -450,11 +448,11 @@ public class ArtworkDAO {
 				simpleArtwork.setTitle(rs.getString("title"));
 				simpleArtwork.setArtistName(rs.getString("artistName"));
 				simpleArtwork.setPrice(rs.getInt("price"));
-				if( rs.getInt("wishArtworkNo") == 0 ) {
-					simpleArtwork.setIsInWishlist(0);
-				} else {
-					simpleArtwork.setIsInWishlist(1);
-				}
+//				if( rs.getInt("wishArtworkNo") == 0 ) {
+//					simpleArtwork.setIsInWishlist(0);
+//				} else {
+//					simpleArtwork.setIsInWishlist(1);
+//				}
 				
 				simpleArtworkList.add(simpleArtwork);
 			}		

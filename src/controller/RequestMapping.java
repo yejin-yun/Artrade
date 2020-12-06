@@ -25,6 +25,7 @@ import controller.user.WishlistUpdateController;
 import controller.order.ListOrderController;
 import controller.order.OrderProductsController;
 import controller.order.PaymentController;
+import controller.search.SearchAllContentsController;
 
 //import controller.user.*;
 //import controller.exhibition.EnterExhibitionController;
