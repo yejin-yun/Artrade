@@ -25,44 +25,20 @@
      <%@ include file="../main/header.jsp" %>        
     <div class="container">
     <aside id="right">
-    	<%
-    		System.out.println("artworkNo = " + request.getAttribute("artworkNo"));
-    		System.out.println("도 여기......");
-    		int artworkNo = Integer.parseInt((String)request.getAttribute("artworkNo"));
-    		System.out.println("도 여기..");
-    		
-    		ArtworkDAO artworkDao = new ArtworkDAO();
-    		
-    		//System.out.println("isLogined = " + request.getParameter("isLogined"));
-    		String isLogined = (String)request.getAttribute("isLogined");
-    		//System.out.println("isLoginedss = " + isLogined + " ..... = " + isLogined.getClass().getName());
-    		
-    		Artwork artwork;
-    		if(isLogined.equals("0")) {
-    			System.out.println("not login");
-    			artwork = artworkDao.getArtworkByNoForNotUser(artworkNo);
-    			System.out.println("not login = " + artwork.getArtworkNo());
-    		} else {
-    			int userNo = Integer.parseInt((String)request.getAttribute("userNo"));
-    			artwork = artworkDao.getArtworkByNoForUser(userNo, artworkNo);
-    			System.out.println("login = " + artwork.getArtworkNo());
-    		} 
-    	%>
-        <h2>작가: <%= artwork.getArtistName() %></h2>
-        <p>작품 명: <%= artwork.getTitle() %></p>
-        <p>가격: <%= artwork.getPrice() %>원</p>
-        <p>사이즈: <%= artwork.getWorkSize() %></p>
+        <h2>작가: ${artwork.artworkNo} </h2>
+        <p>작품 명: ${artwork.title} </p>
+        <p>가격: ${artwork.price}원</p>
+        <p>사이즈: ${artwork.workSize} </p>
         <form class="btn">
             <a href="<c:url value='/order/payment'>
-            	<c:param name="userNo" value="<%= request.getParameter(\"userNo\") %>" />
             	<c:param name="isInCart" value="0" />
-            	<c:param name="artworkNo" value="<%= request.getParameter(\"artworkNo\") %>" />
+            	<c:param name="artworkNo" value="${artwork.artworkNo}" />
             	<c:param name="servletPath" value="<%= request.getServletPath() %>" />
             </c:url>">
             <button type="button" id="buy">주문하기</button></a>
             <a href=""><button type="button" id="cart">장바구니에 담기</button></a>
             <%--  <c:set var="wish_val" value="<%= artwork.getIsInWishlist() %>" /> --%> 
-            <c:set var="artworkNo" value="<%= artwork.getArtworkNo() %>" /> 
+            <c:set var="artworkNo" value="${artwork.artworkNo}" /> 
             <a href="<c:url value="/user/wishlistLike" var="wish">
                             	<c:if test="${wish_val == 0}" >
         							<c:param name="like" value="1" />
@@ -78,8 +54,7 @@
 
    <section id="section1">
         <article id="main_image">    
-        	<c:set var="image" value="<%= artwork.getImage() %>" />  
-	        <img src="<c:url value='${image}' />" alt="모네_수련_연작"/><br>
+	        <img src="<c:url value='${artwork.image}' />" alt="모네_수련_연작"/><br>
         </article>
         <article id="explanation">
             <br><hr>
@@ -88,7 +63,7 @@
                 <img src="../img/artwork/모네_수련_연작.jpg" alt="모네_수련_연작"/>
             </div> -->
             <P>
-		        <%= artwork.getDescription() %>
+		        ${artwork.description}
             </P>
         </article>
     </section>

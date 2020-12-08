@@ -10,6 +10,7 @@ import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.Artwork;
 import model.ArtworkOrder;
+import model.User;
 import model.service.Manager;
 
 public class PaymentController implements Controller {
@@ -29,7 +30,12 @@ public class PaymentController implements Controller {
     	System.out.println("isInCart = " + request.getParameter("isInCart"));
     	System.out.println("userNo = " + request.getParameter("userNo"));
     	int isInCart = Integer.parseInt((String)request.getParameter("isInCart"));
-    	int userNo = Integer.parseInt(request.getParameter("userNo"));
+    	//int userNo = Integer.parseInt(request.getParameter("userNo"));
+    	
+    	String userId = UserSessionUtils.getLoginUserId(request.getSession());
+        
+		User user = manager.findUserById(userId);
+		int userNo = user.getUserNo();
     	
     	request.setAttribute("userNo", userNo);
     	request.setAttribute("isInCart", isInCart);
