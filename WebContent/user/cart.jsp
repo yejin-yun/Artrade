@@ -102,7 +102,8 @@
            %>
                  <td>
                   <label> <%-- detail.jsp?artworkNo=${ads.artwork.artworkNo}&isLogined=1&userNo=${ads.artwork(심플아트워크 담는 객체 변수의 이름).userNo} --%>
-                    <input type="checkbox" name="cartArtwork" value="<%= i %>"/>    
+                    <!-- <input type="checkbox" name="cartArtwork" value="<%= i %>"/> -->
+                    <input type="checkbox" name="cartArtwork" value="${artworkNo}"/>    
                     <div class="w3-card-4 work card">
                         <c:set var="artworkNo" value="<%= cartArtwork.getArtworkNo() %>" />    
                         <c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 

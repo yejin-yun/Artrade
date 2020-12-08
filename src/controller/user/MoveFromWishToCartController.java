@@ -14,7 +14,7 @@ public class MoveFromWishToCartController implements Controller {
 		Manager manager = Manager.getInstance();
 		
 		if (!UserSessionUtils.hasLogined(request.getSession())) {
-            return "redirect:/user/login";		// login form 요청으로 redirect
+            return "redirect:/user/login";		// login form �슂泥��쑝濡� redirect
         }
 		
 		String userId = UserSessionUtils.getLoginUserId(request.getSession());
@@ -22,12 +22,12 @@ public class MoveFromWishToCartController implements Controller {
 		User user = manager.findUserById(userId);
 		int userNo = user.getUserNo();
 		
-		String[] checkedWish = request.getParameterValues("checked");
+		String[] checkedWish = request.getParameterValues("checkArtwork");
 		
 		for(int i = 0; i < checkedWish.length; i++) {
 			int artworkNo = Integer.parseInt(checkedWish[i]);
 			
-			//manager.removeWishArtwork(userNo, artworkNo); //장바구니로 보낸 위시리스트를 삭제하고 싶으면 주석 해제!
+			//manager.removeWishArtwork(userNo, artworkNo); //�옣諛붽뎄�땲濡� 蹂대궦 �쐞�떆由ъ뒪�듃瑜� �궘�젣�븯怨� �떢�쑝硫� 二쇱꽍 �빐�젣!
 			manager.addCartArtwork(userNo, artworkNo);
 		}
 		
