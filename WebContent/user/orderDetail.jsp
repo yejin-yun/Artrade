@@ -36,8 +36,8 @@
 	      <tr>
 	        <th>구매상품</th>
 	        <th>상품명</th>
-	        <th></th>
 	        <th>가격</th>
+	        <th><button onClick='history.go(-1)' style='display: inline;'>BACK</button></th>
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -71,12 +71,12 @@
            
 	        <tr>
 	            <td>
-	            <a href="<c:url value='/order/product'>
+	            <a href="<c:url value='/artwork/detail'>
 	            				<c:param name='artworkNo' value='${artworkNo}' />
 	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
 	            <img style="height: 50px;" src="<c:url value='<%= artwork.getImage() %>' />"></a>
 	            </td>
-	            <td><a href="<c:url value='/order/product'>
+	            <td><a href="<c:url value='/artwork/detail'>
 	            				<c:param name='artworkNo' value='${artworkNo}' />
 	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
 	            				<%= artwork.getTitle() %></a></td>
@@ -105,9 +105,6 @@
            					}
           			  	}
            			}
-           			out.println("<div>");
-           			out.println("<button onClick='history.go(-1)' style='display: inline;'>BACK</button>");
-           			out.println("</div>");
            			out.println("</div>");
            		}
            		

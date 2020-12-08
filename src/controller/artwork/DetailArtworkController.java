@@ -26,7 +26,7 @@ public class DetailArtworkController implements Controller {
     		//List<SimpleArtworkInfo> artworkList = manager.findSimpleArtworkInfoListForNotUser();
     		Artwork artwork = manager.findArtworkForNotUser(artworkNo);
             request.setAttribute("isLogined", 0);
-    		request.setAttribute("artwork", artwork);	
+    		request.setAttribute("artworkNo", artworkNo);	
     		
     		return "/artwork/detail.jsp";
         } 
@@ -42,12 +42,10 @@ public class DetailArtworkController implements Controller {
 		if(artwork == null) {
 			System.out.println("DeatilArtworkController send null");
 		}
-		// List<User> userList = manager.findUserList(currentPage, countPerPage);
 		
-		 request.setAttribute("isLogined", 1);
-		request.setAttribute("artwork", artwork);	
-		/*request.setAttribute("curUserId", 
-				UserSessionUtils.getLoginUserId(request.getSession()));		*/
+		request.setAttribute("isLogined", 1);
+		request.setAttribute("artworkNo", artworkNo);	
+		request.setAttribute("userNo", request.getParameter("userNo"));
 
 		return "/artwork/detail.jsp";
 		

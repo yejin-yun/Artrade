@@ -48,7 +48,6 @@
 </head>
 <body>
    <%@ include file="header.jsp" %>
-   
     <div id="container" >
     <section>
     <div class="w3-content w3-section" style="padding-bottom: 50px; padding-top: 30px; max-width:100%; height: 600px;"><!--main image-->

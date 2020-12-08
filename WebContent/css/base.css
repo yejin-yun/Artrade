@@ -109,8 +109,8 @@ header ul li a{
     letter-spacing:10px; /*글씨를 띄워놓음*/
     font-size: 1.5vw;
     font-family: '맑은 고딕', 'Nanum Gothic';
-    background-color: red;
     margin-right: 10%;
+    margin-left: 10%;
 }
 .main_menu > li > a {
    display: block;
