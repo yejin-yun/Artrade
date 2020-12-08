@@ -158,13 +158,13 @@
     	           		} else { //널이라면 페이지를 처음 방문한 것임.
     	           			curPage = 1;
     	           		}
-    	           		
-    	           		i = rpp * (curPage - 1);
-    	           		lastIndex = rpp * curPage - 1;
+    	           		       		
            			}
+           			startIndex = rpp * (curPage - 1);
+	           		lastIndex = rpp * curPage - 1;
            			total = exhList.size();
 	           		allPage = (exhList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
-	           		for(int j = i; j <= lastIndex && j <total; j++) {
+	           		for(int j = startIndex; j <= lastIndex && j <total; j++) {
 	           			Exhibition exhibition = exhList.get(j);
 	           			if((j + 1) % 3 == 1) {
 	           				out.println("<tr style='margin-bottom: 30px;'>");

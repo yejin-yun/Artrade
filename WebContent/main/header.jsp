@@ -51,13 +51,7 @@
                     </ul>
                 </li>
                 <li><a href="<c:url value='/exhibition/list' />">전시회</a></li>
-                <li id="trade"><a>교환</a>
-                    <ul class="trade_sub_menu sub_menu">
-                        <li><a href="<c:url value='/trade/list' />">교환품보기</a></li>
-                        <li><a href="<c:url value='/trade/list' />">교환품제시</a></li>
-                    </ul> 
-                </li>
-                <li><a href="<c:url value='/onedayclass/list' />">클래스</a></li>
+               
             </ul></strong>
             </h2>
         </nav>

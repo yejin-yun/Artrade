@@ -72,7 +72,7 @@ header .wapper { /*https://ironsky.tistory.com/21*/
     float:left;
     max-width:100%;
     height: auto; /*원래 50p x로 함.*/
-    padding-left: 20px;
+    padding-left: 2%;
     padding-bottom: 10px;
 }
 header .main_menu {
@@ -96,7 +96,7 @@ header ul li a{
 }
 
 .main_menu {
-	width: 100%;
+	width: 65%;
 	display:inline;
 }
 
@@ -104,13 +104,13 @@ header ul li a{
     /*display:inline; 가로로 나열*/
     float: left;
     /*border: 1px solid red;*/
-    width: 200px;
+    width: 30%;
     text-transform:uppercase;
     letter-spacing:10px; /*글씨를 띄워놓음*/
     font-size: 1.5vw;
     font-family: '맑은 고딕', 'Nanum Gothic';
-    margin-right: 300px;
-    margin-left: auto;
+    background-color: red;
+    margin-right: 10%;
 }
 .main_menu > li > a {
    display: block;
@@ -127,7 +127,7 @@ header ul li a{
 #search_img {
     float: left;
     padding-top: 40px;
-    padding-left: 50px;
+    padding-left: 0px;
 }
 section{ flex: 1; } 
 
