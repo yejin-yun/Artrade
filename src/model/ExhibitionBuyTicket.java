@@ -19,8 +19,7 @@ public class ExhibitionBuyTicket implements Serializable{
 		this.exhibitionNo = exhibitionNo;
 	}
 
-	
-	
+
 	public String getTitle() {
 		return title;
 	}
