@@ -29,12 +29,17 @@
 </head>
 <body>
 	<%@ include file="../main/header.jsp" %>
-        <table>
-            <tr>
-                <td><a href="index.html" title="Home"><img src="img/artrade_logo.png" alt="artrade"></a></td>
-                <td colspan="2"  style="font-size: 30px; text-align: center;">구매내역 상세보기</td>
-                <td><a href="장바구니.html"><img style="height: 50px;" src="https://t14.pimg.jp/027/281/254/1/27281254.jpg"></a></td>
-            </tr>
+   	  <div class="container">         
+	  <table class="table table-hover">
+	    <thead>
+	      <tr>
+	        <th>주문번호</th>
+	        <th>주문상품</th>
+	        <th></th>
+	        <th>구매내역</th>
+	      </tr>
+	    </thead>
+	    <tbody>
             <tr>
                 <td colspan="4"><hr></td>
             </tr>
