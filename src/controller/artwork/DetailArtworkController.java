@@ -46,7 +46,7 @@ public class DetailArtworkController implements Controller {
 		request.setAttribute("isLogined", 1);
 		request.setAttribute("artworkNo", artworkNo);	
 		request.setAttribute("userNo", request.getParameter("userNo"));
-
+		System.out.println("Detatl...");
 		return "/artwork/detail.jsp";
 		
 	}

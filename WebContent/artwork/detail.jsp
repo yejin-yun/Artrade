@@ -26,13 +26,15 @@
     <div class="container">
     <aside id="right">
     	<%
-    		System.out.println("artworkNo = " + request.getParameter("artworkNo"));
-    		int artworkNo = Integer.parseInt((String)request.getParameter("artworkNo"));
+    		System.out.println("artworkNo = " + request.getAttribute("artworkNo"));
+    		System.out.println("도 여기......");
+    		int artworkNo = Integer.parseInt((String)request.getAttribute("artworkNo"));
+    		System.out.println("도 여기..");
     		
     		ArtworkDAO artworkDao = new ArtworkDAO();
     		
     		//System.out.println("isLogined = " + request.getParameter("isLogined"));
-    		String isLogined = (String)request.getParameter("isLogined");
+    		String isLogined = (String)request.getAttribute("isLogined");
     		//System.out.println("isLoginedss = " + isLogined + " ..... = " + isLogined.getClass().getName());
     		
     		Artwork artwork;
@@ -41,7 +43,7 @@
     			artwork = artworkDao.getArtworkByNoForNotUser(artworkNo);
     			System.out.println("not login = " + artwork.getArtworkNo());
     		} else {
-    			int userNo = Integer.parseInt((String)request.getParameter("userNo"));
+    			int userNo = Integer.parseInt((String)request.getAttribute("userNo"));
     			artwork = artworkDao.getArtworkByNoForUser(userNo, artworkNo);
     			System.out.println("login = " + artwork.getArtworkNo());
     		} 

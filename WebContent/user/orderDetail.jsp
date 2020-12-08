@@ -82,7 +82,7 @@
 	            				<%= artwork.getTitle() %></a></td>
 	            <td><%= artwork.getPrice() %></td>
 	        </tr>
-	        <%--/user/orderDetail.jsp?ArtworkOrderNo=<%= artworkOrder.getArtworkOrderNo() %>&isLogined=${isLogined}&userNo=${userNo} --%>
+	        <%-- --%>
     		<%
            		}
            		out.println("</tbody>");

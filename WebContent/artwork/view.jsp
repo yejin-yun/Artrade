@@ -108,11 +108,15 @@
                         		<c:param name="artworkNo" value="${artworkNo}" />
                         	</c:url>"> --%>
 	                        <div class="img_div">
-	                        	<a href="detail.jsp?artworkNo=${artworkNo}&isLogined=${isLogined}&userNo=${userNo}" >
+	                        	<a href="<c:url value='/artwork/detail'>
+	            				<c:param name='artworkNo' value='${artworkNo}' />
+	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
 	                            <img class="main_img" src="<c:url value='<%= artwork.getImage() %>' />" /></a>
 	                        </div>
                         	<div class="content">
-                        		<a href="detail.jsp?artworkNo=${artworkNo}&isLogined=${isLogined}&userNo=${userNo}" > 
+                        		<a href="<c:url value='/artwork/detail'>
+	            				<c:param name='artworkNo' value='${artworkNo}' />
+	            				<c:param name='isLogined' value='${isLogined}' /></c:url>"> 
 	                            <h2><%= artwork.getTitle() %></h2></a>
 	                            <c:if test="${wish_val == 1}" >
 	        						<c:set var="like_src" value="/images/bagic/heart-full.png" />
