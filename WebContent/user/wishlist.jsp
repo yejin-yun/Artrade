@@ -113,8 +113,7 @@
                             <h2><%= wishArtwork.getArtistName() %></h2>
                             <h2><%= wishArtwork.getPrice() %></h2></a> 
                            <div>
-                           <input type="button" value="삭제" onClick="moveTarget('<c:url value='/user/deletewishlist' />')" >
-                           <input type="button" value="장바구니로 이동" onClick="moveTarget('<c:url value='/user/fromWishToCart' />')" >
+                           
                           
                            </div>
                         </div>
@@ -130,6 +129,8 @@
          %>
          <div class="w3-center"> 
 			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
+			<!-- <input type="button" value="삭제" onClick="moveTarget('<c:url value='/user/deletewishlist' />')" > -->
+			<input type="button" value="장바구니로 이동" onClick="moveTarget('<c:url value='/user/fromWishToCart' />')" >
 		 </div>
          <%
                  if(total != 0) {
