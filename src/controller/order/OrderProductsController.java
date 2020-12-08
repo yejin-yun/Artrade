@@ -31,25 +31,27 @@ public class OrderProductsController implements Controller {
        
        Manager manager = Manager.getInstance();
        
-       //String userId = UserSessionUtils.getLoginUserId(request.getSession());
-        
-      //User user = manager.findUserById(userId);
-      //int userNo = user.getUserNo();
+       
       
-       System.out.println("artworkOrderNo = " + request.getAttribute("artworkOrderNo"));
-      int artworkOrderNo = 	Integer.parseInt((String)request.getAttribute("artworkOrderNo"));
+       System.out.println("artworkOrderNo = " + request.getParameter("ArtworkOrderNo"));
+      int artworkOrderNo = 	Integer.parseInt(request.getParameter("ArtworkOrderNo"));
       
+      String userId = UserSessionUtils.getLoginUserId(request.getSession());
+      
+      User user = manager.findUserById(userId);
+      int userNo = user.getUserNo();
       
       List<Artwork> artworkList = manager.findOrderArtworkListByOrdNo(artworkOrderNo);
       
       // List<User> userList = manager.findUserList(currentPage, countPerPage);
 
       // cartArtworkList 객체와 현재 로그인한 사용자 ID를 request에 저장하여 전달
-      request.setAttribute("artworkList", artworkList);            
-      request.setAttribute("curUserId", 
-            UserSessionUtils.getLoginUserId(request.getSession()));      
+      request.setAttribute("artworkList", artworkList);          
+      request.setAttribute("isLogined", request.getParameter("isLogined")); // artwork detail 페이지에서 사용하기 위해서 
+      request.setAttribute("userNo", request.getParameter("userNo")); // artwork detail 페이지에서 사용하기 위해서      
+      request.setAttribute("ArtworkOrderNo", artworkOrderNo);
 
-      return "/order/product.jsp"; 
+      return "/user/orderDetail.jsp"; 
       
    }
 

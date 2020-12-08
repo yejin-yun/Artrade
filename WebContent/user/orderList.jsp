@@ -79,9 +79,13 @@
 	            <td><%= artworkOrder.getArtworkOrderNo() %></td>
 	            <td><img style="height: 50px;" src="<c:url value='<%= artworkOrder.getArtworks().get(0).getImage() %>' />"></td>
 	            <td><%= artworkOrder.getArtworks().get(0).getTitle() %></td>
-	            <td><a href="/user/orderDetail.jsp?ArtworkOrderNo=${ArtworkOrderNo}&isLogined=${isLogined}&userNo=${userNo}">
+	            <c:set var="aon" value="<%= artworkOrder.getArtworkOrderNo() %>" />
+	            <td><a href="<c:url value='/order/product'>
+	            				<c:param name='ArtworkOrderNo' value='${aon}' />
+	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
 	            <button type="button" class="btn btn-default" style="margin-bottom: 20px; margin-top: 5px;">구매내역보기</button></a></td> <%-- isLogined, 주문번호 넘기기, 유저 번호 --%>
 	        </tr>
+	        <%--/user/orderDetail.jsp?ArtworkOrderNo=<%= artworkOrder.getArtworkOrderNo() %>&isLogined=${isLogined}&userNo=${userNo} --%>
     		<%
            		}
            		out.println("</tbody>");
