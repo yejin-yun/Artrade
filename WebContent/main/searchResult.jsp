@@ -63,8 +63,8 @@
            		System.out.println("here is....view.jsp");
            		List<SimpleArtworkInfo> artworkList = (List<SimpleArtworkInfo>)request.getAttribute("artworkList");
            		List<Exhibition> exhList = (List<Exhibition>)request.getAttribute("exhibitionList");
-
-           		if(artworkList == null && exhList == null) {
+           		
+           		if(artworkList.size() < 1 && exhList.size() < 1) {
            			out.println("<p style='text-align:center;'>검색결과가 없습니다.</p>");
            			return;           			
            		}
@@ -76,7 +76,7 @@
            		int lastIndex = 0;
            		int i = -1;
            		
-           		if(artworkList != null) {
+           		if(artworkList.size() > 0) {
 					System.out.println("artworkList is not null");
 
 	           		total = artworkList.size();
@@ -150,7 +150,7 @@
 		   				}
            			}
            		}
-           		if(exhList != null) {
+           		if(exhList.size() > 0) {
            			System.out.println("exhList is not null");
            			if(i == -1) {
     	           		if(request.getAttribute("sIndex") != null && !request.getAttribute("sIndex").equals("")) {
