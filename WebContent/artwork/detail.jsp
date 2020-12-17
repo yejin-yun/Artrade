@@ -39,12 +39,13 @@
             
             
              
-            <a href="<c:url value="/user/cartAdd">
+            <a href="<c:url value="/user/cartAdd" var="cart">
             	
-            	<c:param name="artworkNo" value="${artworkNo}" />
+            	<c:param name="artworkNo" value="${artwork.artworkNo}" />
+            	<c:param name="servletPath" value="<%= request.getServletPath() %>" />
             	
             </c:url>">
-            <button type="button" id="cartlist">장바구니에 담기${artworkNo} </button>
+            <button type="button" id="cartlist">장바구니에 담기 ${artwork.artworkNo} </button>
             </a>
             
             <!-- 백업 

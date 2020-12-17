@@ -58,7 +58,10 @@ public class RequestMapping {
           mappings.put("/user/wishlistLike", new WishlistUpdateController());//half-clear
         mappings.put("/user/deletewishlist", new DeleteWishlistController());
           mappings.put("/user/fromWishToCart", new MoveFromWishToCartController());
+          
+          System.out.println("here is controller mapping");
           mappings.put("/user/cartAdd", new CartAddController()); 
+          System.out.println("here is controller mapping222");
           mappings.put("/user/cartRemove", new CartRemoveController()); 
           mappings.put("/user/mypage", new MyPageController()); 
  
