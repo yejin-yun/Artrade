@@ -93,7 +93,7 @@ function moveTarget(targetUri) {
 
 <%@ include file="../main/header.jsp" %>
 	<div id="main_div" class="w3-center">
-		<h1>회원 가입</h1> (*는 필수)
+		<h1>회원정보 수정</h1> (*는 필수)
 		<c:if test="${registerFailed}">
 	      <font color="red"><c:out value="${exception.getMessage()}" /></font>
 	    </c:if>
@@ -125,7 +125,7 @@ function moveTarget(targetUri) {
 			</div>
 			<div class="form-group form-inline" style="margin-top: 0;">
 				<button type="reset" class="btn btn-info">취소</button>
-				<button class="btn btn-info" onClick="userCreate('<c:url value='/user/register' />')">확인</button>
+				<button class="btn btn-info" onClick="userCreate('<c:url value='/user/update' />')">확인</button>
 			</div>
 		</form>
 	</div>
