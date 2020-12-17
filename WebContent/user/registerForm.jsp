@@ -51,6 +51,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel=stylesheet href="<c:url value='/css/user.css' />" type="text/css">
 <script>
+	//https://cublip.tistory.com/326	
+	$(document).on("keyup", ".phoneNumber", function() { 
+		$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+	});
+</script>
+<script>
 function userCreate(targetUri) {
    if (form.userId.value == "") {
       alert("사용자 ID를 입력하십시오.");
@@ -78,12 +84,18 @@ function userCreate(targetUri) {
       form.email.focus();
       return false;
    }
-   var phoneExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
-   if(phoneExp.test(form.phone.value)==false) {
-      alert("전화번호 형식이 올바르지 않습니다.");
-      form.phone.focus();
-      return false;
-   }
+   if (form.phone.value == "") {
+       alert("전화번호 입력하십시오."+form.phone.value);
+       form.phone.focus();
+       return false;
+    }
+   
+   //var phoneExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+   //if(phoneExp.test(form.phone.value)==false) {
+    //  alert("전화번호 형식이 올바르지 않습니다.");
+     // form.phone.focus();
+     // return false;
+  // }
    moveTarget(targetUri);
 }
 
@@ -109,7 +121,7 @@ function moveTarget(targetUri) {
 			<div class="form-group form-inline">
     				<label for="userId" style="margin-left: 15%;">ID*: </label>
     				<input type="text" class="form-control" name="userId" id="userId" placeholder="Enter ID">
-    				<button type="button" class="btn btn-info" style="margin-top: 10px;" onClick="moveTarget('<c:url value='/user/register' />')">중복 확인</button>
+    				<button type="button" class="btn btn-info" style="margin-top: 10px;" onClick="moveTarget('<c:url value='/user/register'><c:param name="submitBtn" value="0" /></c:url>')">중복 확인</button>
     		</div>	
 			<div class="form-group form-inline">
     				<label for="pwd">Password*: </label>
@@ -126,7 +138,7 @@ function moveTarget(targetUri) {
     		</div>	
     		<div class="form-group form-inline">
     				<label for="phoneNum">전화번호*: </label>
-    				<input type="tel" class="form-control" name="phone" id="phoneNum" placeholder="Enter Phone Number">
+    				<input type="tel" class="form-control phoneNumber" name="phone" id="phoneNum" placeholder="Enter Phone Number">
     		</div>	
     		<div class="form-group form-inline">
 			    <label for="email">Email*:</label>
@@ -134,7 +146,7 @@ function moveTarget(targetUri) {
 			</div>
 			<div class="form-group form-inline" style="margin-top: 0;">
 				<button type="reset" class="btn btn-info">취소</button>
-				<button class="btn btn-info" onClick="userCreate('<c:url value='/user/register' />')">확인</button>
+				<button class="btn btn-info" onClick="userCreate('<c:url value='/user/register'><c:param name="submitBtn" value="1" /></c:url>')">확인</button>
 			</div>
 		</form>
 	</div>
