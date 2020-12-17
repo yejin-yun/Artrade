@@ -14,9 +14,9 @@
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/detail.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
     
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
     <style>
     	#main_div {
@@ -48,63 +48,62 @@
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     <script src="<c:url value='/js/base.js' />" ></script>
     <script src="<c:url value='/js/img_slide.js' />"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel=stylesheet href="<c:url value='/css/user.css' />" type="text/css">
-<script>
-	//https://cublip.tistory.com/326	
-	$(document).on("keyup", ".phoneNumber", function() { 
-		$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
-	});
-</script>
-<script>
-function userCreate(targetUri) {
-   if (form.userId.value == "") {
-      alert("사용자 ID를 입력하십시오.");
-      form.userId.focus();
-      return false;
-   }
-   if (form.password.value == "") {
-      alert("비밀번호를 입력하십시오.");
-      form.password.focus();
-      return false;
-   }
-   if (form.password.value != form.password2.value) {
-      alert("비밀번호가 일치하지 않습니다.");
-      form.name.focus();
-      return false;
-   }
-   if (form.name.value == "") {
-      alert("이름을 입력하십시오.");
-      form.name.focus();
-      return false;
-   }
-   var emailExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-   if(emailExp.test(form.email.value)==false) {
-      alert("이메일 형식이 올바르지 않습니다.");
-      form.email.focus();
-      return false;
-   }
-   if (form.phone.value == "") {
-       alert("전화번호 입력하십시오."+form.phone.value);
-       form.phone.focus();
-       return false;
-    }
-   
-   //var phoneExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
-   //if(phoneExp.test(form.phone.value)==false) {
-    //  alert("전화번호 형식이 올바르지 않습니다.");
-     // form.phone.focus();
-     // return false;
-  // }
-   moveTarget(targetUri);
-}
-
-function moveTarget(targetUri) {
-	   form.action = targetUri;
-	   form.submit();
+    
+    
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+		//https://cublip.tistory.com/326	
+		$(document).on("keyup", ".phoneNumber", function() { 
+			$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+		});
+	</script>
+	<script>
+	function userCreate(targetUri) {
+	   if (form.userId.value == "") {
+	      alert("사용자 ID를 입력하십시오.");
+	      form.userId.focus();
+	      return false;
+	   }
+	   if (form.password.value == "") {
+	      alert("비밀번호를 입력하십시오.");
+	      form.password.focus();
+	      return false;
+	   }
+	   if (form.password.value != form.password2.value) {
+	      alert("비밀번호가 일치하지 않습니다.");
+	      form.name.focus();
+	      return false;
+	   }
+	   if (form.name.value == "") {
+	      alert("이름을 입력하십시오.");
+	      form.name.focus();
+	      return false;
+	   }
+	   var emailExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+	   if(emailExp.test(form.email.value)==false) {
+	      alert("이메일 형식이 올바르지 않습니다.");
+	      form.email.focus();
+	      return false;
+	   }
+	   
+	   var phoneExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+	   if(phoneExp.test(form.phone.value)==false) {
+	      alert("전화번호 형식이 올바르지 않습니다.");
+	      form.phone.focus();
+	      return false;
+	   }
+	   
+	   moveTarget(targetUri);
 	}
+	
+	function moveTarget(targetUri) {
+		   form.action = targetUri;
+		   form.submit();
+		}
+	
+	</script>
 
-</script>
+	
 </head>
 <body>
 

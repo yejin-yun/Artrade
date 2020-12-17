@@ -128,11 +128,13 @@
 	        return false;
 	     } 
     
-	    if (form.phone.value == "") {
-	        alert("전화번호 입력하십시오."+form.phone.value);
-	        form.phone.focus();
-	        return false;
-	     }
+	    var phoneExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+	    if(phoneExp.test(form.phone.value)==false) {
+	       alert("전화번호 형식이 올바르지 않습니다.");
+	       form.phone.focus();
+	       return false;
+	    }
+	    
 	    var payment = document.getElementsByName("pm_means");
 	    if(payment[1].checked == true) {
 	    	 if (form.provider.value == "") {
