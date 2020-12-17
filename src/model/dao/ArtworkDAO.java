@@ -381,15 +381,16 @@ public class ArtworkDAO {
 	}
 	
 	/** #키워드 검색*/
-	/*public List<SimpleArtworkInfo> searchArtworkByKeyword(String keyword) throws SQLException{
-		String sql = "SELECT artworkNo, image, title , artistName, price, NVL(w.wishArtworkNo, 0) AS wishArtworkNo "
-					+ "FROM ARTWORK a, KEYWORD k, WISHARTWORK w "
-					+ "WHERE a.artworkNo = w.artworkNo (+) "
-					+ "AND a.artworkNo = k.artworkNo "
-					+ "AND k.keyword LIKE ?";
+	public List<SimpleArtworkInfo> searchArtworkByKeywordForUser(String keyword, int userNo) throws SQLException{
+		String sql = "SELECT a.artworkNo AS artworkNo, image, title , artistName, price, NVL(w.wishArtworkNo, 0) AS wishArtworkNo "
+				+ "FROM ARTWORK a, KEYWORD k, WISHARTWORK w "
+				+ "WHERE a.artworkNo = k.artworkNo "
+				+ "AND  a.artworkNo = w.artworkNo (+) "
+				+ "AND k.keyword LIKE ? "
+				+ "AND w.userno(+) = ?";
 		//title LIKE ‘%key%’ OR artist LIKE ‘%key%
 		//+ "AND title LIKE ? OR artistName LIKE '%key%' "
-		Object[] param = new Object[] { "%"+keyword+"%"};
+		Object[] param = new Object[] { "%"+keyword+"%", userNo};
 		
 		jdbcUtil.setSqlAndParameters(sql, param);
 					
@@ -423,10 +424,10 @@ public class ArtworkDAO {
 		return null;
 		
 		
-	}*/
+	}
 	
 	/** 비로그인 #키워드검색 */
-	public List<SimpleArtworkInfo> searchArtworkByKeyword(String keyword) throws SQLException{
+	public List<SimpleArtworkInfo> searchArtworkByKeywordForNotUser(String keyword) throws SQLException{
 		
 		String sql = "SELECT a.artworkNo AS artworkNo, image, title , artistName, price "
 				+ "FROM ARTWORK a, KEYWORD k "

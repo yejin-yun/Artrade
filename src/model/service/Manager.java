@@ -191,8 +191,13 @@ public class Manager {
    }
    
    public List<SimpleArtworkInfo> searchArtworkByKeyword(String keyword) throws SQLException{
-      return artworkDao.searchArtworkByKeyword(keyword); //수정요망
+      return artworkDao.searchArtworkByKeywordForNotUser(keyword); //수정요망
    }
+   
+   /*public List<SimpleArtworkInfo> searchArtworkByKeywordForUser(String keyword, int userNo) throws SQLException{
+	      return artworkDao.searchArtworkByKeywordForUser(keyword, userNo); //수정요망
+   }*/
+   
    public List<SimpleArtworkInfo> searchArtworkByKey(String key) throws SQLException{
       return artworkDao.searchArtworkByKey(key);
    }
