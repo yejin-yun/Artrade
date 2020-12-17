@@ -36,7 +36,29 @@
             	<c:param name="servletPath" value="<%= request.getServletPath() %>" />
             </c:url>">
             <button type="button" id="buy">주문하기</button></a>
-            <a href=""><button type="button" id="cart">장바구니에 담기</button></a>
+            
+            
+             
+            <a href="<c:url value="../user/cartAdd" var="cartlist">
+            	
+            	<c:param name="artworkNo" value="${artworkNo}" />
+            	
+            </c:url>">
+            <button type="button" id="cartlist">장바구니에 담기${artworkNo} </button>
+            </a>
+            
+            <!-- 백업 
+            <a href="<c:url value="/user/cartAdd" var="cart">
+            	<c:param name="artworkNo" value="${artworkNo}" />
+            </c:url>">
+            <button type="button" id="cart">장바구니에 담기</button>
+            </a>
+            
+             -->
+            
+            
+            
+            
             <%--  <c:set var="wish_val" value="<%= artwork.getIsInWishlist() %>" /> --%> 
             <c:set var="artworkNo" value="${artwork.artworkNo}" /> 
             <a href="<c:url value="/user/wishlistLike" var="wish">

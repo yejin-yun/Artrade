@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% request.setCharacterEncoding("UTF-8"); %>
+<%@ page import="model.*" %>
 <html>
 <head>
 <title>Artrade</title>
@@ -60,6 +61,14 @@ function userCreate() {
 function userList(targetUri) {
    form.action = targetUri;
    form.submit();
+}
+
+function check() {
+	if(existingUser(form.userId.value) == 1)
+		alert("해당 아이디는 사용중입니다.");
+	else
+		alert("해당 아이디는 사용 가능 합니다.");
+	
 }
 
 </script>
