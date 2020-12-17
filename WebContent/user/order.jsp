@@ -79,6 +79,10 @@
                 }
             });
         });
+        $(document).on("keyup", ".phoneNumber", function() { 
+        	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+        });
+
         /* http://blog.naver.com/PostView.nhn?blogId=schatz1234&logNo=220908487291&parentCategoryNo=&categoryNo=16&viewDate=&isShowPopularPosts=true&from=search */
         $(function() {
             $(".pm_nobackbook_click").click(function(){
@@ -238,7 +242,7 @@
                 	<p><label>수취자</label><input type="text"  class="form-control" name="receiver" style="width: 30%; margin-right: auto; margin-left: auto; "/></p>
                 </div>
                 <div class="form-group">
-                	<p><label>전화번호</label><input type="text"  class="form-control" name="phone" style="width: 30%; margin-right: auto; margin-left: auto; "/></p>
+                	<p><label>전화번호</label><input type="text"  class="form-control phoneNumber" name="phone" style="width: 30%; margin-right: auto; margin-left: auto; "/></p>
                 </div>
       
             </div>

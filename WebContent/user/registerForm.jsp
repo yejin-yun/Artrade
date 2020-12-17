@@ -102,6 +102,9 @@ function moveTarget(targetUri) {
 		<c:if test="${registerFailed}">
 	      <font color="red"><c:out value="${exception.getMessage()}" /></font>
 	    </c:if>
+	    <c:if test="${empty registerFailed}">
+	      <font color="red"><c:out value="사용가능한 id입니다." /></font>
+	    </c:if>
 		<form name="form" method="POST" action="" class="form-horizontal" style="margin-top: 10%;"> <!-- form에 action이 있으면 서브밋 타입의 버튼이 아니여도 보내줌. -->
 			<div class="form-group form-inline">
     				<label for="userId" style="margin-left: 15%;">ID*: </label>
