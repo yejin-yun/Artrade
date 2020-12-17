@@ -22,6 +22,7 @@ public class RegisterUserController implements Controller {
 
 		try {
             if(request.getMethod().equals("GET")){
+            	request.setAttribute("noDuplication", 0);
                 return "/user/registerForm.jsp";
             }
 
@@ -45,6 +46,9 @@ public class RegisterUserController implements Controller {
             
             if(request.getParameter("submitBtn").equals("0")) {
             	request.setAttribute("user", user);
+            	if(!userId.equals("") && userId != null) {
+            		request.setAttribute("noDuplication", 1);
+            	}
     			return "/user/registerForm.jsp";
             }
             

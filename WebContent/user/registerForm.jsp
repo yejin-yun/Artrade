@@ -113,13 +113,19 @@
 		<c:if test="${registerFailed}">
 	      <font color="red"><c:out value="${exception.getMessage()}" /></font>
 	    </c:if>
-	    <c:if test="${empty registerFailed}">
-	      <font color="red"><c:out value="사용가능한 id입니다." /></font>
+	    <c:if test="${noDuplication == 1}" >
+		      <font color="red"><c:out value="사용가능한 id입니다." /></font>
 	    </c:if>
 		<form name="form" method="POST" action="" class="form-horizontal" style="margin-top: 10%;"> <!-- form에 action이 있으면 서브밋 타입의 버튼이 아니여도 보내줌. -->
 			<div class="form-group form-inline">
     				<label for="userId" style="margin-left: 15%;">ID*: </label>
-    				<input type="text" class="form-control" name="userId" id="userId" placeholder="Enter ID">
+    				<c:if test="${!(empty user.userId)}">
+    					<input type="text" class="form-control" name="userId" id="userId" value="${user.userId }">
+    				</c:if>
+    				<c:if test="${empty user.userId}">
+    					<input type="text" class="form-control" name="userId" id="userId" placeholder="Enter ID">
+    				</c:if>
+    				
     				<button type="button" class="btn btn-info" style="margin-top: 10px;" onClick="moveTarget('<c:url value='/user/register'><c:param name="submitBtn" value="0" /></c:url>')">중복 확인</button>
     		</div>	
 			<div class="form-group form-inline">
@@ -133,15 +139,30 @@
     		</div>	
     		<div class="form-group form-inline">
     				<label for="name">이름*: </label>
-    				<input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
+    				<c:if test="${!(empty user.name)}">
+    					<input type="text" class="form-control" name="name" id="name" value="${user.name }">
+    				</c:if>
+    				<c:if test="${empty user.name}">
+    					<input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
+    				</c:if>
     		</div>	
     		<div class="form-group form-inline">
     				<label for="phoneNum">전화번호*: </label>
-    				<input type="tel" class="form-control phoneNumber" name="phone" id="phoneNum" placeholder="Enter Phone Number">
+    				<c:if test="${!(empty user.phone)}">
+    					<input type="tel" class="form-control phoneNumber" name="phone" id="phoneNum" value="${user.phone }">
+    				</c:if>
+    				<c:if test="${empty user.phone}">
+    					<input type="tel" class="form-control phoneNumber" name="phone" id="phoneNum" placeholder="Enter Phone Number">
+    				</c:if>
     		</div>	
     		<div class="form-group form-inline">
 			    <label for="email">Email*:</label>
-		    	<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+			    <c:if test="${!(empty user.email)}">
+			   		<input type="email" class="form-control" id="email" value="${user.email }" name="email">
+    			</c:if>
+    			<c:if test="${empty user.email}">
+    				<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+    			</c:if>
 			</div>
 			<div class="form-group form-inline" style="margin-top: 0;">
 				<button type="reset" class="btn btn-info">취소</button>
