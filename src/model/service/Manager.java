@@ -53,6 +53,10 @@ public class Manager {
    }
    
    /** UserDAO */
+   public boolean existingUser(String userId) throws SQLException, ExistingUserException {
+	   return userDao.existingUser(userId);
+   }
+   
    public int createUser(User user) throws SQLException, ExistingUserException {
       if (userDao.existingUser(user.getUserId()) == true) {
          throw new ExistingUserException(user.getUserId() + "는 존재하는 아이디입니다.");

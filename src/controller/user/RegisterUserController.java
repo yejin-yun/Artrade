@@ -37,6 +37,17 @@ public class RegisterUserController implements Controller {
             log.debug("Create User : {}", user);
 
             Manager manager = Manager.getInstance();
+            
+            String userId = request.getParameter("userId");
+            if( manager.existingUser(userId) ) {
+            	throw new ExistingUserException(userId + "는 존재하는 아이디입니다.");
+            }
+            
+            if(request.getParameter("submitBtn").equals("0")) {
+            	request.setAttribute("user", user);
+    			return "/user/registerForm.jsp";
+            }
+            
             manager.createUser(user);
     
 	        return "redirect:/user/login";	// 성공 시 로그인 페이지로 넘김
