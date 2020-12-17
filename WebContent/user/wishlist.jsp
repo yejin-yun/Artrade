@@ -93,11 +93,27 @@
 	     moveTarget(targetUri);
        }
         
-      
+       
+      function deleteWish(paraValue) {
+    	  alert("상품" + paraValue);
+    	  var flag = false;
+    	  var artwork = document.getElementsByName("checkArtwork");
+    	  
+    	  for(var i=0;i<artwork.length;i++){
+    		  alert("상품" + artwork[i].value);
+	           if(artwork[i].value == paraValue) {
+	        	   if(artwork.valuechecked == true) {
+	        		   flag = true;
+	        		   break;
+	        	   }
+	           }	
+	       }
+    	  if(flag == false) {
+    		  retrun false;
+    	  }
+    	  moveTarget('/artrade/user/deletewishlist'); 
+      }
      
-    </script>
-    <script>
-
     </script>
 </head>
 <body>
@@ -148,16 +164,20 @@
                        	<c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 
                     	<input type="checkbox" name="checkArtwork" value="${artworkNo}" class="checkWish"/> 	
                            <div class="img_div">
-                           	<a href="<c:url value='/artwork/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />" > 
+                           	<a href="<c:url value='/artwork/detail'>
+	            				<c:param name='artworkNo' value='${artworkNo}' />
+	            				<c:param name='isLogined' value='${isLogined}' /></c:url>"> 
                                <img class="main_img" src="<c:url value='<%= wishArtwork.getImage() %>' />" /></a>
                            </div>
                         	<div class="content">
-                        	<a href="<c:url value='/artwork/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />" > 
+                        	<a href="<c:url value='/artwork/detail'>
+	            				<c:param name='artworkNo' value='${artworkNo}' />
+	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
                             <h2><%= wishArtwork.getTitle() %></h2>
                             <p><%= wishArtwork.getArtistName() %></p>
                             <p><%= wishArtwork.getPrice() %></p></a> 
                            <div class="btns">
-                           		<input type="button" value="삭제" onClick="moveTarget('<c:url value='/user/deletewishlist' />')" >
+                           		<input type="button" value="삭제" onClick="deleteWish('<c:url value='/user/deletewishlist' />', ${artworkNo})" >
                            		<input type="button" value="장바구니로 이동" onClick="moveTarget('<c:url value='/user/fromWishToCart' />')" >
                            </div>
                         </div>
