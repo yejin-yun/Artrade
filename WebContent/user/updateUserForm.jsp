@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<%@ page import="model.*" %>
 <html>
 <head>
 <title>Artrade</title>
@@ -53,11 +52,6 @@
 <link rel=stylesheet href="<c:url value='/css/user.css' />" type="text/css">
 <script>
 function userCreate(targetUri) {
-   if (form.userId.value == "") {
-      alert("사용자 ID를 입력하십시오.");
-      form.userId.focus();
-      return false;
-   }
    if (form.password.value == "") {
       alert("비밀번호를 입력하십시오.");
       form.password.focus();
@@ -93,33 +87,24 @@ function moveTarget(targetUri) {
 	   form.submit();
 	}
 
-function check() {
-	if(existingUser(form.userId.value) == 1)
-		alert("해당 아이디는 사용중입니다.");
-	else
-		alert("해당 아이디는 사용 가능 합니다.");
-	
-}
-
 </script>
 </head>
 <body>
 
 <%@ include file="../main/header.jsp" %>
 	<div id="main_div" class="w3-center">
-		<h1>회원 가입</h1> (*는 필수)
+		<h1>회원정보 수정</h1> (*는 필수)
 		<c:if test="${registerFailed}">
 	      <font color="red"><c:out value="${exception.getMessage()}" /></font>
 	    </c:if>
 		<form name="form" method="POST" action="" class="form-horizontal" style="margin-top: 10%;"> <!-- form에 action이 있으면 서브밋 타입의 버튼이 아니여도 보내줌. -->
 			<div class="form-group form-inline">
-    				<label for="userId" style="margin-left: 15%;">ID*: </label>
-    				<input type="text" class="form-control" name="userId" id="userId" placeholder="Enter ID">
-    				<button type="submit" class="btn btn-info" style="margin-top: 10px;">중복 확인</button>
+    				<label for="userId">ID: </label>
+    				<input type="text" class="form-control" value="${user.userId}" name="userId" id="userId" readonly>
     		</div>	
 			<div class="form-group form-inline">
-    				<label for="pwd">Password*: </label>
-    				<input type="password" class="form-control" id="pwd" name="password" placeholder="Enter password">
+    				<label for="pwd">Password 수정*: </label>
+    				<input type="password" class="form-control" id="pwd" name="password" value="${user.password}">
     				<p>(영문, 숫자, 특수 문자 포함 8~20자)</p>
     		</div>	
     		<div class="form-group form-inline">
@@ -128,19 +113,19 @@ function check() {
     		</div>	
     		<div class="form-group form-inline">
     				<label for="name">이름*: </label>
-    				<input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
+    				<input type="text" class="form-control" name="name" id="name" value="${user.name}">
     		</div>	
     		<div class="form-group form-inline">
     				<label for="phoneNum">전화번호*: </label>
-    				<input type="tel" class="form-control" name="phone" id="phoneNum" placeholder="Enter Phone Number">
+    				<input type="tel" class="form-control" name="phone" id="phoneNum" value="${user.phone}">
     		</div>	
     		<div class="form-group form-inline">
 			    <label for="email">Email*:</label>
-		    	<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+		    	<input type="email" class="form-control" id="email" value="${user.email}" name="email">
 			</div>
 			<div class="form-group form-inline" style="margin-top: 0;">
 				<button type="reset" class="btn btn-info">취소</button>
-				<button class="btn btn-info" onClick="userCreate('<c:url value='/user/register' />')">확인</button>
+				<button class="btn btn-info" onClick="userCreate('<c:url value='/user/update' />')">확인</button>
 			</div>
 		</form>
 	</div>

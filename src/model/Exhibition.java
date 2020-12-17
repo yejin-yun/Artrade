@@ -9,7 +9,6 @@ public class Exhibition implements Serializable{
     private String description;
     private String period; 
     private ArrayList<Artwork> works;
-    private boolean isFree; //���� true, ���� false
     private int price; //free일 경우 가격 0으로 설정할 것.
     private int visitor;
     private String image;
@@ -19,14 +18,13 @@ public class Exhibition implements Serializable{
     }
 
     public Exhibition(int exhibitionNo, String title, String description, String period, ArrayList<Artwork> works,
-			boolean isFree, int price, int visitor, String image) {
+		 int price, int visitor, String image) {
 		super();
 		this.exhibitionNo = exhibitionNo;
 		this.title = title;
 		this.description = description;
 		this.period = period;
 		this.works = works;
-		this.isFree = isFree;
 		this.price = price;
 		this.visitor = visitor;
 		this.image = image;
@@ -41,13 +39,6 @@ public class Exhibition implements Serializable{
 		this.exhibitionNo = exhibitionNo;
 	}
 
-	public boolean isFree() {
-		return isFree;
-	}
-
-	public void setFree(boolean isFree) {
-		this.isFree = isFree;
-	}
 
 	public String getTitle() {
 		return this.title;
@@ -81,13 +72,6 @@ public class Exhibition implements Serializable{
 		this.works = works;
 	}
 
-	public boolean isIsFree() {
-		return this.isFree;
-	}
-
-	public void setIsFree(boolean isFree) {
-		this.isFree = isFree;
-	}
 
 	public int getPrice() {
 		return this.price;

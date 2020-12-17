@@ -81,8 +81,8 @@
       <selectKey keyProperty="exhibitionNo" resultType="int" order="BEFORE">
          SELECT seq_pk.nextval AS exhibitionNo FROM DUAL
       </selectKey>
-      INSERT INTO Exhibition(exhibitionNo, title, description, period, isFree, price, visitor, image)
-      VALUES (#{exhibitionNo}, #{title}, #{description}, #{period}, #{isFree}, #{price}, #{visitor}, #{image})
+      INSERT INTO Exhibition(exhibitionNo, title, description, period, price, visitor, image)
+      VALUES (#{exhibitionNo}, #{title}, #{description}, #{period}, #{price}, #{visitor}, #{image})
    </insert>
    
    <!-- 전시회의 방문자 수를 1 더함-->
@@ -94,7 +94,7 @@
    
    <update id="updateExhibition" parameterType="Exhibition">
       UPDATE Exhibition
-      SET title = #{title}, description = #{description}, period = #{period}, isFree = #{isFree}, price = #{price}, visitor = #{visitor}, image = #{image}
+      SET title = #{title}, description = #{description}, period = #{period}, price = #{price}, visitor = #{visitor}, image = #{image}
       WHERE exhibitionNo = #{exhibitionNo}
    </update>
    

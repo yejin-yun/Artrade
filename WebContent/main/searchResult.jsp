@@ -145,9 +145,11 @@
                     </div>
                   </td>
 			<%
-						if((i + 1) % 3 == 0) {
-		   					out.println("</tr>");
-		   				}
+						if(artworkList.size() > 3){
+							if((i + 1) % 3 == 0) {
+			   					out.println("</tr>");
+			   				}
+						}
            			}
            		}
            		if(exhList.size() > 0) {
@@ -166,9 +168,11 @@
 	           		allPage = (exhList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
 	           		for(int j = startIndex; j <= lastIndex && j <total; j++) {
 	           			Exhibition exhibition = exhList.get(j);
-	           			if((j + 1) % 3 == 1) {
-	           				out.println("<tr style='margin-bottom: 30px;'>");
-	           			}		
+	           			if(exhList.size() > 3) {
+		           			if((j + 1) % 3 == 1) {
+		           				out.println("<tr style='margin-bottom: 30px;'>");
+		           			}		
+	           			}
            %>
            	<td>
            			<div class="w3-card-4 work">

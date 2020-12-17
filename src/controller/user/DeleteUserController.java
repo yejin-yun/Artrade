@@ -22,59 +22,40 @@ public class DeleteUserController implements Controller {
     	
     	Manager manager = Manager.getInstance();	
     	
+    	//int isSubmit = Integer.parseInt(request.getParameter("isSubmit"));
     	String userId = UserSessionUtils.getLoginUserId(request.getSession());
     	User user = manager.findUserById(userId);
     	
     	//탈퇴창에서 입력한 비밀번호 값
+    	System.out.println("delete tst");
 		String password = request.getParameter("password");
+		System.out.println("password = " + password); //처음에 null 나옴
+		//request.setAttribute("deleteClear", false);
+		
+		if(password == null || password.equals("")) { //처음에 null 나오는 데 password.equals("") --> 메소드 사용해서 NullPointerException 난 거. password.equals("") 할거면 || 뒤에 다가 해야 함. 할거면이 아니라 해야함. password가 null로 반환될때도 있지만 빈 문자열로 반환될 때도 있음. 아 맨처음에 getParameter때는 null로 들어오고, 새로고침이나 서브밋버튼 누르면 빈문자열 들어오는 듯.   
+			request.setAttribute("deleteFailed", false);
+			return "/user/withdraw.jsp";
+		}
 
 		if (!user.matchPassword(password)) {
 			//비밀번호 틀림
 			String message = "비밀번호가 일치하지 않습니다.";
 			request.setAttribute("exception", new IllegalStateException(message));
-			
-			request.setAttribute("deleteFailed", true);
+			//if(isSubmit != 1) {
+			//	request.setAttribute("deleteFailed", false);
+			//}else {
+				request.setAttribute("deleteFailed", true);
+			//}
 			
 			return "/user/withdraw.jsp";
 		}
 		
+		//request.setAttribute("deleteClear", true);
 		int userNo = user.getUserNo();
 		
 		manager.removeUser(userNo); 
 		
 		//logout처리
 		return "redirect:/user/logout";
-		
-		/*
-		if ((UserSessionUtils.isLoginUser("admin", session) && 	// 로그인한 사용자가 관리자이고 	
-			 !deleteId.equals("admin"))							// 삭제 대상이 일반 사용자인 경우, 
-			   || 												// 또는 
-			(!UserSessionUtils.isLoginUser("admin", session) &&  // 로그인한 사용자가 관리자가 아니고 
-			  UserSessionUtils.isLoginUser(deleteId, session) &&
-			  user.matchPassword(password))) { // 로그인한 사용자가 삭제 대상인 경우 (자기 자신을 삭제)
-				
-			manager.remove(deleteId);				// 사용자 정보 삭제
-			if (UserSessionUtils.isLoginUser("admin", session))	// 로그인한 사용자가 관리자 	
-				return "redirect:/admin";		// 사용자 리스트로 이동
-			else 									// 로그인한 사용자는 이미 삭제됨
-				return "redirect:/user/logout";		// logout 처리
-		}*/
-		
-		/* 삭제가 불가능한 경우 */
-		//User user = manager.findUser(deleteId);	// 사용자 정보 검색
-		//request.setAttribute("user", user);						
-		//request.setAttribute("deleteFailed", true);
-		/*String msg = (UserSessionUtils.isLoginUser("admin", session)) 
-				   ? "시스템 관리자 정보는 삭제할 수 없습니다."		
-				   : "타인의 정보는 삭제할 수 없습니다.";													
-		request.setAttribute("exception", new IllegalStateException(msg)); 
-		return "/user/view.jsp";		// 사용자 보기 화면으로 이동 (forwarding)	*/
-		
-		//String message = "비밀번호가 일치하지 않습니다.";
-		//request.setAttribute("exception", new IllegalStateException(message));
-		//return "/user/withdraw.jsp";
-		
-		
-		
-	}
+    }
 }
