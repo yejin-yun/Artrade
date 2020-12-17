@@ -1,3 +1,7 @@
+*{					
+    padding: 0px;
+    margin: 0px;
+}
 section {
     margin-top: 150px;
     width: 100%;
@@ -8,18 +12,25 @@ table {
     border: 1px solid white;
     border-collapse: collapse;
     width: 90%; /*https://aboooks.tistory.com/93*/
+	height: auto;
     margin-left: auto;
     margin-right: auto;
     
 }
-tr, td {
-    border: 1px solid white;
+.card {
+	width: 100%;
+	height: 100%;
 }
-table tr td {
-    width: 30%;
-    height: 100%;
+table tr {
+	width: 100%;
+	height: 100%;
+}
 
+table tr td {
+	border: 1px solid white;
+	width: 30%;
     padding: 10px 20px;
+    
 }
 .main_img {
     width: 100%;
@@ -33,10 +44,7 @@ table tr td {
     margin-left: auto;
     margin-right: auto;
 }
-.card {
-	width: 100%;
-	height: 100%;
-}
+
 .img_div {
     width: 100%;
     height: 100%;
@@ -45,7 +53,8 @@ table tr td {
 .content {
     padding-left: 20px; 
     padding-right: 20px; 
-    padding-bottom:30px;
+    padding-bottom: 30px;
+    height: 100%;
 }
 
 .content h2{
@@ -67,5 +76,6 @@ a{
 }*/
 .section {
     margin-bottom: 70px;
+    
 }
 

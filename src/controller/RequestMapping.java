@@ -22,6 +22,7 @@ import controller.user.LogoutController;
 import controller.user.MoveFromWishToCartController;
 import controller.user.MyPageController;
 import controller.user.RegisterUserController;
+import controller.user.UpdateUserController;
 import controller.user.WishlistUpdateController;
 import controller.order.ListOrderController;
 import controller.order.OrderProductsController;
@@ -49,7 +50,7 @@ public class RequestMapping {
         mappings.put("/user/login", new LoginController()); //clear.
         mappings.put("/user/logout", new LogoutController()); //clear
         mappings.put("/user/register", new RegisterUserController()); //clear
-      //  mappings.put("/user/update", new UpdateUserController()); //clear
+        mappings.put("/user/update", new UpdateUserController()); //clear
         mappings.put("/user/quit", new DeleteUserController()); //clear
         mappings.put("/user/wishlist", new ListWishlistController()); //clear
         mappings.put("/user/cartlist", new ListCartController()); //clear
