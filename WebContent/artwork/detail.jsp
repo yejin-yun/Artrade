@@ -39,7 +39,7 @@
             
             
              
-            <a href="<c:url value="../user/cartAdd" var="cartlist">
+            <a href="<c:url value="/user/cartAdd">
             	
             	<c:param name="artworkNo" value="${artworkNo}" />
             	
