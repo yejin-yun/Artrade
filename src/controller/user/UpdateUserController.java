@@ -52,7 +52,9 @@ public class UpdateUserController implements Controller {
 		
     	log.debug("Update User : {}", updateUser);
 		
-		manager.updateUser(updateUser);		
+    	if(request.getParameter("password").equals(request.getParameter("password2"))) {
+    		manager.updateUser(updateUser);
+    	}
 		
         return "redirect:/user/update";			
     }
