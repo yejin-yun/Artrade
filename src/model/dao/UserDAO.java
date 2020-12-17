@@ -19,13 +19,13 @@ public class UserDAO {
 	private JDBCUtil jdbcUtil = null;
 	
 	public UserDAO() {			
-		jdbcUtil = new JDBCUtil();	// JDBCUtil 占쏙옙체 占쏙옙占쏙옙
+		jdbcUtil = new JDBCUtil();	// JDBCUtil ��ü ����
 	}
 	
 	private ConnectionManager cm = new ConnectionManager();
 	
 	/** 
-	 *  USERINFO �뀒�씠釉붿뿉 �깉濡쒖슫 �뻾 �궫�엯
+	 *  USERINFO 테이블에 새로운 행 삽입
 	 *  */
 	public int insertUser(User user) throws SQLException {
 		String sql = "INSERT INTO USERINFO (userNo, userId, password, name, nickname, email, phone) " +
@@ -35,21 +35,21 @@ public class UserDAO {
 		jdbcUtil.setSqlAndParameters(sql, param);	
 						
 		try {				
-			int result = jdbcUtil.executeUpdate();	// insert 占쏙옙 占쏙옙占쏙옙
+			int result = jdbcUtil.executeUpdate();	// insert �� ����
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 占쏙옙환
+			jdbcUtil.close();	// resource ��ȯ
 		}		
 		return 0;
 		
 	}
 	
 	/** 
-	 *  USERINFO �뀒�씠釉붿쓽  �엯�젰媛믪씤 userNo�뿉 �빐�떦�븯�뒗 �뻾 �궘�젣
+	 *  USERINFO 테이블의  입력값인 userNo에 해당하는 행 삭제
 	 *  */
 	public int deleteUser(int userNo) throws SQLException {
 		String sql = "DELETE FROM USERINFO WHERE userNo=?";		
@@ -69,17 +69,17 @@ public class UserDAO {
 		return 0;
 	}
 	
-	/** userNo 媛믪쓣 諛쏆븘�꽌 �빐�떦 USERINFO �뻾�쓣 USER 媛앹껜濡�  諛섑솚�븳�떎.
+	/** userNo 값을 받아서 해당 USERINFO 행을 USER 객체로  반환한다.
 	 */
 	public User getUserInfoByNo(int userNo) throws SQLException {
         String sql = "SELECT userNo, userId, password, name, nickname, email, phone "
 					+ "FROM USERINFO "
 					+ "WHERE userNo = ?";              
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});	// JDBCUtil占쏙옙 query占쏙옙占쏙옙 占신곤옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});	// JDBCUtil�� query���� �Ű� ���� ����
 	
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query 占쏙옙占쏙옙
-			if (rs.next()) {						// 占싻삼옙 占쏙옙占쏙옙 占쌩곤옙
+			ResultSet rs = jdbcUtil.executeQuery();		// query ����
+			if (rs.next()) {						// �л� ���� �߰�
 				User user = new User();
 				
 				user.setUserNo(rs.getInt("userNo"));
@@ -95,7 +95,7 @@ public class UserDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		// resource ��ȯ
 		}
 		return null;
 }
@@ -104,7 +104,7 @@ public class UserDAO {
 	
 	
 	public List<User> getUserInfoByName (String name) {
-		//: user name占쎌뱽 占쎌뵠占쎌뒠占쎈퉸 user 占쎌젟癰귣�占쏙옙 筌≪뼚釉� 獄쏆꼹�넎
+		//: user name�쓣 �씠�슜�빐 user �젙蹂대�� 李얠븘 諛섑솚
 		Connection conn = null;
 		PreparedStatement pStmt = null;			
 		ResultSet rs = null;
@@ -115,7 +115,7 @@ public class UserDAO {
 		List<User> userList = null;
 
 		try {
-			conn = cm.getConnection();	// DBMS占쏙옙占쎌벥 占쎈염野껓옙 占쎌돴占쎈굣 
+			conn = cm.getConnection();	// DBMS���쓽 �뿰寃� �쉷�뱷 
 			pStmt = conn.prepareStatement(query);	
 			
 			pStmt.setString(1, name);
@@ -141,7 +141,7 @@ public class UserDAO {
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-		} finally {		// 占쎌쁽占쎌뜚 獄쏆꼶沅�
+		} finally {		// �옄�썝 諛섎궔
 			if (rs != null) 
 				try { 
 					rs.close(); 
@@ -164,11 +164,11 @@ public class UserDAO {
 		String sql = "SELECT userNo, userId, password, name, nickname, email, phone "
 					+ "FROM USERINFO "
 					+ "WHERE userId = ?";              
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil占쏙옙 query占쏙옙占쏙옙 占신곤옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil�� query���� �Ű� ���� ����
 	
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query 占쏙옙占쏙옙
-			if (rs.next()) {						// 占싻삼옙 占쏙옙占쏙옙 占쌩곤옙
+			ResultSet rs = jdbcUtil.executeQuery();		// query ����
+			if (rs.next()) {						// �л� ���� �߰�
 				User user = new User();
 				
 				user.setUserNo(rs.getInt("userNo"));
@@ -184,13 +184,13 @@ public class UserDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		// resource ��ȯ
 		}
 		return null;
 		
 	}
 	
-	/** USERINFO �뀒�씠釉붿쓽 �뻾�쓣 �닔�젙. �쉶�썝�젙蹂� �닔�젙 
+	/** USERINFO 테이블의 행을 수정. 회원정보 수정 
 	 * */
 	public int updateUserInfo(User user) throws SQLException {
 		String sql = " UPDATE USERINFO  "
@@ -215,7 +215,7 @@ public class UserDAO {
 	
 	
 	
-	/** userNo, artworkNo �쓣 諛쏆븘�꽌 WISHARTWORK �뀒�씠釉붿뿉 �깉濡쒖슫 �뻾�쓣 �깮�꽦 / �궗�슜�옄 愿��젏 : �쐞�떆由ъ뒪�듃�뿉 �듅�젙 artwork瑜� 異붽��븯���쓬
+	/** userNo, artworkNo 을 받아서 WISHARTWORK 테이블에 새로운 행을 생성 / 사용자 관점 : 위시리스트에 특정 artwork를 추가하였음
 	 */
 	public int insertWishArtwork(int userNo, int artworkNo) throws SQLException {
 		String sql = "INSERT INTO WISHARTWORK (wishArtworkNo, userNo, artworkNo) " +
@@ -224,19 +224,19 @@ public class UserDAO {
 		jdbcUtil.setSqlAndParameters(sql, param);	
 						
 		try {				
-			int result = jdbcUtil.executeUpdate();	// insert 占쏙옙 占쏙옙占쏙옙
+			int result = jdbcUtil.executeUpdate();	// insert �� ����
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 占쏙옙환
+			jdbcUtil.close();	// resource ��ȯ
 		}		
 		return 0;
 	}
 	
-	/** userNo, artworkNo �뿉 �빐�떦�븯�뒗  WISHARTWORK �뀒�씠釉붿쓽 �뻾�쓣 �궘�젣 / �궗�슜�옄 愿��젏 : �쐞�떆由ъ뒪�듃�뿉�꽌 �듅�젙 artwork瑜� �궘�젣�븯���쓬
+	/** userNo, artworkNo 에 해당하는  WISHARTWORK 테이블의 행을 삭제 / 사용자 관점 : 위시리스트에서 특정 artwork를 삭제하였음
 	 */
 	public int deleteWishArtwork(int userNo, int artworkNo) throws SQLException {
 		String sql = "DELETE FROM WISHARTWORK WHERE userNo = ? AND artworkNo =? ";		
@@ -257,7 +257,7 @@ public class UserDAO {
 		
 	}
 	
-	/** �궗�슜�옄媛� �쐞�떆由ъ뒪�듃�뿉 異붽��븳 artwork 由ъ뒪�듃濡� 諛섑솚 
+	/** 사용자가 위시리스트에 추가한 artwork 리스트로 반환 
 	 * */
 	public List<Artwork> getWishArtwork(int userNo){
 		String sql = "SELECT a.artworkNo AS artworkNo, a.image AS image, a.workSize AS workSize, a.title AS title, a.artistName AS artistName, "
@@ -266,7 +266,7 @@ public class UserDAO {
 				+ "WHERE w.userNo = u.userNo "
 				+ "AND w.artworkNo = a.artworkNo "
 				+ "AND u.userNo = ?" ;
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil占쏙옙 query占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil�� query�� ����
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		
@@ -292,7 +292,7 @@ public class UserDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		// resource ��ȯ
 		}
 		return null;
 		
@@ -301,7 +301,7 @@ public class UserDAO {
 	
 	/*
 	public List<Onedayclass> getWishOnedayclass(int userNo) {
-		//: 占쎈퉸占쎈뼣 占쎌�占쏙옙占쎌벥 onedayclass占쎈퓠 占쏙옙占쎈립 wish�몴占� 揶쏉옙占쎌죬占쎌궔占쎈뼄.
+		//: �빐�떦 �쑀���쓽 onedayclass�뿉 ���븳 wish瑜� 媛��졇�삩�떎.
 		Connection conn = null;
 		PreparedStatement pStmt = null;			
 		ResultSet rs = null;
@@ -315,7 +315,7 @@ public class UserDAO {
 		
 
 		try {
-			conn = cm.getConnection();	// DBMS占쏙옙占쎌벥 占쎈염野껓옙 占쎌돴占쎈굣 
+			conn = cm.getConnection();	// DBMS���쓽 �뿰寃� �쉷�뱷 
 			pStmt = conn.prepareStatement(query);	
 			
 			pStmt.setInt(1, userNo);
@@ -329,7 +329,7 @@ public class UserDAO {
 
 				odc.setOnedayclassNo(rs.getInt("onedayclassNo"));
 				
-				odc.setHost( getUserInfoByNo(rs.getInt("hostNo")) ); //揶쏉옙占쎈뮟占쎈릭占쎈뼄筌롳옙
+				odc.setHost( getUserInfoByNo(rs.getInt("hostNo")) ); //媛��뒫�븯�떎硫�
 				
 				odc.setTitle(rs.getString("title"));
 				odc.setImage(rs.getString("image"));
@@ -348,7 +348,7 @@ public class UserDAO {
 			
 		}catch (SQLException ex) {
 			ex.printStackTrace();
-		} finally {		// 占쎌쁽占쎌뜚 獄쏆꼶沅�
+		} finally {		// �옄�썝 諛섎궔
 			if (rs != null) 
 				try { 
 					rs.close(); 
@@ -433,7 +433,7 @@ public class UserDAO {
 	}*/
 	
 	/** 
-	 * cart�뿉 artwork異붽�
+	 * cart에 artwork추가
 	 * */
 	public int insertCartArtwork(int userNo, int artworkNo) {
 		String sql = "INSERT INTO CARTARTWORK "
@@ -442,21 +442,21 @@ public class UserDAO {
 		jdbcUtil.setSqlAndParameters(sql, param);	
 						
 		try {				
-			int result = jdbcUtil.executeUpdate();	// insert 占쏙옙 占쏙옙占쏙옙
+			int result = jdbcUtil.executeUpdate();	// insert �� ����
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 占쏙옙환
+			jdbcUtil.close();	// resource ��ȯ
 		}		
 		return 0;
 		
 	}
 	
 	/** 
-	 * cart�뿉�꽌 artwork �궘�젣
+	 * cart에서 artwork 삭제
 	 * */
 	public int deleteCartArtwork(int userNo, int artworkNo) throws SQLException {
 		
@@ -480,7 +480,7 @@ public class UserDAO {
 	
 	
 	
-	/** �옣諛붽뎄�땲�뿉 �떞寃⑥졇�엳�뒗 artwork 紐⑸줉�쓣 由ъ뒪�듃濡� 諛섑솚 
+	/** 장바구니에 담겨져있는 artwork 목록을 리스트로 반환 
 	 */
 	public List<Artwork> getCartArtwork(int userNo){
 		String sql = "SELECT a.artworkNo AS artworkNo, a.image AS image, a.workSize AS workSize, a.title AS title, a.artistName AS artistName, "
@@ -489,7 +489,7 @@ public class UserDAO {
 				+ "WHERE c.userNo = u.userNo "
 				+ "AND c.artworkNo = a.artworkNo "
 				+ "AND u.userNo = ?" ;
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil占쏙옙 query占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil�� query�� ����
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		
@@ -515,7 +515,7 @@ public class UserDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		// resource ��ȯ
 		}
 		return null;
 		
@@ -528,7 +528,7 @@ public class UserDAO {
 		
 	}*/
 	
-	/** �떊泥��븳 �썝�뜲�씠 �겢�옒�뒪 紐⑸줉*/
+	/** 신청한 원데이 클래스 목록*/
 	/*public List<Onedayclass> getApplyOnedayclass(int userNo) { 
 		
 		String sql = "SELECT o.onedayclassNo AS onedayclassNo, o.hostNo AS hostNo, u.name AS name, o.title AS title, o.image AS image, "
@@ -538,7 +538,7 @@ public class UserDAO {
 				+ "WHERE oca.userNo = u.userNo "
 				+ "AND o.onedayclassNo = oca.onedayclassNo " 
 				+ "AND u.userNo = ? ";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil占쏙옙 query占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil�� query�� ����
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		
@@ -572,21 +572,21 @@ public class UserDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		// resource ��ȯ
 		}
 		return null;
 		
 		
 	} */
 	
-	/** �엯�옣沅뚯쓣 援щℓ�븳 �쟾�떆�쉶 紐⑸줉*/
+	/** 입장권을 구매한 전시회 목록*/
 	public List<Exhibition> getBuyTicketExhByUserNo(int userNo)
 	{
 		String sql = "SELECT e.exhibitionNo AS exhibitionNo, title, description, period, price, visitor, image "
 				+"FROM ExhibitionBuyTicket ebt, userinfo u, Exhibition e "
 				+"WHERE ebt.userNo = u.userNo "
 				+"AND ebt.exhibitionNo = e.exhibitionNo AND u.userNo = ?";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil占쏙옙 query占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil�� query�� ����
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		
@@ -609,13 +609,13 @@ public class UserDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		// resource ��ȯ
 		}
 		return null;
 		
 	}
 	/*
-	public List<TradeWork> getTradeWorkByUser(int userNo) {//: 占쎈퉸占쎈뼣 占쎌�占쏙옙揶쏉옙 占쎈쾻嚥≪빜釉� tradeWork占쎈굶占쎌뱽 獄쏆꼹�넎占쎈립占쎈뼄. 
+	public List<TradeWork> getTradeWorkByUser(int userNo) {//: �빐�떦 �쑀��媛� �벑濡앺븳 tradeWork�뱾�쓣 諛섑솚�븳�떎. 
 		Connection conn = null;
 		PreparedStatement pStmt = null;			
 		ResultSet rs = null;
@@ -645,7 +645,7 @@ public class UserDAO {
 				TradeWork tw = new TradeWork();
 				
 				tw.setTradeWorkNo(rs.getInt("tradeWorkNo"));
-				tw.setTrader(trader); // trader媛� User���엯�씠�땲源� .. userNo濡� User媛앹껜 留뚮뱾�뼱�꽌 ,, 洹몃젃寃� �꽔湲� ?!
+				tw.setTrader(trader); // trader가 User타입이니까 .. userNo로 User객체 만들어서 ,, 그렇게 넣기 ?!
 				tw.setImage(rs.getString("image"));
 				tw.setTitle(rs.getString("title"));
 				tw.setLocation(rs.getString("location"));
@@ -680,7 +680,7 @@ public class UserDAO {
 	}*/
 	
 	
-	//二쇰Ц�궡�뿭 異붽��븯湲�
+	//주문내역 추가하기
 	public int insertArtworkOrder(ArtworkOrder artworkOrder, List<Artwork> artworkList){
 		
 		String sql = "INSERT INTO ARTWORKORDER(artworkorderno, userno, destination, receiver, phone) "
@@ -697,13 +697,13 @@ public class UserDAO {
 		String key[]={"artworkorderno"};
 		
 		try {
-			int result = jdbcUtil.executeUpdate(key);     // insert 臾� �떎�뻾
-			ResultSet rs = jdbcUtil.getGeneratedKeys();    // �깮�꽦�맂 PK 媛믪쓣 �룷�븿�븳 result set 媛앹껜 諛섑솚
+			int result = jdbcUtil.executeUpdate(key);     // insert 문 실행
+			ResultSet rs = jdbcUtil.getGeneratedKeys();    // 생성된 PK 값을 포함한 result set 객체 반환
 			
 			int generatedKey = 0;
 			if(rs.next()) {
-				generatedKey = rs.getInt(1);     //  PK 媛믪쓣 �씫�쓬
-			    // ... �쐞�뿉�꽌 援ы븳 PK 媛믪쓣 �씠�슜�빐�꽌 �븘�슂�븳 �옉�뾽 援ы쁽
+				generatedKey = rs.getInt(1);     //  PK 값을 읽음
+			    // ... 위에서 구한 PK 값을 이용해서 필요한 작업 구현
 			}
 			
 			int result2 = 0;
@@ -713,14 +713,14 @@ public class UserDAO {
 				result2 = jdbcUtil.executeUpdate();
 			}
 			
-			return generatedKey;   // �삉�뒗 Test �뀒�씠釉붿뿉 ���쓳�릺�뒗 VO/DTO 媛앹껜瑜� �깮�꽦�븯�뿬 PK 媛믪쓣 ���옣�븳 �썑 由ы꽩
+			return generatedKey;   // 또는 Test 테이블에 대응되는 VO/DTO 객체를 생성하여 PK 값을 저장한 후 리턴
 			   
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 占쏙옙환
+			jdbcUtil.close();	// resource ��ȯ
 		}		
 		return 0;
 		
@@ -729,7 +729,7 @@ public class UserDAO {
 	}
 	
 	
-	/** �궗�슜�옄�쓽 artwork 二쇰Ц�궡�뿭�쓣 ArtworkOrder 媛앹껜濡� 諛섑솚 
+	/** 사용자의 artwork 주문내역을 ArtworkOrder 객체로 반환 
 	 * */
 	public List<ArtworkOrder> getArtworkOrderByUserNo(int userNo) {
 		String sql = "SELECT a.artworkOrderNo AS artworkOrderNo, u.userNo AS userNo, a.destination AS destination, "
@@ -743,7 +743,7 @@ public class UserDAO {
 				+ "WHERE o.artworkorderno = ? "
 				+ "AND o.artworkno = a.artworkno";
 		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil占쏙옙 query占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userNo});		// JDBCUtil�� query�� ����
 		
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		
@@ -761,7 +761,7 @@ public class UserDAO {
 				artworkOrderList.add(artworkOrder);
 			}	
 			
-			/** 二쇰Ц踰덊샇�뿉 �빐�떦�븯�뒗 紐⑤뱺 Artwork�뱾�쓣 由ъ뒪�듃濡� 諛섑솚�븯�뿬 ArtworkOrder媛앹껜�뿉 ���옣*/
+			/** 주문번호에 해당하는 모든 Artwork들을 리스트로 반환하여 ArtworkOrder객체에 저장*/
 			for(int i = 0; i < artworkOrderList.size(); i++) {
 				ArtworkOrder a = artworkOrderList.get(i);
 				jdbcUtil.setSqlAndParameters(sql2, new Object[] {a.getArtworkOrderNo()});
@@ -808,25 +808,25 @@ public class UserDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		// resource ��ȯ
 		}
 		return null;
 		
 	}
 	
 	
-	/**  artworkOrderNo(�옉�뭹 二쇰Ц踰덊샇)�뿉 �빐�떦�븯�뒗 Artwork瑜� List濡� 諛섑솚 (�븯�굹�쓽 二쇰Ц踰덊샇�뿉 �뿬�윭媛쒖쓽 �옉�뭹�씠 �엳�쓣 �닔 �엳�쓬)
+	/**  artworkOrderNo(작품 주문번호)에 해당하는 Artwork를 List로 반환 (하나의 주문번호에 여러개의 작품이 있을 수 있음)
 	 * */
 
 	public List<Artwork> getOdrArtworkListByOdrNo(int artworkOrderNo) { 
-	      //�븯�굹�쓽 二쇰Ц�젙蹂댁뿉 ���븳 �븘�듃�썙�겕 由ъ뒪�듃瑜� 諛섑솚. 
+	      //하나의 주문정보에 대한 아트워크 리스트를 반환. 
 
 		String sql = "SELECT a1.artworkNo AS artworkNo, image, workSize, title, price, likeCnt, artistName, description, isSoldOut "
 					+"FROM ARTWORK a1, ARTWORKORDER a2, ODRARTWORKLIST o "
 					+"WHERE a2.artworkOrderNo = ? "
 					+ "AND o.ArtworkOrderNo = a2.ArtworkOrderNo "
 					+ "AND o.artworkNo = a1.artworkNo ";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {artworkOrderNo});		// JDBCUtil占쏙옙 query占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {artworkOrderNo});		// JDBCUtil�� query�� ����
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		
@@ -852,7 +852,7 @@ public class UserDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		// resource ��ȯ
 		}
 		return null;
 		
@@ -861,10 +861,10 @@ public class UserDAO {
 	
 	public boolean existingUser(String userId) throws SQLException {
 		String sql = "SELECT count(*) FROM USERINFO WHERE userid=?";      
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil占쏙옙 query占쏙옙占쏙옙 占신곤옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil�� query���� �Ű� ���� ����
 
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query 占쏙옙占쏙옙
+			ResultSet rs = jdbcUtil.executeQuery();		// query ����
 			if (rs.next()) {
 				int count = rs.getInt(1);
 				return (count == 1 ? true : false);
@@ -872,14 +872,10 @@ public class UserDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		// resource ��ȯ
 		}
 		return false;
 	}
-	
-	
-	
-	
 	
 
 }
