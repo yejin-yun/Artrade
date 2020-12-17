@@ -129,7 +129,27 @@
 	        form.phone.focus();
 	        return false;
 	     }
-	    
+	    var payment = document.getElementsByName("pm_means");
+	    if(payment[1].checked == true) {
+	    	 if (form.provider.value == "") {
+	 	        alert("입금자명을 입력하십시오."+form.provider.value);
+	 	        form.provider.focus();
+	 	        return false;
+	 	     }
+	    	 if (form.bank.value == "") {
+		 	        alert("입금은행을 입력하십시오."+form.bank.value);
+		 	        form.bank.focus();
+		 	        return false;
+		 	 }
+	    }
+	    if(payment[3].checked == true) {
+	    	 if (form.depositor.value == "") {
+	 	        alert("예금주명을 입력하십시오."+form.depositor.value);
+	 	        form.depositor.focus();
+	 	        return false;
+	 	     }
+	    }
+	 
 
 	     var isChk = false;
 	        var products = document.getElementsByName("payment_product");

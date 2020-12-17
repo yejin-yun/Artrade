@@ -59,7 +59,7 @@ function userCreate(targetUri) {
    }
    if (form.password.value != form.password2.value) {
       alert("비밀번호가 일치하지 않습니다.");
-      form.name.focus();
+      form.password2.focus();
       return false;
    }
    if (form.name.value == "") {
@@ -79,7 +79,7 @@ function userCreate(targetUri) {
       form.phone.focus();
       return false;
    }
-   moveTarget(targetUri);
+  moveTarget(targetUri);
 }
 
 function moveTarget(targetUri) {

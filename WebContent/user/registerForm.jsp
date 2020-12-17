@@ -106,7 +106,7 @@ function moveTarget(targetUri) {
 			<div class="form-group form-inline">
     				<label for="userId" style="margin-left: 15%;">ID*: </label>
     				<input type="text" class="form-control" name="userId" id="userId" placeholder="Enter ID">
-    				<button type="submit" class="btn btn-info" style="margin-top: 10px;">중복 확인</button>
+    				<button type="button" class="btn btn-info" style="margin-top: 10px;" onClick="moveTarget('<c:url value='/user/register' />')">중복 확인</button>
     		</div>	
 			<div class="form-group form-inline">
     				<label for="pwd">Password*: </label>
