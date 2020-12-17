@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html>
-<head lang="en"> <!-- 이전 코드 css -> 작품보기.html에 있음 -->
+<head> <!-- 이전 코드 css -> 작품보기.html에 있음 -->
     <title>Artrade</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,51 +17,8 @@
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/detail.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
-
     <style>
-		.btns{
-			 margin-top: 10%;
-		}
-		.btns input {
-			padding: 5px;
-			background-color: white;
-			border: 1px solid #646EFF;
-			color: #646EFF;
-			border-top-left-radius: 5px; 
-			border-bottom-left-radius: 5px;
-			border-top-right-radius: 5px; 
-			border-bottom-right-radius: 5px;
-		}
-		.btns input:hover
-		{ 	
-			color:white; 
-			background-color: #646EFF; 
-		}
-		.funcs {
-			margin-top: 10%;
-		}
-		.funcs input 
-		{
-			padding: 5px;
-			background-color: white;
-			border: 1px solid #646EFF;
-			color: #646EFF;
-			border-top-left-radius: 5px; 
-			border-bottom-left-radius: 5px;
-			border-top-right-radius: 5px; 
-			border-bottom-right-radius: 5px;
 
-		}
-		.funcs input:hover
-		{ 	
-			color:white; 
-			background-color: #646EFF; 
-		}
-		
-		.checkWish {
-			margin-top: 10px;
-			margin-left: 10px;
-		}
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     <script src="<c:url value='/js/base.js' />" ></script>
@@ -146,7 +103,7 @@
                     <div class="w3-card-4 work card">
                    		<c:set var="artworkNo" value="<%= wishArtwork.getArtworkNo() %>" />    
                        	<c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 
-                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}" class="checkWish"/> 	
+                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}"/> 	
                            <div class="img_div">
                            	<a href="<c:url value='/artwork/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />" > 
                                <img class="main_img" src="<c:url value='<%= wishArtwork.getImage() %>' />" /></a>
@@ -154,11 +111,12 @@
                         	<div class="content">
                         	<a href="<c:url value='/artwork/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />" > 
                             <h2><%= wishArtwork.getTitle() %></h2>
-                            <p><%= wishArtwork.getArtistName() %></p>
-                            <p><%= wishArtwork.getPrice() %></p></a> 
-                           <div class="btns">
-                           		<input type="button" value="삭제" onClick="moveTarget('<c:url value='/user/deletewishlist' />')" >
-                           		<input type="button" value="장바구니로 이동" onClick="moveTarget('<c:url value='/user/fromWishToCart' />')" >
+                            <h2><%= wishArtwork.getArtistName() %></h2>
+                            <h2><%= wishArtwork.getPrice() %></h2></a> 
+                           <div>
+                           <input type="button" value="삭제" onClick="moveTarget('<c:url value='/user/deletewishlist' />')" >
+                           <input type="button" value="장바구니로 이동" onClick="moveTarget('<c:url value='/user/fromWishToCart' />')" >
+                          
                            </div>
                         </div>
                     </div>
@@ -171,8 +129,8 @@
                }
                  out.println("</table>");
          %>
-         <div class="w3-center funcs"> 
-			<input type="button" value="선택한 상품들 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
+         <div class="w3-center"> 
+			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
 		 </div>
          <%
                  if(total != 0) {

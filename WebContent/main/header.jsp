@@ -74,7 +74,7 @@
                 <c:if test="${isLogined == 1}" >
                 	<li><a href="<c:url value='/user/logout' />">LogOut</a></li>
                 </c:if>
-                <li><a href="../user/cart.jsp">Cart</a></li>
+                <li><a href="<c:url value='/user/cartlist' />">Cart</a></li>
                 <li><a href="<c:url value='/user/wishlist' />">Wishlist</a></li>
                 <li><a href="<c:url value='/user/mypage' />">Mypage</a></li>
             </ul>
