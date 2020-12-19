@@ -22,19 +22,7 @@ public class RegisterUserController implements Controller {
 
       try {
             if(request.getMethod().equals("GET")){
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-               request.setAttribute("noDuplication", 0);
-=======
             	request.setAttribute("noDuplication", 0);
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-            	request.setAttribute("noDuplication", 0);
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-            	request.setAttribute("noDuplication", 0);
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
                 return "/user/registerForm.jsp";
             }
 
@@ -53,48 +41,20 @@ public class RegisterUserController implements Controller {
 
             String userId = request.getParameter("userId");
             if( manager.existingUser(userId) ) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                throw new ExistingUserException(userId + "는 존재하는 아이디입니다.");
-=======
-            	throw new ExistingUserException(userId + "는 존재하는 아이디입니다.");
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-            	throw new ExistingUserException(userId + "는 존재하는 아이디입니다.");
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-            	throw new ExistingUserException(userId + "는 존재하는 아이디입니다.");
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
             }
             
             if(!request.getParameter("submitBtn").equals("1")) {
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                request.setAttribute("user", user);
                if(!userId.equals("") && userId != null) {
                   request.setAttribute("noDuplication", 1);
                }
              return "/user/registerForm.jsp";
-=======
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
             	request.setAttribute("user", user);
             	if(!userId.equals("") && userId != null) {
             		request.setAttribute("noDuplication", 1);
             	}
     			return "/user/registerForm.jsp";
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
             }
             
 

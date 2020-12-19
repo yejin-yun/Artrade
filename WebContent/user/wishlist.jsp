@@ -51,27 +51,8 @@
 			border-top-left-radius: 5px; 
 			border-bottom-left-radius: 5px;
 			border-top-right-radius: 5px; 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-         border-bottom-right-radius: 5px;
+        	border-bottom-right-radius: 5px;
       }
-=======
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-			border-bottom-right-radius: 5px;
-
-
-		}
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 		.funcs input:hover
 		{ 	
 			color:white; 
@@ -79,23 +60,8 @@
 		}
 		
 		.checkWish {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 			margin-left: 10px;
 			margin-top: 10px;
-=======
-			margin-top: 10px;
-			margin-left: 10px;
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-			margin-top: 10px;
-			margin-left: 10px;
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-			margin-top: 10px;
-			margin-left: 10px;
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 		}
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
@@ -152,14 +118,6 @@
 	        
 	        moveTarget(targetUri);
 	    }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
        
       //function deleteWish(paraValue) {
     	 
@@ -184,13 +142,6 @@
     	  }
     	  moveTarget('/artrade/user/deletewishlist'); 
      */
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
     </script>
 </head>
 <body>
@@ -239,19 +190,7 @@
                     <div class="w3-card-4 work card">
                    		<c:set var="artworkNo" value="<%= wishArtwork.getArtworkNo() %>" />    
                        	<c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                     	<input type="checkbox" name="checkArtwork" value="${artworkNo}" id="${artworkNo}" class="checkWish allCheckbox"/> 	
-=======
-                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}"/> 	
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}"/> 	
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}"/> 	
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
                            <div class="img_div">
                            	<a href="<c:url value='/artwork/detail'>
 	            				<c:param name='artworkNo' value='${artworkNo}' />
@@ -288,26 +227,11 @@
                }
                  out.println("</table>");
          %>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
          <div class="w3-center funcs">
          	<input type="button" value="전체 선택" id="allCheck" > 
          	<input type="button" value="전체 해제" id="allReset">
 			<input type="button" value="선택 상품 모두 삭제" onClick="checkConfirm('<c:url value='/user/deletewishlist' />')">
 			<input type="button" value="선택 상품 장바구니 이동" onClick="checkConfirm('<c:url value='/user/fromWishToCart' />')">
-=======
-         <div class="w3-center"> 
-			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-         <div class="w3-center"> 
-			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-         <div class="w3-center"> 
-			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 		 </div>
          <%
                  if(total != 0) {

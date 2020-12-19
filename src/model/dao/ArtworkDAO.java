@@ -479,7 +479,6 @@ public class ArtworkDAO {
       String sql = "SELECT artworkNo, image, title , artistName, price "
             + "FROM ARTWORK "
             + "WHERE title LIKE ? OR artistName LIKE ?"; 
-=======
 		String sql3 = "SELECT artworkNo, userNo, NVL(cartartworkno, 0) AS cartArtworkNo "
 						+ "FROM CARTARTWORK "
 						+ "WHERE artworkNo = ? AND userNo = ?";
@@ -631,11 +630,6 @@ public class ArtworkDAO {
 		
 		Object[] param = new Object[] { "%"+keyword+"%"};
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 		jdbcUtil.setSqlAndParameters(sql, param);
 					
 		try {

@@ -80,19 +80,7 @@
             });
         });
         $(document).on("keyup", ".phoneNumber", function() { 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
            $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
-=======
-        	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-        	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-        	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
         });
 
         /* http://blog.naver.com/PostView.nhn?blogId=schatz1234&logNo=220908487291&parentCategoryNo=&categoryNo=16&viewDate=&isShowPopularPosts=true&from=search */
@@ -167,15 +155,7 @@
                return false;
             }
        }
-    
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+
 	    var phoneExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
 	    if(phoneExp.test(form.phone.value)==false) {
 	       alert("전화번호 형식이 올바르지 않습니다.");
@@ -204,13 +184,6 @@
 	 	     }
 	    }
 	 
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 
         var isChk = false;
            var products = document.getElementsByName("payment_product");
@@ -299,19 +272,7 @@
                    <p><label>수취자</label><input type="text"  class="form-control" name="receiver" style="width: 30%; margin-right: auto; margin-left: auto; "/></p>
                 </div>
                 <div class="form-group">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                    <p><label>전화번호</label><input type="text"  class="form-control phoneNumber" name="phone" style="width: 30%; margin-right: auto; margin-left: auto; "/></p>
-=======
-                	<p><label>전화번호</label><input type="text"  class="form-control phoneNumber" name="phone" style="width: 30%; margin-right: auto; margin-left: auto; "/></p>
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-                	<p><label>전화번호</label><input type="text"  class="form-control phoneNumber" name="phone" style="width: 30%; margin-right: auto; margin-left: auto; "/></p>
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-                	<p><label>전화번호</label><input type="text"  class="form-control phoneNumber" name="phone" style="width: 30%; margin-right: auto; margin-left: auto; "/></p>
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
                 </div>
       
             </div>

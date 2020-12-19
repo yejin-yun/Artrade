@@ -15,20 +15,8 @@
     <meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
-    <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-     <!-- Latest compiled and minified CSS -->
-=======
-    <!-- Latest compiled and minified CSS -->
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-    <!-- Latest compiled and minified CSS -->
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-    <!-- Latest compiled and minified CSS -->
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+	<link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
+	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	
 	<!-- jQuery library -->
@@ -95,28 +83,10 @@
            		int startIndex = 0; 
            		int lastIndex = 0;
            		int i = -1;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
            		int totalNum;
            		
          		totalNum = artworkList.size() + exhList.size();
-=======
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-           		int resultNum;
-           		
-           		resultNum = artworkList.size() + exhList.size();
-           		System.out.println("resultNum = " + resultNum);
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+
            		
            		if(artworkList.size() > 0) {
 					System.out.println("artworkList is not null");
@@ -187,48 +157,17 @@
                     </div>
                   </td>
 			<%
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 						if(totalNum > 3){
-=======
-						if(resultNum > 3){
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-						if(resultNum > 3){
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-						if(resultNum > 3){
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 							if((i + 1) % 3 == 0) {
 			   					out.println("</tr>");
 			   				}
 						}
            			}
            		}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-           		if(exhList.size() == 0) {
-           			for(int t = 0; t < 3 - exhList.size(); t++) {
- 		  			   out.println("<td></td>");
- 		  		   }
-=======
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-           		if(exhList.size() < 1 && resultNum < 3) {
-           			for(int t = 0; t < 3 - resultNum; t++) {
+           		if(exhList.size() < 1 && totalNum < 3) {
+           			for(int t = 0; t < 3 - totalNum; t++) {
    						out.println("<td></td>");
    					}
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
            		}
            		if(exhList.size() > 0) {
            			System.out.println("exhList is not null");
@@ -246,47 +185,12 @@
 	           		allPage = (exhList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
 	           		for(int j = startIndex; j <= lastIndex && j <total; j++) {
 	           			Exhibition exhibition = exhList.get(j);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 	           			if(totalNum > 3) {
-=======
-	           			if(resultNum > 3) {
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-	           			if(resultNum > 3) {
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
-	           			if(resultNum > 3) {
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 		           			if((j + 1) % 3 == 1) {
 		           				out.println("<tr style='margin-bottom: 30px;'>");
 		           			}		
 	           			}
            %>
-           	<td>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-           			<div class="w3-card-4 work">
-                        <c:set var="exhibitionNo" value="<%= exhibition.getExhibitionNo() %>" />
-	                        <div class="img_div">
-	                        	<%-- <a class="trigger" data-toggle="modal" data-target="#myModal" href="detail.jsp?artworkNo=${artworkNo}&isLogined=${isLogined}&userNo=${userNo}" >  --%>
-	                        	<a class="trigger" data-toggle="modal" data-target="#myModal">
-	                            <img class="main_img" src="<c:url value='<%= exhibition.getImage() %>' />" /></a>
-	                        </div>
-                        	<div class="content">
-                        		<a class="trigger" data-toggle="modal" data-target="#myModal">  
-	                            <h2><%= exhibition.getTitle() %></h2></a>
-	                            <p><%= exhibition.getPrice() %>원</p>
-                       		</div>
-                       	<!-- Modal -->
-  				<div class="modal fade" id="myModal" role="dialog">
-=======
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
            		<div class="w3-card-4 work">
                    <c:set var="exhibitionNo" value="<%= exhibition.getExhibitionNo() %>" />
 	                    <div class="img_div">
@@ -301,13 +205,6 @@
                        	</div>
                   <!-- Modal -->
   				<div class="modal fade" id="myModal" role="dialog"> <%-- 사용하려면 부트스트랩 링크 넣기 --%>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
     			<div class="modal-dialog">
 			      <!-- Modal content-->
 			      <div class="modal-content">
@@ -330,30 +227,10 @@
           	</div>
                   </td>
            <%
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
            				if(totalNum < 3) {
            					for(int t = 0; t < 3 - totalNum; t++) {
          		  			   out.println("<td></td>");
          		  		   }
-=======
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-           				if(resultNum < 3) {
-           					for(int t = 0; t < 3 - resultNum; t++) {
-           						out.println("<td></td>");
-           						
-           					}
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
            				}
 			       		if((j + 1) % 3 == 0) {
 			  				out.println("</tr>");

@@ -52,9 +52,6 @@
     <script src="<c:url value='/js/base.js' />" ></script>
     <script src="<c:url value='/js/img_slide.js' />"></script>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
    <script>
       //https://cublip.tistory.com/326   
@@ -100,11 +97,6 @@
       }
    
    </script>
-=======
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script>
 		//https://cublip.tistory.com/326	
@@ -150,18 +142,10 @@
 		}
 	
 	</script>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
-=======
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 </head>
 <body>
 
 <%@ include file="../main/header.jsp" %>
-<<<<<<< HEAD
    <div id="main_div" class="w3-center">
       <h1>회원정보 수정</h1> (*는 필수)
       <c:if test="${registerFailed}">
@@ -200,46 +184,6 @@
       </form>
    </div>
    <footer class="w3-center" style="margin-top: 500px;">
-=======
-	<div id="main_div" class="w3-center">
-		<h1>회원정보 수정</h1> (*는 필수)
-		<c:if test="${registerFailed}">
-	      <font color="red"><c:out value="${exception.getMessage()}" /></font>
-	    </c:if>
-		<form name="form" method="POST" action="" class="form-horizontal" style="margin-top: 10%;"> <!-- form에 action이 있으면 서브밋 타입의 버튼이 아니여도 보내줌. -->
-			<div class="form-group form-inline">
-    				<label for="userId">ID: </label>
-    				<input type="text" class="form-control" value="${user.userId}" name="userId" id="userId" readonly>
-    		</div>	
-			<div class="form-group form-inline">
-    				<label for="pwd">Password 수정*: </label>
-    				<input type="password" class="form-control" id="pwd" name="password" value="${user.password}">
-    				<p>(영문, 숫자, 특수 문자 포함 8~20자)</p>
-    		</div>	
-    		<div class="form-group form-inline">
-    				<label for="pwd2">Password 재확인*: </label>
-    				<input type="password" class="form-control" id="pwd2" name="password2" placeholder="Enter password">
-    		</div>	
-    		<div class="form-group form-inline">
-    				<label for="name">이름*: </label>
-    				<input type="text" class="form-control" name="name" id="name" value="${user.name}">
-    		</div>	
-    		<div class="form-group form-inline">
-    				<label for="phoneNum">전화번호*: </label>
-    				<input type="tel" class="form-control phoneNumber" name="phone" id="phoneNum" value="${user.phone}">
-    		</div>	
-    		<div class="form-group form-inline">
-			    <label for="email">Email*:</label>
-		    	<input type="email" class="form-control" id="email" value="${user.email}" name="email">
-			</div>
-			<div class="form-group form-inline" style="margin-top: 0;">
-				<button type="reset" class="btn btn-info">취소</button>
-				<button class="btn btn-info" onClick="userCreate('<c:url value='/user/update' />')">확인</button>
-			</div>
-		</form>
-	</div>
-	<footer class="w3-center" style="margin-top: 500px;">
->>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
         <div style="padding: 30px 0;"><p>Copyright (c) Artrade  |    2018년 5월 22일~ </p><p>대표: 윤 예진</p></div>
     </footer>
 </body>
