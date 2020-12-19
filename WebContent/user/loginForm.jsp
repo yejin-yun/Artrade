@@ -1,6 +1,11 @@
-<%@page contentType="text/html; charset=UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="model.*, model.dao.*" %>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<% request.setCharacterEncoding("UTF-8"); %>
+
+<!DOCTYPE html>
 <html>
 <head>
 <title>로그인</title>
@@ -12,14 +17,38 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/detail.css' />" >
-    <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
-    
+	<link rel=stylesheet href="<c:url value='/css/user.css' />" type="text/css">
      <!--JQuery -->
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     <script src="<c:url value='/js/base.js' />" ></script>
     <script src="<c:url value='/js/img_slide.js' />"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel=stylesheet href="<c:url value='/css/user.css' />" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
+	<style>
+		section {
+			width: 90%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		form {
+			width: 50%;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 10%;
+		}
+		#container {
+			width: 70%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#inputForms {
+			margin-top: 10%;
+		}
+		#btns {
+			margin-top: 10%;
+		}
+	</style>
+	
 <script>
 function login() {
    if (form.userId.value == "") {
@@ -36,78 +65,37 @@ function login() {
 }
 
 function userCreate(targetUri) {
-   form.action = targetUri;
+   form.action = targetUri; // action을 바꾸고 제출하는 거라 method는 안바꾸면 post로 감.
+   form.method = 'GET'; //get으로 넘겨야 jsp가 뜸.
    form.submit();
 }
 </script>
-<style>
-.login {
-   font-size: 30pt;
-
-}
-
-
-</style>
-
 
 </head>
-
+<body bgcolor=#FFFFFF text=#000000 >
 <%@ include file="../main/header.jsp" %>
 
-
-<body bgcolor=#FFFFFF text=#000000 >
-<br>
 <!-- login form  -->
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<div class="table" style="text-align:center; margin:0 auto; width:40%; height:70%;">
-<center>
+<section>
 <form name="form" method="POST" action="<c:url value='/user/login' />">
-  
-  <table style="width:40%; text-align:center; font-size:15pt;">
-  
-  <tr>
-  <td colspan="4" style="font-size:20pt;">로그인</td>
-  </tr>
-  
-  <tr>
-  <td></td>
-  <td>ID</td>
-  <td><input type="text" name="userId"> </td>
-  <td></td>
-  </tr>
-  
-  <tr>
-  <td></td>
-  <td>PW</td>
-  <td><input type="password" name="password"> </td>
-  <td></td>
-  </tr>
-
-  
-  <tr>
-  <td></td>
-  <td colspan="2"> <input type="submit" value="로그인" onClick="login()">  <a href="../user/registerForm.jsp"><input type="button" value="회원가입"></a></td>
-  <td></td>
-  </tr>
-  
-  
-  
-  
-  
-  </table>
-  
+	<div id="container" >
+	  	<h2>로그인</h2>
+	  	<div id="inputForms">
+		  	ID: <input name="userId" class="w3-input w3-border w3-animate-input w3-round-large" type="text" style="width:50%">
+		  	PW: <input name="password" class="w3-input w3-border w3-animate-input w3-round-large" type="password" style="width:50%">
+	  	</div>
+	  	<div id="btns">
+	  		<button type="submit" onClick="login()"class="w3-button w3-black">로그인</button>
+	  		
+	  		<button class="w3-button w3-black" onClick="userCreate('<c:url value='/user/register' />')">회원가입</button>
+	  	</div>
+ 	</div>
 </form>
-</center>
-</div>
-
+</section>
+	<div class="footer">
+     	<footer class="w3-center">
+            <div style="padding: 30px 0;"><p>Copyright (c) Artrade  |    2018년 5월 22일~ </p><p>대표: 윤 예진</p></div>
+        </footer>
+    </div>
 </body>
 </html>

@@ -62,8 +62,8 @@
                 <img id="menubar" src="<c:url value='/images/index/menubar.PNG' />" border="0">
             </a></div>
         </div>
-        <div class="menu_bg"></div>
-        <div class="sidebar_menu">
+        <div class="menu_bg" style="z-index:1000;"></div>
+        <div class="sidebar_menu" style="z-index:1000;">
             <div class="close_btn"><a href="#">
                 <img src="<c:url value='/images/index/x-mark.png' />" border="0" width="10px" height="10px">
             </a></div>

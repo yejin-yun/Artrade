@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="model.*, java.util.List" %>
+    pageEncoding="UTF-8" import="model.*, model.dao.*" %>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <% request.setCharacterEncoding("UTF-8"); %>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +15,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link type="text/css" rel="stylesheet" href="../css/base.css" >
     <link type="text/css" rel="stylesheet" href="../css/detail.css" >
-    <link type="text/css" rel="stylesheet" href="../css/view.css" >
     <style>
 		#left {
 			float: left;
@@ -31,7 +29,7 @@
 		}
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
-    <script src="../js/base.js"></script>
+    <script src="<c:url value='/js/base.js' />" ></script>
 </head>
 <body>
 	<%@ include file="../main/header.jsp" %>

@@ -137,7 +137,7 @@
 	function moveTarget(targetUri) {
 		   form.action = targetUri;
 		   form.submit();
-		}
+	}
 	
 	</script>
 

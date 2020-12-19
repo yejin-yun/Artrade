@@ -144,6 +144,13 @@
                     </div>
                   </td>
 			<%
+					if(artworkList.size() < 3) {
+			        	   if((3 - artworkList.size() - 1) != i) { //i는 0부터 시작하니까 -1해준 거. 
+					  		   for(int t = 0; t < 3 - artworkList.size(); t++) {
+					  			   out.println("<td></td>");
+					  		   }
+				  		   }
+				  	   }	
 					if((i + 1) % 3 == 0) {
 		   				out.println("</tr>");
 		   			}

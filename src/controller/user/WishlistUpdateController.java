@@ -31,6 +31,10 @@ public class WishlistUpdateController implements Controller {
       int like = Integer.parseInt(request.getParameter("like"));
       
       int result = 1;
+      
+      if(like == -1) {
+    	  return "redirect:/artwork/list";
+      }
       if(like == 0) {
          result = manager.removeWishArtwork(userNo, artworkNo);
       } else {
