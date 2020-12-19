@@ -82,7 +82,7 @@ public class Manager {
       return user;
    }
    
-   public User findUserbyNo(int userNo)
+   public User findUserByNo(int userNo)
          throws SQLException, UserNotFoundException {
          User user = userDao.getUserInfoByNo(userNo);
                
