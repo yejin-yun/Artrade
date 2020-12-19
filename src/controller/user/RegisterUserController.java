@@ -34,9 +34,29 @@ public class RegisterUserController implements Controller {
                 request.getParameter("email"),
                 request.getParameter("phone")
             );
-            log.debug("Create User : {}", user);
+            
 
             Manager manager = Manager.getInstance();
+
+
+            String userId = request.getParameter("userId");
+            if( manager.existingUser(userId) ) {
+            	throw new ExistingUserException(userId + "는 존재하는 아이디입니다.");
+            }
+            
+            if(!request.getParameter("submitBtn").equals("1")) {
+
+            	request.setAttribute("user", user);
+            	if(!userId.equals("") && userId != null) {
+            		request.setAttribute("noDuplication", 1);
+            	}
+    			return "/user/registerForm.jsp";
+            }
+            
+
+            log.debug("Create User : {}", user);
+
+
             manager.createUser(user);
     
 	        return "redirect:/user/login";	// 성공 시 로그인 페이지로 넘김
