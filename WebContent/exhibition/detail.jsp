@@ -16,11 +16,20 @@
     <link type="text/css" rel="stylesheet" href="../css/base.css" >
     <link type="text/css" rel="stylesheet" href="../css/detail.css" >
     <style>
+    	section {
+    		width: 100%;
+    		height: 100%;
+    	}
 		#left {
 			float: left;
+			width: 70%;
+			height: 100%;
 		}
 		#right {
 			float: right;
+			width: 30%;
+			height: 100%;
+			padding-left: 3%;
 			background-color: white;
 		}
 		#full_img {
@@ -34,17 +43,17 @@
 <body>
 	<%@ include file="../main/header.jsp" %>
     <section>
-    	<div class="w3-card-4 work">
-              <a href="">
-              <div class="img_div">
-                 <img class="full_img" src="../img/artwork/모네_수련_연작.jpg" />
+              <div class="img_div" id="left">
+                 <img class="full_img" src="<c:url value='/images/artwork/모네_수련_연작.jpg'/>" />
               </div>
-              <div class="content">
-              <h2>모네</h2></a>
-              <p>산책</p>
-              <p>${artwork.description}</p>
-              </div>
+              <div class="content" id="right">
+              <h2>작가: 모네</h2>
+              <p>제목: 산책</p>
+              <p style="margin-top: 15px;">설명: ${artwork.description}</p>
         </div>
     </section>
+    <footer class="w3-center" style="margin-top: 500px;">
+        <div style="padding: 30px 0;"><p>Copyright (c) Artrade  |    2018년 5월 22일~ </p><p>대표: 윤 예진</p></div>
+    </footer>
 </body>
 </html>

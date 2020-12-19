@@ -23,7 +23,13 @@ public class BuyExhTicketController implements Controller {
             return "redirect:/user/login";	
         } 
     	
+    	//exhibitionNo 알아내기
+    	//Exhibition exh = (Exhibition)((Object)request.getParameter("exhibition"));
+    	int exhibitionNo = Integer.parseInt(request.getParameter("exhibition"));
+    	//int exhibitionNo = (int) request.getAttribute("exhibitionNo");
+    	
     	if(request.getMethod().equals("GET")) {
+    		request.setAttribute("exh", exh);
     		return "/exhibition/exhOrder.jsp";
     	}
     	
@@ -33,11 +39,6 @@ public class BuyExhTicketController implements Controller {
     	String userId = UserSessionUtils.getLoginUserId(request.getSession());
 		User user = manager.findUserById(userId);
 		int userNo = user.getUserNo();
-		
-		//exhibitionNo 알아내기
-		Exhibition exh = (Exhibition) request.getAttribute("exhibition");
-		int exhibitionNo = exh.getExhibitionNo();
-		//int exhibitionNo = (int) request.getAttribute("exhibitionNo");
 		
 		//ExhibitionBuyTicket 객체 생성
 		ExhibitionBuyTicket ebt = new ExhibitionBuyTicket();

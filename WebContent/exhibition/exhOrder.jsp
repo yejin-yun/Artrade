@@ -166,8 +166,7 @@
         	<%-- </c:if>
         	</c:url>" id="payment_form">
             <div class="menu"> --%>
-            <form method="POST" action="<c:url value='/order/payment'>
-            	<c:param name='isInCart' value='${isInCart}' /><c:param name='userNo' value='${userNo}' /><c:param name='artworkNo' value='${artworkNo}' /></c:url>" id="payment_form" name="form">
+            <form method="POST" action="<c:url value='/exhibition/buyTicket'></c:url>" id="payment_form" name="form">
             	
             <div class="menu">
                     <h3>상품 정보</h3>
@@ -182,15 +181,12 @@
                     	<li>
                             <div class="product">
                                 <label> <%-- detail.jsp?artworkNo=${ads.artwork.artworkNo}&isLogined=1&userNo=${ads.artwork(심플아트워크 담는 객체 변수의 이름).userNo} --%>
-                                    <input type="checkbox" name="payment_product" value="${artworkNo}" checked />    
+                                    <input type="checkbox" name="payment_product" value="${exh.exhibitionNo}" checked />    
                                     <%-- <a href="<c:url value='/${frontServletPath}/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />"> --%>
-                                    <a href="<c:url value='/artwork/detail'>
-	            					<c:param name='artworkNo' value='${artworkNo}' />
-	            					<c:param name='isLogined' value='${isLogined}' /></c:url>">
-                                    	<img src="<c:url value='${artwork.image}' />" class="artwork_img" />
-                                    <span><br>작가: ${artwork.artistName}<br>작품명: ${artwork.title}<br>가격: ${artwork.price}원</span></a>
+                                    	<img src="<c:url value='${exh.image}' />" class="artwork_img" />
+                                    <span><br>${exh.title}<br>가격: ${exh.price}원</span></a>
                                 </label> <!-- 라벨은 있는 게 좋은지 없는 게 좋은지 모르겠다... -->
-                                <c:set var="totalCost" value="${artwork.price}" />
+                                <c:set var="totalCost" value="${exh.price}" />
                             </div>
                         </li>
                         </ul>
