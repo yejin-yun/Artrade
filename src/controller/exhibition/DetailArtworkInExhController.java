@@ -15,6 +15,7 @@ public class DetailArtworkInExhController implements Controller {
 		int artworkNo = Integer.parseInt(request.getParameter("artworkNo"));
 		
 		Artwork artwork = manager.findArtworkForNotUser(artworkNo);
+		if(artwork == null) System.out.println("artwork null Error");
 		
 		request.setAttribute("artwork", artwork);
 		

@@ -58,7 +58,7 @@
                  <img class="full_img" src="<c:url value='${artwork.image}'/>" />
               </div>
               <div class="content" id="right">
-              <h2>작가: ${artwork.artist}</h2>
+              <h2>작가: ${artwork.artistName}</h2>
               <p>제목: ${artwork.title}</p>
               <p style="margin-top: 15px;">설명: ${artwork.description}</p>
         </div>
