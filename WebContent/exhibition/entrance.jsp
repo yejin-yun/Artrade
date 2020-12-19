@@ -40,7 +40,7 @@
            <table>
            <%
            		System.out.println("here is....view.jsp");
-           		List<Artwork> artworkList = (List<Artwork>)request.getAttribute("artworkInExh");
+           		List<Artwork> artworkList = (List<Artwork>)request.getAttribute("artworkList");
 
            		if(artworkList == null) {
            			out.println("<p style='text-align:center;'>상품이 없습니다.</p>");

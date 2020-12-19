@@ -26,7 +26,7 @@ public class EnterExhibitionController implements Controller{
         int userNo = user.getUserNo();
 		request.setAttribute("userNo", userNo);
 
-        int exhibitionNo = (int)request.getAttribute("exhibitionNo");
+        int exhibitionNo = Integer.parseInt(request.getParameter("exhibitionNo"));
         
         //입장권을 가지고 있는지 검사
         int ticketCnt = manager.countHavingTicket(userNo, exhibitionNo);
@@ -40,7 +40,7 @@ public class EnterExhibitionController implements Controller{
         List<Artwork> artworkInExh = manager.findArtworkInExhibition(exhibitionNo);
         
         //전시작품 리스트를 request로 전달
-        request.setAttribute("artworkInExh", artworkInExh);
+        request.setAttribute("artworkList", artworkInExh);
         
         return "/exhibition/entrance.jsp";
 
