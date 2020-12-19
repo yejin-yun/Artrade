@@ -103,20 +103,20 @@
 	     moveTarget(targetUri);
        }
         
-       function value_check(targetUri, paraVlaue) {
-	        var select_obj = '';
-	 
-	        $('input[type="checkbox"]:checked').each(function (index, element) {
-	        	
-	            if (index != 0) {
-	                select_obj += ', ';
-	            }
-	            select_obj += $(this).val();
-	        });
-	 
-	        alert(select_obj);
-	        
-	        moveTarget(targetUri);
+       function delWish(paraValue, targetUri) {
+	        if($("input:checkbox[id='" + paraValue + "']").is(':checked') == true) {
+	        	 moveTarget(targetUri);
+	        } else {
+	        	alert('해당 상품이 선택되어 있지 않습니다.');
+	        }
+	    }
+       
+       function moveToCart(paraValue, targetUri) {
+	        if($("input:checkbox[id='" + paraValue + "']").is(':checked') == true) {
+	        	 moveTarget(targetUri);
+	        } else {
+	        	alert('해당 상품이 선택되어 있지 않습니다.');
+	        }
 	    }
        
       //function deleteWish(paraValue) {
@@ -156,7 +156,7 @@
                  
                  //System.out.println("size = " + wishlist.size());
                  
-                 if(wishlist == null) {
+                 if(wishlist == null || wishlist.size() == 0) {
                     out.println("<p style='text-align:center;'>위시리스트가 없습니다.</p>");
                     return;
                  }
@@ -205,8 +205,8 @@
                             <p><%= wishArtwork.getArtistName() %></p>
                             <p><%= wishArtwork.getPrice() %></p></a> 
                            <div class="btns">
-                           		<input type="button" value="삭제" onClick="value_check('<c:url value='/user/deletewishlist' />', ${artworkNo})" >
-                           		<input type="button" value="장바구니로 이동" onClick="moveTarget('<c:url value='/user/fromWishToCart' />')" >
+                           		<input type="button" value="삭제" onClick="delWish('${artworkNo}', '<c:url value='/user/deletewishlist' />')" >
+                           		<input type="button" value="장바구니로 이동" onClick="moveToCart('${artworkNo}', '<c:url value='/user/fromWishToCart' />')" >
 
                            </div>
                         </div>

@@ -51,13 +51,44 @@
     
     
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script>
+    <script> 
 		//https://cublip.tistory.com/326	
 		$(document).on("keyup", ".phoneNumber", function() { 
 			$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
 		});
+		$('#confirmBtn').click(function() { //https://hee-kkk.tistory.com/22 //https://dotheright.tistory.com/165
+			var regExpPw = /(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{1,20}).{8,20}$/;
+			var result = regExpPw.test($('#pwd').val());
+			if(!result) {
+				alert('비밀번호는 영문, 숫자, 특수 문자 포함하여 8~20자여야 합니다.');
+				return false;
+			}
+		});
 	</script>
 	<script>
+	function chkPW(){
+
+		 var pw = $("#pwd").val();
+		 var num = pw.search(/[0-9]/g);
+		 var eng = pw.search(/[a-z]/ig);
+		 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+		 if(pw.length < 8 || pw.length > 20){
+
+		  alert("8자리 ~ 20자리 이내로 입력해주세요.");
+		  return false;
+		 }else if(pw.search(/\s/) != -1){
+		  alert("비밀번호는 공백 없이 입력해주세요.");
+		  return false;
+		 }else if(num < 0 || eng < 0 || spe < 0 ){
+		  alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+		  return false;
+		 }else {
+			console.log("통과"); 
+		    return true;
+		 }
+
+	}
 	function userCreate(targetUri) {
 	   if (form.userId.value == "") {
 	      alert("사용자 ID를 입력하십시오.");
@@ -69,9 +100,16 @@
 	      form.password.focus();
 	      return false;
 	   }
+
+	   if(!chkPW()) {
+		   form.password.focus();
+		   return false;
+	   }
+	   
+	   
 	   if (form.password.value != form.password2.value) {
 	      alert("비밀번호가 일치하지 않습니다.");
-	      form.name.focus();
+	      form.password.focus();
 	      return false;
 	   }
 	   if (form.name.value == "") {
@@ -130,12 +168,12 @@
     		</div>	
 			<div class="form-group form-inline">
     				<label for="pwd">Password*: </label>
-    				<input type="password" class="form-control" id="pwd" name="password" placeholder="Enter password">
+    				<input type="password" class="form-control pw" id="pwd" name="password" placeholder="Enter password">
     				<p>(영문, 숫자, 특수 문자 포함 8~20자)</p>
     		</div>	
     		<div class="form-group form-inline">
     				<label for="pwd2">Password 재확인*: </label>
-    				<input type="password" class="form-control" id="pwd2" name="password2" placeholder="Enter password">
+    				<input type="password" class="form-control pw" id="pwd2" name="password2" placeholder="Enter password">
     		</div>	
     		<div class="form-group form-inline">
     				<label for="name">이름*: </label>
@@ -166,7 +204,7 @@
 			</div>
 			<div class="form-group form-inline" style="margin-top: 0;">
 				<button type="reset" class="btn btn-info">취소</button>
-				<button class="btn btn-info" onClick="userCreate('<c:url value='/user/register'><c:param name="submitBtn" value="1" /></c:url>')">확인</button>
+				<button class="btn btn-info" id="confirmBtn" onClick="userCreate('<c:url value='/user/register'><c:param name="submitBtn" value="1" /></c:url>')">확인</button>
 			</div>
 		</form>
 	</div>
