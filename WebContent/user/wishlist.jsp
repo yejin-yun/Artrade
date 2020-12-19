@@ -42,6 +42,7 @@
 		}
 		.funcs input 
 		{
+			margin-right: 10px;
 			padding: 5px;
 			background-color: white;
 			border: 1px solid #646EFF;
@@ -93,45 +94,31 @@
 	     moveTarget(targetUri);
        }
         
-       function value_check(targetUri, paraVlaue) {
-	        var select_obj = '';
-	 
-	        $('input[type="checkbox"]:checked').each(function (index, element) {
-	        	
-	            if (index != 0) {
-	                select_obj += ', ';
-	            }
-	            select_obj += $(this).val();
-	        });
-	 
-	        alert(select_obj);
-	        
-	        moveTarget(targetUri);
+       function deleteWish(paraValue, targetUri) {
+    	   //alert("input:checkbox[id='"+ paraValue +"']");
+	        if($("input:checkbox[id='"+ paraValue +"']").is(':checked') == true) {
+	        	moveTarget(targetUri);
+	        } else{
+	        	alert('해당 상품이 선택 되어있지 않습니다.');
+	        }
 	    }
        
-      //function deleteWish(paraValue) {
-    	 
-      //}
-     /*
-     
-      alert("상품" + paraValue);
-    	  var flag = false;
-    	  var artwork = document.getElementsByName("checkArtwork");
-    	  
-    	  for(var i=0;i<artwork.length;i++){
-    		  alert("상품" + artwork[i].value);
-	           if(artwork[i].value == paraValue) {
-	        	   if(artwork.valuechecked == true) {
-	        		   flag = true;
-	        		   break;
-	        	   }
-	           }	
-	       }
-    	  if(flag == false) {
-    		  retrun false;
-    	  }
-    	  moveTarget('/artrade/user/deletewishlist'); 
-     */
+       function moveCart(paraValue, targetUri) {
+    	   //alert("input:checkbox[id='"+ paraValue +"']");
+	        if($("input:checkbox[id='"+ paraValue +"']").is(':checked') == true) {
+	        	moveTarget(targetUri);
+	        } else{
+	        	alert('해당 상품이 선택 되어있지 않습니다.');
+	        }
+	    }
+       
+       function resetWish() {
+    	   $("input[type=checkbox][checked]").each(
+    			   function () {
+    			  	 $(this).attr('checked', false);
+    		});
+       }
+       
     </script>
 </head>
 <body>
@@ -180,7 +167,7 @@
                     <div class="w3-card-4 work card">
                    		<c:set var="artworkNo" value="<%= wishArtwork.getArtworkNo() %>" />    
                        	<c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 
-                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}" class="checkWish"/> 	
+                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}" id="${artworkNo}" class="checkWish"/> 	
                            <div class="img_div">
                            	<a href="<c:url value='/artwork/detail'>
 	            				<c:param name='artworkNo' value='${artworkNo}' />
@@ -195,8 +182,8 @@
                             <p><%= wishArtwork.getArtistName() %></p>
                             <p><%= wishArtwork.getPrice() %></p></a> 
                            <div class="btns">
-                           		<input type="button" value="삭제" onClick="value_check('<c:url value='/user/deletewishlist' />', ${artworkNo})" >
-                           		<input type="button" value="장바구니로 이동" onClick="moveTarget('<c:url value='/user/fromWishToCart' />')" >
+                           		<input type="button" value="삭제" onClick="deleteWish('${artworkNo}', '<c:url value='/user/deletewishlist' />')" >
+                           		<input type="button" value="장바구니로 이동" onClick="moveCart('${artworkNo}', '<c:url value='/user/fromWishToCart' />')" >
                            </div>
                         </div>
                     </div>
@@ -209,7 +196,9 @@
                }
                  out.println("</table>");
          %>
-         <div class="w3-center funcs"> 
+         <div class="w3-center funcs">
+         	<input type="button" value="전체 선택" onClick="resetWish()"> 
+         	<input type="button" value="전체 해제" onClick="resetWish()">
 			<input type="button" value="선택한 상품들 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
 		 </div>
          <%
