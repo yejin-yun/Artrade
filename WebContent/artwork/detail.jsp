@@ -29,6 +29,10 @@
         <p>작품 명: ${artwork.title} </p>
         <p>가격: ${artwork.price}원</p>
         <p>사이즈: ${artwork.workSize} </p>
+        <c:set var="wish_val" value="${artwork.isInWishList }" />
+        <c:set var="cart_val" value="${artwork.isInCart }" />
+        
+        
         <form class="btn">
             <a href="<c:url value='/order/payment'>
             	<c:param name="isInCart" value="0" />
@@ -38,10 +42,11 @@
             <button type="button" id="buy">주문하기</button></a>
             
             
-             
-            <a href="<c:url value="/user/cartAdd">
-            	
+            <c:set var="artworkNo" value="${artwork.artworkNo}" /> 
+            <a href="<c:url value='/user/cartAdd'>
+            	<c:param name="isLogined" value="1" />
             	<c:param name="artworkNo" value="${artworkNo}" />
+            	
             	
             </c:url>">
             <button type="button" id="cartlist">장바구니에 담기${artworkNo} </button>
@@ -56,20 +61,18 @@
             
              -->
             
-            
-            
-            
             <%--  <c:set var="wish_val" value="<%= artwork.getIsInWishlist() %>" /> --%> 
             <c:set var="artworkNo" value="${artwork.artworkNo}" /> 
-            <a href="<c:url value="/user/wishlistLike" var="wish">
-                            	<c:if test="${wish_val == 0}" >
-        							<c:param name="like" value="1" />
-        						</c:if>
-        						<c:if test="${wish_val == 1}" >
-        							<c:param name="like" value="0" />
-        						</c:if>
-        						<c:param name="artworkNo" value="${artworkNo}" />
-        						</c:url>">
+            <a href="<c:url value='/user/wishlistLike'>
+	                            	<c:if test="${wish_val == 0}" >
+	        							<c:param name="like" value="1" />
+	        						</c:if>
+	        						<c:if test="${wish_val == 1}" >
+	        							<c:param name="like" value="0" />
+	        						</c:if>
+	        						<c:param name="isLogined" value="1" /> <%-- 이걸 쓰려면 controller에서 isLogined를 쓰면 안됨 --%>
+	        						<c:param name="artworkNo" value="${artworkNo}" />
+	        						</c:url>">
         	<button type="button" id="wishlist">위시리스트에 담기</button></a>
         </form>
     </aside>   

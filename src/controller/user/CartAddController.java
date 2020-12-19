@@ -39,7 +39,7 @@ public class CartAddController implements Controller {
 				UserSessionUtils.getLoginUserId(request.getSession()));		*/
 
 		//cartlist濡� 蹂대궡踰꾨━湲�
-		return "/user/cartlist.jsp";
+		return "/user/cart.jsp";
 	}
 
 }
