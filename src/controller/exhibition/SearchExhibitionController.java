@@ -29,7 +29,7 @@ public class SearchExhibitionController implements Controller {
 	        
 			request.setAttribute("exhibitionList", exhList);
 			
-			return "/exhibition/searchResult.jsp";
+			return "/main/searchResult.jsp";
 	    }
 		
 		//로그인 되어 있는 경우
@@ -44,7 +44,7 @@ public class SearchExhibitionController implements Controller {
 		
 		request.setAttribute("exhibitionList", exhList);
 		
-		return "/exhibition/searchResult.jsp";
+		return "/main/searchResult.jsp";
 	}
 
 }
