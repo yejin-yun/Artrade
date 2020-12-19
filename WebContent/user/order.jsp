@@ -79,6 +79,10 @@
                 }
             });
         });
+        $(document).on("keyup", ".phoneNumber", function() { 
+        	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+        });
+
         /* http://blog.naver.com/PostView.nhn?blogId=schatz1234&logNo=220908487291&parentCategoryNo=&categoryNo=16&viewDate=&isShowPopularPosts=true&from=search */
         $(function() {
             $(".pm_nobackbook_click").click(function(){
@@ -124,12 +128,34 @@
 	        return false;
 	     } 
     
-	    if (form.phone.value == "") {
-	        alert("전화번호 입력하십시오."+form.phone.value);
-	        form.phone.focus();
-	        return false;
-	     }
+	    var phoneExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+	    if(phoneExp.test(form.phone.value)==false) {
+	       alert("전화번호 형식이 올바르지 않습니다.");
+	       form.phone.focus();
+	       return false;
+	    }
 	    
+	    var payment = document.getElementsByName("pm_means");
+	    if(payment[1].checked == true) {
+	    	 if (form.provider.value == "") {
+	 	        alert("입금자명을 입력하십시오."+form.provider.value);
+	 	        form.provider.focus();
+	 	        return false;
+	 	     }
+	    	 if (form.bank.value == "") {
+		 	        alert("입금은행을 입력하십시오."+form.bank.value);
+		 	        form.bank.focus();
+		 	        return false;
+		 	 }
+	    }
+	    if(payment[3].checked == true) {
+	    	 if (form.depositor.value == "") {
+	 	        alert("예금주명을 입력하십시오."+form.depositor.value);
+	 	        form.depositor.focus();
+	 	        return false;
+	 	     }
+	    }
+	 
 
 	     var isChk = false;
 	        var products = document.getElementsByName("payment_product");
@@ -218,7 +244,7 @@
                 	<p><label>수취자</label><input type="text"  class="form-control" name="receiver" style="width: 30%; margin-right: auto; margin-left: auto; "/></p>
                 </div>
                 <div class="form-group">
-                	<p><label>전화번호</label><input type="text"  class="form-control" name="phone" style="width: 30%; margin-right: auto; margin-left: auto; "/></p>
+                	<p><label>전화번호</label><input type="text"  class="form-control phoneNumber" name="phone" style="width: 30%; margin-right: auto; margin-left: auto; "/></p>
                 </div>
       
             </div>
