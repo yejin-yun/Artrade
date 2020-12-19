@@ -51,11 +51,29 @@
 			border-top-right-radius: 5px; 
          border-bottom-right-radius: 5px;
       }
-
+		.funcs input:hover
+		{ 	
+			color:white; 
+			background-color: #646EFF; 
+		}
+		
+		.checkWish {
+			margin-left: 10px;
+			margin-top: 10px;
+		}
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     <script src="<c:url value='/js/base.js' />" ></script>
-
+	<script>
+	$(document).ready(function() { 
+		$('#allCheck').click(function() {
+		  $("input[name=checkArtwork]:checkbox").attr("checked", true);
+		});
+		$('#allReset').click(function() {
+		  $("input[name=checkArtwork]:checkbox").attr("checked", false);
+		});
+	});
+	</script>
     <script>
         //위시리스트
          function moveTarget(targetUri) {
@@ -64,7 +82,7 @@
            form.submit();
         }
         
-       function deletes(targetUri) {
+       function checkConfirm(targetUri) {
     	   //alert(targetUri);
 	       var isChk = false;
 	       var products = document.getElementsByName("checkArtwork");
@@ -100,14 +118,6 @@
 	        	alert('해당 상품이 선택 되어있지 않습니다.');
 	        }
 	    }
-       
-       function resetWish() {
-    	   $("input[type=checkbox][checked]").each(
-    			   function () {
-    			  	 $(this).attr('checked', false);
-    		});
-       }
-       
     </script>
 </head>
 <body>
@@ -156,7 +166,7 @@
                     <div class="w3-card-4 work card">
                    		<c:set var="artworkNo" value="<%= wishArtwork.getArtworkNo() %>" />    
                        	<c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 
-                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}" id="${artworkNo}" class="checkWish"/> 	
+                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}" id="${artworkNo}" class="checkWish allCheckbox"/> 	
                            <div class="img_div">
                            	<a href="<c:url value='/artwork/detail'>
 	            				<c:param name='artworkNo' value='${artworkNo}' />
@@ -180,6 +190,13 @@
                     </label>
                   </td>
          <%
+	           if(wishlist.size() < 3) {
+	        	   if((3 - wishlist.size() - 1) != i) { //i는 0부터 시작하니까 -1해준 거. 
+			  		   for(int t = 0; t < 3 - wishlist.size(); t++) {
+			  			   out.println("<td></td>");
+			  		   }
+		  		   }
+		  	   }	
                if((i + 1) % 3 == 0) {
                      out.println("</tr>");
                   }
@@ -187,9 +204,10 @@
                  out.println("</table>");
          %>
          <div class="w3-center funcs">
-         	<input type="button" value="전체 선택" onClick="resetWish()"> 
-         	<input type="button" value="전체 해제" onClick="resetWish()">
-			<input type="button" value="선택한 상품들 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
+         	<input type="button" value="전체 선택" id="allCheck" > 
+         	<input type="button" value="전체 해제" id="allReset">
+			<input type="button" value="선택 상품 모두 삭제" onClick="checkConfirm('<c:url value='/user/deletewishlist' />')">
+			<input type="button" value="선택 상품 장바구니 이동" onClick="checkConfirm('<c:url value='/user/fromWishToCart' />')">
 		 </div>
          <%
                  if(total != 0) {

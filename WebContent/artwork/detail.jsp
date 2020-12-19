@@ -49,7 +49,7 @@
             	
             	
             </c:url>">
-            <button type="button" id="cartlist">장바구니에 담기${artworkNo} </button>
+            <button type="button" id="cartlist">장바구니에 담기 </button>
             </a>
             
             <!-- 백업 

@@ -16,6 +16,14 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
+     <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
 
     </style>
@@ -75,6 +83,9 @@
            		int startIndex = 0; 
            		int lastIndex = 0;
            		int i = -1;
+           		int totalNum;
+           		
+         		totalNum = artworkList.size() + exhList.size();
            		
            		if(artworkList.size() > 0) {
 					System.out.println("artworkList is not null");
@@ -145,12 +156,17 @@
                     </div>
                   </td>
 			<%
-						if(artworkList.size() > 3){
+						if(totalNum > 3){
 							if((i + 1) % 3 == 0) {
 			   					out.println("</tr>");
 			   				}
 						}
            			}
+           		}
+           		if(exhList.size() == 0) {
+           			for(int t = 0; t < 3 - exhList.size(); t++) {
+ 		  			   out.println("<td></td>");
+ 		  		   }
            		}
            		if(exhList.size() > 0) {
            			System.out.println("exhList is not null");
@@ -168,7 +184,7 @@
 	           		allPage = (exhList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
 	           		for(int j = startIndex; j <= lastIndex && j <total; j++) {
 	           			Exhibition exhibition = exhList.get(j);
-	           			if(exhList.size() > 3) {
+	           			if(totalNum > 3) {
 		           			if((j + 1) % 3 == 1) {
 		           				out.println("<tr style='margin-bottom: 30px;'>");
 		           			}		
@@ -178,11 +194,12 @@
            			<div class="w3-card-4 work">
                         <c:set var="exhibitionNo" value="<%= exhibition.getExhibitionNo() %>" />
 	                        <div class="img_div">
-	                        	<a class="trigger" data-toggle="modal" data-target="#myModal" href="detail.jsp?artworkNo=${artworkNo}&isLogined=${isLogined}&userNo=${userNo}" >
+	                        	<%-- <a class="trigger" data-toggle="modal" data-target="#myModal" href="detail.jsp?artworkNo=${artworkNo}&isLogined=${isLogined}&userNo=${userNo}" >  --%>
+	                        	<a class="trigger" data-toggle="modal" data-target="#myModal">
 	                            <img class="main_img" src="<c:url value='<%= exhibition.getImage() %>' />" /></a>
 	                        </div>
                         	<div class="content">
-                        		<a class="trigger" data-toggle="modal" data-target="#myModal" href="detail.jsp?artworkNo=${artworkNo}&isLogined=${isLogined}&userNo=${userNo}" > 
+                        		<a class="trigger" data-toggle="modal" data-target="#myModal">  
 	                            <h2><%= exhibition.getTitle() %></h2></a>
 	                            <p><%= exhibition.getPrice() %>원</p>
                        		</div>
@@ -210,6 +227,11 @@
                     </div>
                   </td>
            <%
+           				if(totalNum < 3) {
+           					for(int t = 0; t < 3 - totalNum; t++) {
+         		  			   out.println("<td></td>");
+         		  		   }
+           				}
 			       		if((j + 1) % 3 == 0) {
 			  				out.println("</tr>");
 			  			}
