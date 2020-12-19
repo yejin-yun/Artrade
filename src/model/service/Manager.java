@@ -54,7 +54,19 @@ public class Manager {
    
    /** UserDAO */
    public boolean existingUser(String userId) throws SQLException, ExistingUserException {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
       return userDao.existingUser(userId);
+=======
+	   return userDao.existingUser(userId);
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+	   return userDao.existingUser(userId);
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+	   return userDao.existingUser(userId);
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
    }
    
    public int createUser(User user) throws SQLException, ExistingUserException {
@@ -195,7 +207,19 @@ public class Manager {
    }
    
    /*public List<SimpleArtworkInfo> searchArtworkByKeywordForUser(String keyword, int userNo) throws SQLException{
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
          return artworkDao.searchArtworkByKeywordForUser(keyword, userNo); //수정요망
+=======
+	      return artworkDao.searchArtworkByKeywordForUser(keyword, userNo); //수정요망
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+	      return artworkDao.searchArtworkByKeywordForUser(keyword, userNo); //수정요망
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+	      return artworkDao.searchArtworkByKeywordForUser(keyword, userNo); //수정요망
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
    }*/
    
    public List<SimpleArtworkInfo> searchArtworkByKey(String key) throws SQLException{

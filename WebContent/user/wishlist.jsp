@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html>
-<head> <!-- 이전 코드 css -> 작품보기.html에 있음 -->
+<head lang="en"> <!-- 이전 코드 css -> 작품보기.html에 있음 -->
     <title>Artrade</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,9 @@
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/detail.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
+
     <style>
+
 		.btns{
 			 margin-top: 10%;
 		}
@@ -49,8 +51,27 @@
 			border-top-left-radius: 5px; 
 			border-bottom-left-radius: 5px;
 			border-top-right-radius: 5px; 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
          border-bottom-right-radius: 5px;
       }
+=======
+=======
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+			border-bottom-right-radius: 5px;
+
+
+		}
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 		.funcs input:hover
 		{ 	
 			color:white; 
@@ -58,8 +79,23 @@
 		}
 		
 		.checkWish {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 			margin-left: 10px;
 			margin-top: 10px;
+=======
+			margin-top: 10px;
+			margin-left: 10px;
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+			margin-top: 10px;
+			margin-left: 10px;
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+			margin-top: 10px;
+			margin-left: 10px;
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 		}
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
@@ -101,23 +137,60 @@
 	     moveTarget(targetUri);
        }
         
-       function deleteWish(paraValue, targetUri) {
-    	   //alert("input:checkbox[id='"+ paraValue +"']");
-	        if($("input:checkbox[id='"+ paraValue +"']").is(':checked') == true) {
-	        	moveTarget(targetUri);
-	        } else{
-	        	alert('해당 상품이 선택 되어있지 않습니다.');
-	        }
+       function value_check(targetUri, paraVlaue) {
+	        var select_obj = '';
+	 
+	        $('input[type="checkbox"]:checked').each(function (index, element) {
+	        	
+	            if (index != 0) {
+	                select_obj += ', ';
+	            }
+	            select_obj += $(this).val();
+	        });
+	 
+	        alert(select_obj);
+	        
+	        moveTarget(targetUri);
 	    }
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
        
-       function moveCart(paraValue, targetUri) {
-    	   //alert("input:checkbox[id='"+ paraValue +"']");
-	        if($("input:checkbox[id='"+ paraValue +"']").is(':checked') == true) {
-	        	moveTarget(targetUri);
-	        } else{
-	        	alert('해당 상품이 선택 되어있지 않습니다.');
-	        }
-	    }
+      //function deleteWish(paraValue) {
+    	 
+      //}
+     /*
+     
+      alert("상품" + paraValue);
+    	  var flag = false;
+    	  var artwork = document.getElementsByName("checkArtwork");
+    	  
+    	  for(var i=0;i<artwork.length;i++){
+    		  alert("상품" + artwork[i].value);
+	           if(artwork[i].value == paraValue) {
+	        	   if(artwork.valuechecked == true) {
+	        		   flag = true;
+	        		   break;
+	        	   }
+	           }	
+	       }
+    	  if(flag == false) {
+    		  retrun false;
+    	  }
+    	  moveTarget('/artrade/user/deletewishlist'); 
+     */
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
     </script>
 </head>
 <body>
@@ -166,7 +239,19 @@
                     <div class="w3-card-4 work card">
                    		<c:set var="artworkNo" value="<%= wishArtwork.getArtworkNo() %>" />    
                        	<c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
                     	<input type="checkbox" name="checkArtwork" value="${artworkNo}" id="${artworkNo}" class="checkWish allCheckbox"/> 	
+=======
+                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}"/> 	
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}"/> 	
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+                    	<input type="checkbox" name="checkArtwork" value="${artworkNo}"/> 	
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
                            <div class="img_div">
                            	<a href="<c:url value='/artwork/detail'>
 	            				<c:param name='artworkNo' value='${artworkNo}' />
@@ -178,12 +263,12 @@
 	            				<c:param name='artworkNo' value='${artworkNo}' />
 	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
                             <h2><%= wishArtwork.getTitle() %></h2>
-
                             <p><%= wishArtwork.getArtistName() %></p>
                             <p><%= wishArtwork.getPrice() %></p></a> 
                            <div class="btns">
-                           		<input type="button" value="삭제" onClick="deleteWish('${artworkNo}', '<c:url value='/user/deletewishlist' />')" >
-                           		<input type="button" value="장바구니로 이동" onClick="moveCart('${artworkNo}', '<c:url value='/user/fromWishToCart' />')" >
+                           		<input type="button" value="삭제" onClick="value_check('<c:url value='/user/deletewishlist' />', ${artworkNo})" >
+                           		<input type="button" value="장바구니로 이동" onClick="moveTarget('<c:url value='/user/fromWishToCart' />')" >
+
                            </div>
                         </div>
                     </div>
@@ -203,11 +288,26 @@
                }
                  out.println("</table>");
          %>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
          <div class="w3-center funcs">
          	<input type="button" value="전체 선택" id="allCheck" > 
          	<input type="button" value="전체 해제" id="allReset">
 			<input type="button" value="선택 상품 모두 삭제" onClick="checkConfirm('<c:url value='/user/deletewishlist' />')">
 			<input type="button" value="선택 상품 장바구니 이동" onClick="checkConfirm('<c:url value='/user/fromWishToCart' />')">
+=======
+         <div class="w3-center"> 
+			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+         <div class="w3-center"> 
+			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+=======
+         <div class="w3-center"> 
+			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/deletewishlist' />')">
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 		 </div>
          <%
                  if(total != 0) {

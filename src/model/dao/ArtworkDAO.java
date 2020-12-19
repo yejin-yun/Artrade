@@ -285,6 +285,7 @@ public class ArtworkDAO {
                   + "FROM wishArtwork "
                   + "WHERE artworkNo = ? AND userNo = ?";
 
+<<<<<<< HEAD
       String sql3 = "SELECT artworkNo, userNo, NVL(cartartworkno, 0) AS cartArtworkNo "
                   + "FROM CARTARTWORK "
                   + "WHERE artworkNo = ? AND userNo = ?";
@@ -478,6 +479,252 @@ public class ArtworkDAO {
       String sql = "SELECT artworkNo, image, title , artistName, price "
             + "FROM ARTWORK "
             + "WHERE title LIKE ? OR artistName LIKE ?"; 
+=======
+		String sql3 = "SELECT artworkNo, userNo, NVL(cartartworkno, 0) AS cartArtworkNo "
+						+ "FROM CARTARTWORK "
+						+ "WHERE artworkNo = ? AND userNo = ?";
+		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {artworkNo});	// JDBCUtil�� query���� �Ű� ���� ����
+		
+		
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();		// query ����
+			
+			Artwork artwork = null;
+			if (rs.next()) {
+				artwork = new Artwork();
+				
+				artwork.setArtworkNo(rs.getInt("artworkNo"));
+				artwork.setImage(rs.getString("image"));
+				artwork.setWorkSize(rs.getString("workSize"));
+				artwork.setTitle(rs.getString("title"));
+				artwork.setPrice(rs.getInt("price"));
+				artwork.setLikeCnt(rs.getInt("likeCnt"));
+				artwork.setArtistName(rs.getString("artistName"));
+				artwork.setDescription(rs.getString("description"));
+				artwork.setIsSoldOut(rs.getInt("isSoldOut"));
+				//수정
+				artwork.setSellerNo(rs.getInt("sellerNo"));
+				//return artwork;
+			}
+			
+			jdbcUtil.setSqlAndParameters(sql2, new Object[] {artworkNo, userNo});
+			ResultSet rs2 = jdbcUtil.executeQuery();
+			//boolean found = rs2.next();rs.isBeforeFirst() && 
+			if(rs2.next()) {
+				if( rs2.getInt("wishArtworkNo") != 0 ) artwork.setIsInWishList(1);
+			} else {
+				artwork.setIsInWishList(0);
+			}
+			
+			jdbcUtil.setSqlAndParameters(sql3, new Object[] {artworkNo, userNo});
+			ResultSet rs3 = jdbcUtil.executeQuery();
+			if(rs3.next()) {
+				if( rs3.getInt("cartArtworkNo") != 0 ) artwork.setIsInCart(1);
+			} else {
+				artwork.setIsInCart(0);
+			}
+			
+			return artwork;
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource ��ȯ
+		}
+		return null;
+		
+	}
+	
+	
+	/** Artwork테이블의 행을 List<Artwork>로 반환*/
+	public List<Artwork> getArtworkList() throws SQLException{
+		String sql = "SELECT artworkNo, image, workSize, title, price, likeCnt, artistName, description, isSoldOut "
+					+ " FROM ARTWORK ";
+		
+		jdbcUtil.setSqlAndParameters(sql, null);
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			
+		
+			List<Artwork> artworkList = new ArrayList<Artwork>();
+			
+			while (rs.next()) {
+				Artwork artwork = new Artwork();
+				
+				artwork.setArtworkNo(rs.getInt("artworkNo"));
+				artwork.setImage(rs.getString("image"));
+				artwork.setWorkSize(rs.getString("workSize"));
+				artwork.setTitle(rs.getString("title"));
+				artwork.setPrice(rs.getInt("price"));
+				artwork.setLikeCnt(rs.getInt("likeCnt"));
+				artwork.setArtistName(rs.getString("artistName"));
+				artwork.setDescription(rs.getString("description"));
+				artwork.setIsSoldOut(rs.getInt("isSoldOut"));
+				
+				artworkList.add(artwork);
+			}		
+			return artworkList;					
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource ��ȯ
+		}
+		return null;
+		
+	}
+	
+	/** #키워드 검색*/
+	public List<SimpleArtworkInfo> searchArtworkByKeywordForUser(String keyword, int userNo) throws SQLException{
+		String sql = "SELECT a.artworkNo AS artworkNo, image, title , artistName, price, NVL(w.wishArtworkNo, 0) AS wishArtworkNo "
+				+ "FROM ARTWORK a, KEYWORD k, WISHARTWORK w "
+				+ "WHERE a.artworkNo = k.artworkNo "
+				+ "AND  a.artworkNo = w.artworkNo (+) "
+				+ "AND k.keyword LIKE ? "
+				+ "AND w.userno(+) = ?";
+		//title LIKE ‘%key%’ OR artist LIKE ‘%key%
+		//+ "AND title LIKE ? OR artistName LIKE '%key%' "
+		Object[] param = new Object[] { "%"+keyword+"%", userNo};
+		
+		jdbcUtil.setSqlAndParameters(sql, param);
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			
+		
+			List<SimpleArtworkInfo> simpleArtworkList = new ArrayList<SimpleArtworkInfo>();
+			
+			while (rs.next()) {
+				SimpleArtworkInfo simpleArtwork = new SimpleArtworkInfo();
+				simpleArtwork.setArtworkNo(rs.getInt("artworkNo"));
+				simpleArtwork.setImage(rs.getString("image"));
+				simpleArtwork.setTitle(rs.getString("title"));
+				simpleArtwork.setArtistName(rs.getString("artistName"));
+				simpleArtwork.setPrice(rs.getInt("price"));
+				if( rs.getInt("wishArtworkNo") == 0 ) {
+					simpleArtwork.setIsInWishlist(0);
+				} else {
+					simpleArtwork.setIsInWishlist(1);
+				}
+				
+				simpleArtworkList.add(simpleArtwork);
+			}		
+			return simpleArtworkList;										
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		
+		}
+		return null;
+		
+		
+	}
+	
+	/** 비로그인 #키워드검색 */
+	public List<SimpleArtworkInfo> searchArtworkByKeywordForNotUser(String keyword) throws SQLException{
+		
+		String sql = "SELECT a.artworkNo AS artworkNo, image, title , artistName, price "
+				+ "FROM ARTWORK a, KEYWORD k "
+				+ "WHERE a.artworkNo = k.artworkNo "
+				+ "AND k.keyword LIKE ?";
+		
+		Object[] param = new Object[] { "%"+keyword+"%"};
+		
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+		jdbcUtil.setSqlAndParameters(sql, param);
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			
+		
+			List<SimpleArtworkInfo> simpleArtworkList = new ArrayList<SimpleArtworkInfo>();
+			
+			while (rs.next()) {
+				SimpleArtworkInfo simpleArtwork = new SimpleArtworkInfo();
+				simpleArtwork.setArtworkNo(rs.getInt("artworkNo"));
+				simpleArtwork.setImage(rs.getString("image"));
+				simpleArtwork.setTitle(rs.getString("title"));
+				simpleArtwork.setArtistName(rs.getString("artistName"));
+				simpleArtwork.setPrice(rs.getInt("price"));
+//				if( rs.getInt("wishArtworkNo") == 0 ) {
+//					simpleArtwork.setIsInWishlist(0);
+//				} else {
+//					simpleArtwork.setIsInWishlist(1);
+//				}
+				
+				simpleArtworkList.add(simpleArtwork);
+			}		
+			return simpleArtworkList;										
+		
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		
+		}
+		return null;
+		
+	}
+	
+	
+	
+	
+	/** #키워드가 아닌 일반 작품제목/작가명 검색*/
+	public List<SimpleArtworkInfo> searchArtworkByKey(String key) throws SQLException
+	{
+		String sql = "SELECT artworkNo, image, title , artistName, price "
+				+ "FROM ARTWORK "
+				+ "WHERE title LIKE ? OR artistName LIKE ?"; 
+
+		Object[] param = new Object[] { "%"+key+"%", "%"+key+"%"};
+	
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
+		jdbcUtil.setSqlAndParameters(sql, param);
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			
+		
+			List<SimpleArtworkInfo> simpleArtworkList = new ArrayList<SimpleArtworkInfo>();
+			
+			while (rs.next()) {
+				SimpleArtworkInfo simpleArtwork = new SimpleArtworkInfo();
+				simpleArtwork.setArtworkNo(rs.getInt("artworkNo"));
+				simpleArtwork.setImage(rs.getString("image"));
+				simpleArtwork.setTitle(rs.getString("title"));
+				simpleArtwork.setArtistName(rs.getString("artistName"));
+				simpleArtwork.setPrice(rs.getInt("price"));
+//				if( rs.getInt("wishArtworkNo") == 0 ) {
+//					simpleArtwork.setIsInWishlist(0);
+//				} else {
+//					simpleArtwork.setIsInWishlist(1);
+//				}
+				
+				simpleArtworkList.add(simpleArtwork);
+			}		
+			return simpleArtworkList;										
+		
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		
+		}
+		return null;
+		
+	}
+	
+	
+	
+	
+	/** #키워드가 아닌 일반 작품제목/작가명 검색*/
+	public List<SimpleArtworkInfo> searchArtworkByKey(String key) throws SQLException
+	{
+		String sql = "SELECT artworkNo, image, title , artistName, price "
+				+ "FROM ARTWORK "
+				+ "WHERE title LIKE ? OR artistName LIKE ?"; 
+>>>>>>> abf894c21ac248b1cedc130f6238b9c2bb9df229
 
       Object[] param = new Object[] { "%"+key+"%", "%"+key+"%"};
    

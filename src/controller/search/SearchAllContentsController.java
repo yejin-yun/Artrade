@@ -20,19 +20,36 @@ public class SearchAllContentsController implements Controller {
 		//사용자가 입력한 검색어
 		//String searchKey = (String)request.getAttribute("searchKey"); //attribute로 넘어올 시
 		String searchKey = request.getParameter("searchKey"); //parameter로 넘어올 시
+		
+		String keyword = "";
+		boolean keywordFlag = false;
+		if( searchKey.indexOf("#") != -1 ) {
+			keywordFlag = true;
+			keyword = searchKey.substring(searchKey.indexOf("#")+1, searchKey.length());
+			System.out.println("keyword="+keyword);
+		}
 				
 		if (!UserSessionUtils.hasLogined(request.getSession())) {
 			//로그인 안되어 있는 경우
 			Manager manager = Manager.getInstance();
 					
+			if(keywordFlag == true) {
+				List<SimpleArtworkInfo> artworkList = null;
+				artworkList = manager.searchArtworkByKeyword(keyword);
+		
+				request.setAttribute("artworkList", artworkList);
+			} else {
+				List<SimpleArtworkInfo> artworkList = null;
+				artworkList = manager.searchArtworkByKey(searchKey);
+				
+				request.setAttribute("artworkList", artworkList);
+			}
+			
 			List<Exhibition> exhList = null;
 			exhList = manager.findExhibitionListByTitleForNotUser(searchKey);
 			
-			List<SimpleArtworkInfo> artworkList = null;
-			artworkList = manager.searchArtworkByKey(searchKey);
-			        
 			request.setAttribute("exhibitionList", exhList);
-			request.setAttribute("artworkList", artworkList);
+			
 			
 			return "/main/searchResult.jsp";
 		}
@@ -47,11 +64,24 @@ public class SearchAllContentsController implements Controller {
 		List<Exhibition> exhList = null;
 		exhList = manager.findExhibitionListByTitleForUser(userNo, searchKey);
 				
-		List<SimpleArtworkInfo> artworkList = null;
-		artworkList = manager.searchArtworkByKey(searchKey);
+		
+		if(keywordFlag == true) {
+			List<SimpleArtworkInfo> artworkList = null;
+			artworkList = manager.searchArtworkByKeyword(keyword);
+	
+			request.setAttribute("artworkList", artworkList);
+		} else {
+			List<SimpleArtworkInfo> artworkList = null;
+			artworkList = manager.searchArtworkByKey(searchKey);
+			
+			request.setAttribute("artworkList", artworkList);
+		}
+		
+		/*List<SimpleArtworkInfo> artworkList = null;
+		artworkList = manager.searchArtworkByKey(searchKey);*/
 		
 		request.setAttribute("exhibitionList", exhList);
-		request.setAttribute("artworkList", artworkList);
+		//request.setAttribute("artworkList", artworkList);
 				
 		return "/main/searchResult.jsp";		
 		
