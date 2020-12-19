@@ -15,8 +15,8 @@
     <meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
-	<link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
-	
+    <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
+    <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	
 	<!-- jQuery library -->
@@ -83,10 +83,10 @@
            		int startIndex = 0; 
            		int lastIndex = 0;
            		int i = -1;
-           		int totalNum;
+           		int resultNum;
            		
-         		totalNum = artworkList.size() + exhList.size();
-
+           		resultNum = artworkList.size() + exhList.size();
+           		System.out.println("resultNum = " + resultNum);
            		
            		if(artworkList.size() > 0) {
 					System.out.println("artworkList is not null");
@@ -157,15 +157,15 @@
                     </div>
                   </td>
 			<%
-						if(totalNum > 3){
+						if(resultNum > 3){
 							if((i + 1) % 3 == 0) {
 			   					out.println("</tr>");
 			   				}
 						}
            			}
            		}
-           		if(exhList.size() < 1 && totalNum < 3) {
-           			for(int t = 0; t < 3 - totalNum; t++) {
+           		if(exhList.size() < 1 && resultNum < 3) {
+           			for(int t = 0; t < 3 - resultNum; t++) {
    						out.println("<td></td>");
    					}
            		}
@@ -185,12 +185,13 @@
 	           		allPage = (exhList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
 	           		for(int j = startIndex; j <= lastIndex && j <total; j++) {
 	           			Exhibition exhibition = exhList.get(j);
-	           			if(totalNum > 3) {
+	           			if(resultNum > 3) {
 		           			if((j + 1) % 3 == 1) {
 		           				out.println("<tr style='margin-bottom: 30px;'>");
 		           			}		
 	           			}
            %>
+           	<td>
            		<div class="w3-card-4 work">
                    <c:set var="exhibitionNo" value="<%= exhibition.getExhibitionNo() %>" />
 	                    <div class="img_div">
@@ -227,10 +228,11 @@
           	</div>
                   </td>
            <%
-           				if(totalNum < 3) {
-           					for(int t = 0; t < 3 - totalNum; t++) {
-         		  			   out.println("<td></td>");
-         		  		   }
+           				if(resultNum < 3) {
+           					for(int t = 0; t < 3 - resultNum; t++) {
+           						out.println("<td></td>");
+           						
+           					}
            				}
 			       		if((j + 1) % 3 == 0) {
 			  				out.println("</tr>");

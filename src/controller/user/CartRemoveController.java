@@ -38,9 +38,11 @@ public class CartRemoveController implements Controller {
 					UserSessionUtils.getLoginUserId(request.getSession()));		*/
 	
 			//cartlist濡� 蹂대궡踰꾨━湲�
+			return "redirect:/user/cartlist";
 			
 		}catch(Exception e){
 			e.printStackTrace();
+			return "redirect:/user/cartlist";
 		}
 	}
 

@@ -16,12 +16,13 @@ public class RegisterUserController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-       
-      User user = null;
-      
+    	
+		User user = null;
+		
 
-      try {
+		try {
             if(request.getMethod().equals("GET")){
+            	request.setAttribute("noDuplication", 0);
                 return "/user/registerForm.jsp";
             }
 
@@ -34,22 +35,16 @@ public class RegisterUserController implements Controller {
                 request.getParameter("email"),
                 request.getParameter("phone")
             );
-            
+            log.debug("Create User : {}", user);
 
             Manager manager = Manager.getInstance();
-
-
+            
             String userId = request.getParameter("userId");
             if( manager.existingUser(userId) ) {
-               throw new ExistingUserException(userId + "는 존재하는 아이디입니다.");
+            	throw new ExistingUserException(userId + "는 존재하는 아이디입니다.");
             }
             
-            if(!request.getParameter("submitBtn").equals("1")) {
-               request.setAttribute("user", user);
-               if(!userId.equals("") && userId != null) {
-                  request.setAttribute("noDuplication", 1);
-               }
-             return "/user/registerForm.jsp";
+            if(request.getParameter("submitBtn").equals("0")) {
             	request.setAttribute("user", user);
             	if(!userId.equals("") && userId != null) {
             		request.setAttribute("noDuplication", 1);
@@ -57,19 +52,16 @@ public class RegisterUserController implements Controller {
     			return "/user/registerForm.jsp";
             }
             
-
-            log.debug("Create User : {}", user);
-
-
             manager.createUser(user);
     
-           return "redirect:/user/login";   // 성공 시 로그인 페이지로 넘김
-           
-      } catch (ExistingUserException e) {   // 예외 발생 시 회원가입 form으로 forwarding
+	        return "redirect:/user/login";	// 성공 시 로그인 페이지로 넘김
+	        
+		} catch (ExistingUserException e) {	// 예외 발생 시 회원가입 form으로 forwarding
             request.setAttribute("registerFailed", true);
-         request.setAttribute("exception", e);
-         request.setAttribute("user", user);
-         return "/user/registerForm.jsp";
-      }
+			request.setAttribute("exception", e);
+			request.setAttribute("user", user);
+			return "/user/registerForm.jsp";
+		}
     }
 }
+
