@@ -123,6 +123,17 @@
       WHERE t.exhibitionno = e.exhibitionno AND t.userno = #{userNo}
    </select>
    
+   <select id="countHavingTicket" resultType="int">
+   	SELECT count(*)
+	FROM exhibitionBuyTicket e
+	WHERE e.userno = #{param1} 
+		AND e.exhibitionno = #{param2}
+   </select>
    
+   <select id="selectExhibitionByNo" resultType="Exhibition">
+   	SELECT exhibitionNo, title, description, period, price, visitor, image
+   	FROM Exhibition
+    WHERE exhibitionNo = #{exhibitionNo}
+   </select>
 
 </mapper>

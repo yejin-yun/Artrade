@@ -28,5 +28,7 @@ public interface ExhibitionMapper {
 	
 	public List<ExhibitionBuyTicket> selectAllExhBuyTicketForUser(int userNo);
 	
+	public int countHavingTicket(int userNo, int exhibitionNo);
 	
+	public Exhibition selectExhibitionByNo(int exhibitionNo);
 }

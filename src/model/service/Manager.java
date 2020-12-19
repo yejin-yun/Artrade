@@ -264,6 +264,13 @@ public class Manager {
       return exhDao.increaseOneVisitorInExhibition(exhibitionNo);
    }
    
+   public int countHavingTicket(int userNo, int exhibitionNo) throws SQLException {
+	   return exhDao.countHavingTicket(userNo, exhibitionNo);
+   }
+   
+   public Exhibition findExhibitionByNo(int exhibitionNo) throws SQLException {
+	   return exhDao.getExhibitionByNo(exhibitionNo);
+   }
    
    /** OnedayclassDAO  */
    public Onedayclass createOnedayclass(Onedayclass odc) throws SQLException{

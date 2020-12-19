@@ -23,16 +23,6 @@ public class BuyExhTicketController implements Controller {
             return "redirect:/user/login";	
         } 
     	
-    	//exhibitionNo 알아내기
-    	//Exhibition exh = (Exhibition)((Object)request.getParameter("exhibition"));
-    	int exhibitionNo = Integer.parseInt(request.getParameter("exhibition"));
-    	//int exhibitionNo = (int) request.getAttribute("exhibitionNo");
-    	
-    	if(request.getMethod().equals("GET")) {
-    		request.setAttribute("exh", exh);
-    		return "/exhibition/exhOrder.jsp";
-    	}
-    	
     	Manager manager = Manager.getInstance();
     	
     	//userNo 알아내기
@@ -40,6 +30,19 @@ public class BuyExhTicketController implements Controller {
 		User user = manager.findUserById(userId);
 		int userNo = user.getUserNo();
 		
+		//exhibitionNo 알아내기
+		//Exhibition exh = (Exhibition) request.getAttribute("exhibition");
+		//int exhibitionNo = exh.getExhibitionNo();
+		//int exhibitionNo = (int) request.getAttribute("exhibitionNo");
+		int exhibitionNo = Integer.valueOf(request.getParameter("exhibitionNo"));
+    	
+    	if(request.getMethod().equals("GET")) {
+    		Exhibition exh = manager.findExhibitionByNo(exhibitionNo);
+    		
+    		request.setAttribute("exhibition", exh);
+    		return "/exhibition/exhOrder.jsp";
+    	}
+    	
 		//ExhibitionBuyTicket 객체 생성
 		ExhibitionBuyTicket ebt = new ExhibitionBuyTicket();
 		ebt.setExhibitionNo(exhibitionNo);
@@ -50,7 +53,10 @@ public class BuyExhTicketController implements Controller {
 		
 		//전시회에 전시되는 작품 목록
 		List<Artwork> artworkList = manager.findArtworkInExhibition(exhibitionNo);
-	
+		
+		int result = manager.increaseOneVisitorInExhibition(exhibitionNo);
+        if(result <= 0) System.out.println("ERROR : update failed : increase visitor + 1");
+        
 		request.setAttribute("artworkList", artworkList);
 		
 		return "/exhibition/entrance.jsp";

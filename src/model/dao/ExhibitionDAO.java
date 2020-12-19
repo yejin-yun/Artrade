@@ -151,4 +151,23 @@ public class ExhibitionDAO {
 			sqlSession.close();
 		}
 	}
+	
+	public int countHavingTicket(int userNo, int exhibitionNo) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			return sqlSession.getMapper(ExhibitionMapper.class).countHavingTicket(userNo, exhibitionNo);			
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	public Exhibition getExhibitionByNo(int exhibitionNo) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			return sqlSession.getMapper(ExhibitionMapper.class).selectExhibitionByNo(exhibitionNo);			
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
 }

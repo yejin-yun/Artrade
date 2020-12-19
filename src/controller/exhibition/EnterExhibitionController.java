@@ -23,9 +23,16 @@ public class EnterExhibitionController implements Controller{
         Manager manager = Manager.getInstance();
         String userId = UserSessionUtils.getLoginUserId(request.getSession());
         User user = manager.findUserById(userId);
-		request.setAttribute("userNo", user.getUserNo());
+        int userNo = user.getUserNo();
+		request.setAttribute("userNo", userNo);
 
         int exhibitionNo = (int)request.getAttribute("exhibitionNo");
+        
+        //입장권을 가지고 있는지 검사
+        int ticketCnt = manager.countHavingTicket(userNo, exhibitionNo);
+        if(ticketCnt == 0) { //입장권 없을 시에
+        	return "redirect:/exhibition/list";
+        }
         
         int result = manager.increaseOneVisitorInExhibition(exhibitionNo);
         if(result <= 0) System.out.println("ERROR : update failed : increase visitor + 1");
