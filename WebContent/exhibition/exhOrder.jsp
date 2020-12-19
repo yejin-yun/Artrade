@@ -166,7 +166,7 @@
         	<%-- </c:if>
         	</c:url>" id="payment_form">
             <div class="menu"> --%>
-            <form method="POST" action="<c:url value='/exhibition/buyTicket'></c:url>" id="payment_form" name="form">
+            <form method="POST" action="<c:url value='/exhibition/buyTicket'><c:param name='exhibitionNo' value='${exhibition.exhibitionNo}'/></c:url>" id="payment_form" name="form">
             	
             <div class="menu">
                     <h3>상품 정보</h3>
@@ -181,7 +181,7 @@
                     	<li>
                             <div class="product">
                                 <label> <%-- detail.jsp?artworkNo=${ads.artwork.artworkNo}&isLogined=1&userNo=${ads.artwork(심플아트워크 담는 객체 변수의 이름).userNo} --%>
-                                    <input type="checkbox" name="payment_product" value="${exh.exhibitionNo}" checked />    
+                                    <input type="checkbox" name="payment_product" value="${exhibition.exhibitionNo}" checked />    
                                     <%-- <a href="<c:url value='/${frontServletPath}/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />"> --%>
                                     	<img src="<c:url value='${exhibition.image}' />" class="artwork_img" />
                                     <span><br>${exhibition.title}<br>가격: ${exhibition.price}원</span></a>

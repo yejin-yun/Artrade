@@ -125,11 +125,15 @@
                         		<c:param name="artworkNo" value="${artworkNo}" />
                         	</c:url>"> --%>
 	                        <div class="img_div">
-	                        	<a href="detail.jsp?artworkNo=${artworkNo}&isLogined=${isLogined}&userNo=${userNo}" >
+	                        	<a href="<c:url value='/artwork/detail'>
+	            				<c:param name='artworkNo' value='${artworkNo}' />
+	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
 	                            <img class="main_img" src="<c:url value='<%= artwork.getImage() %>' />" /></a>
 	                        </div>
                         	<div class="content">
-                        		<a href="detail.jsp?artworkNo=${artworkNo}&isLogined=${isLogined}&userNo=${userNo}" > 
+                        		<a href="<c:url value='/artwork/detail'>
+	            				<c:param name='artworkNo' value='${artworkNo}' />
+	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
 	                            <h2><%= artwork.getTitle() %></h2></a>
 	                            <c:if test="${wish_val == 1}" >
 	        						<c:set var="like_src" value="/images/bagic/heart-full.png" />
@@ -164,11 +168,14 @@
 						}
            			}
            		}
-           		if(exhList.size() < 1 && resultNum < 3) {
-           			for(int t = 0; t < 3 - resultNum; t++) {
-   						out.println("<td></td>");
-   					}
-           		}
+           		
+           		if(resultNum < 3) {
+ 	        	   if((3 - resultNum - 1) != i) { //i는 0부터 시작하니까 -1해준 거. 
+ 			  		   for(int t = 0; t < 3 - resultNum; t++) {
+ 			  			   out.println("<td></td>");
+ 			  		   }
+ 		  		   }
+ 		  	   }	
            		if(exhList.size() > 0) {
            			System.out.println("exhList is not null");
            			if(i == -1) {
@@ -211,16 +218,17 @@
 			      <div class="modal-content">
 			        <div class="modal-header">
 			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			          <h2 class="modal-title">${exh.title}</h2>
+			          <h2 class="modal-title"><%= exhibition.getTitle() %></h2>
 			          <h3>전시회 정보</h3>
 			        </div>
 			        <div class="modal-body">
-			          <p>설명: ${exh.description}</p>
+			          <p>설명: <%= exhibition.getDescription() %></p>
 			        </div>
 			        <div class="modal-footer">
-			          <a href="<c:url value='/exhibition/entrance' />">
-			          <button type="button" class="btn btn-default" id="entrance" class="btn btn-primary">입장</button></a>
-		              <button type="button" class="btn btn-default" id="buyTicket" class="btn btn-primary">입장권 구매</button>
+			          <a href="<c:url value='/exhibition/entrance'><c:param name='exhibitionNo' value='${exhibitionNo}'/></c:url>">
+                   <button type="button" class="btn btn-default" id="entrance" class="btn btn-primary">입장</button></a>
+                   <a href="<c:url value='/exhibition/buyTicket'><c:param name='exhibitionNo' value='${exhibitionNo}'/></c:url>">
+                    <button type="button" class="btn btn-default" id="buyTicket" class="btn btn-primary">입장권 구매</button></a>
 			        </div>
 			      </div>
 			    </div>

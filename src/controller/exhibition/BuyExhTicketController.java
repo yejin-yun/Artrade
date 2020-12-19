@@ -35,7 +35,7 @@ public class BuyExhTicketController implements Controller {
 		//int exhibitionNo = exh.getExhibitionNo();
 		//int exhibitionNo = (int) request.getAttribute("exhibitionNo");
 		int exhibitionNo = Integer.valueOf(request.getParameter("exhibitionNo"));
-    	
+    	request.setAttribute("exhibitionNo", exhibitionNo);
     	if(request.getMethod().equals("GET")) {
     		Exhibition exh = manager.findExhibitionByNo(exhibitionNo);
     		
@@ -51,15 +51,7 @@ public class BuyExhTicketController implements Controller {
 		//입장권 구매내역 생성
 		manager.createExhBuyTicket(ebt);
 		
-		//전시회에 전시되는 작품 목록
-		List<Artwork> artworkList = manager.findArtworkInExhibition(exhibitionNo);
-		
-		int result = manager.increaseOneVisitorInExhibition(exhibitionNo);
-        if(result <= 0) System.out.println("ERROR : update failed : increase visitor + 1");
-        
-		request.setAttribute("artworkList", artworkList);
-		
-		return "/exhibition/entrance.jsp";
+		return "redirect:/exhibition/list";
 	}
 
 }
