@@ -46,6 +46,22 @@
 	     
 	     target(targetUri);
        }
+       
+       function value_check(targetUri, paraVlaue) {
+	        var select_obj = '';
+	 
+	        $('input[type="checkbox"]:checked').each(function (index, element) {
+	        	
+	            if (index != 0) {
+	                select_obj += ', ';
+	            }
+	            select_obj += $(this).val();
+	        });
+	 
+	        alert(select_obj);
+	        
+	        target(targetUri);
+	    }
      
     </script>
     <script>
@@ -137,7 +153,7 @@
          %>
          
          <div class="w3-center"> 
-			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/cartRemove' />')"/>
+			<input type="button" value="선택 상품 삭제" onClick="value_check('<c:url value='/user/cartRemove' />', ${artworkNo})"/>
 			 <input type="button" value="결제" onClick="target('<c:url value='/order/payment' />')"/>
 		 </div>
 		 
