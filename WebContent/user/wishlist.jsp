@@ -19,8 +19,7 @@
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
 
     <style>
-<<<<<<< HEAD
-=======
+
 		.btns{
 			 margin-top: 10%;
 		}
@@ -53,7 +52,7 @@
 			border-bottom-left-radius: 5px;
 			border-top-right-radius: 5px; 
 			border-bottom-right-radius: 5px;
->>>>>>> parent of 2a6f960... Merge branch 'develop' of https://github.com/yejin-yun/Artrade into develop
+
 
 		}
 		.funcs input:hover
