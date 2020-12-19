@@ -122,3 +122,5 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/java,windows,eclipse
 /target/
 /pom.xml
+*.properties
+target/m2e-wtp/web-resources/META-INF/maven/com.example.artrade/artrade/pom.properties
