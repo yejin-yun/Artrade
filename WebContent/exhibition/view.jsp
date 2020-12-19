@@ -47,10 +47,6 @@
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     <script src="<c:url value='/js/base.js' />" ></script>
 	<script>
-		function moveTarget(targetUri) {
-			   form.action = targetUri;
-			   form.submit();
-		}
 	</script>
    
 </head>
@@ -79,8 +75,10 @@
                    <p>설명: ${exh.description}</p>
                  </div>
                  <div class="modal-footer">
-                   <button type="button" class="btn btn-default" id="entrance" class="btn btn-primary" onClick="moveTarget('<c:url value='/exhibition/entrance' />')">입장</button>
-                    <button type="button" class="btn btn-default" id="buyTicket" class="btn btn-primary" onClick="moveTarget('<c:url value='/exhibition/buyTicket'><c:param name="exhObj" value="${exh}"/></c:url>')">입장권 구매</button>
+                 	<a href="<c:url value='/exhibition/entrance'><c:param name="exhibitionNo" value="${exh.exhibitionNo}"/></c:url>">
+                   <button type="button" class="btn btn-default" id="entrance" class="btn btn-primary">입장</button></a>
+                   <a href="<c:url value='/exhibition/buyTicket'><c:param name="exhObj" value="${exh}"/></c:url>">
+                    <button type="button" class="btn btn-default" id="buyTicket" class="btn btn-primary">입장권 구매</button></a>
                  </div>
                </div>
              </div>
