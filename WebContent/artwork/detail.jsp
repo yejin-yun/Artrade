@@ -30,9 +30,6 @@
         <p>가격: ${artwork.price}원</p>
         <p>사이즈: ${artwork.workSize} </p>
         <c:set var="wish_val" value="${artwork.isInWishList }" />
-        <c:set var="cart_val" value="${artwork.isInCart }" />
-        
-        
         <form class="btn">
             <a href="<c:url value='/order/payment'>
             	<c:param name="isInCart" value="0" />
@@ -40,30 +37,10 @@
             	<c:param name="servletPath" value="<%= request.getServletPath() %>" />
             </c:url>">
             <button type="button" id="buy">주문하기</button></a>
-            
-            
-            <c:set var="artworkNo" value="${artwork.artworkNo}" /> 
-            <a href="<c:url value='/user/cartAdd'>
-            	<c:param name="isLogined" value="1" />
-            	<c:param name="artworkNo" value="${artworkNo}" />
-            	
-            	
-            </c:url>">
-            <button type="button" id="cartlist">장바구니에 담기${artworkNo} </button>
-            </a>
-            
-            <!-- 백업 
-            <a href="<c:url value="/user/cartAdd" var="cart">
-            	<c:param name="artworkNo" value="${artworkNo}" />
-            </c:url>">
-            <button type="button" id="cart">장바구니에 담기</button>
-            </a>
-            
-             -->
-            
+            <a href=""><button type="button" id="cart">장바구니에 담기</button></a>
             <%--  <c:set var="wish_val" value="<%= artwork.getIsInWishlist() %>" /> --%> 
             <c:set var="artworkNo" value="${artwork.artworkNo}" /> 
-            <a href="<c:url value='/user/wishlistLike'>
+             <a href="<c:url value='/user/wishlistLike'>
 	                            	<c:if test="${wish_val == 0}" >
 	        							<c:param name="like" value="1" />
 	        						</c:if>

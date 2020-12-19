@@ -124,8 +124,6 @@
                         <c:set var="artworkNo" value="<%= cartArtwork.getArtworkNo() %>" />    
                         <c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 
                            <div class="img_div">
-                           
-                           
                            	<a href="<c:url value='/artwork/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />" > 
                                <img class="main_img" src="<c:url value='<%= cartArtwork.getImage() %>' />" /></a>
                            </div>
@@ -146,19 +144,15 @@
          <%
                if((i + 1) % 3 == 0) {
                      out.println("</tr>");
-              		 }
-                } 
-                 out.println("</table>");        
-                  
+                  }
+               }
+                 out.println("</table>");
          %>
-         
          <div class="w3-center"> 
 			<input type="button" value="선택 상품 삭제" onClick="value_check('<c:url value='/user/cartRemove' />', ${artworkNo})"/>
 			 <input type="button" value="결제" onClick="target('<c:url value='/order/payment' />')"/>
 		 </div>
-		 
          <%
-                 
                  if(total != 0) {
                     out.println("<div class='w3-center' style='margin-top: 50px;'>");
                     for(int i = 1; i <= allPage; i++) {

@@ -1,8 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/controller/RequestMapping.java=UTF-8
-encoding//src/controller/user/CartAddController.java=UTF-8
 encoding//src/controller/user/CartRemoveController.java=UTF-8
 encoding//src/controller/user/MoveFromWishToCartController.java=UTF-8
 encoding//src/model/Artwork.java=UTF-8
 encoding//src/model/ArtworkOrder.java=UTF-8
-encoding//src/model/dao/UserDAO.java=UTF-8
