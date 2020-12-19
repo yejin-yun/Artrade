@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html>
-<head lang="en"> <!-- 이전 코드 css -> 작품보기.html에 있음 -->
+<head> <!-- 이전 코드 css -> 작품보기.html에 있음 -->
     <title>Artrade</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,6 @@
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/detail.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
-
     <style>
 		.btns{
 			 margin-top: 10%;
@@ -50,19 +49,9 @@
 			border-top-left-radius: 5px; 
 			border-bottom-left-radius: 5px;
 			border-top-right-radius: 5px; 
-			border-bottom-right-radius: 5px;
+         border-bottom-right-radius: 5px;
+      }
 
-		}
-		.funcs input:hover
-		{ 	
-			color:white; 
-			background-color: #646EFF; 
-		}
-		
-		.checkWish {
-			margin-top: 10px;
-			margin-left: 10px;
-		}
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     <script src="<c:url value='/js/base.js' />" ></script>
@@ -179,6 +168,7 @@
 	            				<c:param name='artworkNo' value='${artworkNo}' />
 	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
                             <h2><%= wishArtwork.getTitle() %></h2>
+
                             <p><%= wishArtwork.getArtistName() %></p>
                             <p><%= wishArtwork.getPrice() %></p></a> 
                            <div class="btns">

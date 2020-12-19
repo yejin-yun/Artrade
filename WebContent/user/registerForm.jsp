@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% request.setCharacterEncoding("UTF-8"); %>
+<%@ page import="model.*" %>
 <html>
 <head>
 <title>Artrade</title>
@@ -14,9 +15,9 @@
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/detail.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
     
-   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
     <style>
     	#main_div {
@@ -48,62 +49,59 @@
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     <script src="<c:url value='/js/base.js' />" ></script>
     <script src="<c:url value='/js/img_slide.js' />"></script>
-    
-    
-    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script>
-		//https://cublip.tistory.com/326	
-		$(document).on("keyup", ".phoneNumber", function() { 
-			$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
-		});
-	</script>
-	<script>
-	function userCreate(targetUri) {
-	   if (form.userId.value == "") {
-	      alert("사용자 ID를 입력하십시오.");
-	      form.userId.focus();
-	      return false;
-	   }
-	   if (form.password.value == "") {
-	      alert("비밀번호를 입력하십시오.");
-	      form.password.focus();
-	      return false;
-	   }
-	   if (form.password.value != form.password2.value) {
-	      alert("비밀번호가 일치하지 않습니다.");
-	      form.name.focus();
-	      return false;
-	   }
-	   if (form.name.value == "") {
-	      alert("이름을 입력하십시오.");
-	      form.name.focus();
-	      return false;
-	   }
-	   var emailExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-	   if(emailExp.test(form.email.value)==false) {
-	      alert("이메일 형식이 올바르지 않습니다.");
-	      form.email.focus();
-	      return false;
-	   }
-	   
-	   var phoneExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
-	   if(phoneExp.test(form.phone.value)==false) {
-	      alert("전화번호 형식이 올바르지 않습니다.");
-	      form.phone.focus();
-	      return false;
-	   }
-	   
-	   moveTarget(targetUri);
-	}
-	
-	function moveTarget(targetUri) {
-		   form.action = targetUri;
-		   form.submit();
-		}
-	
-	</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel=stylesheet href="<c:url value='/css/user.css' />" type="text/css">
+<script>
+function userCreate(targetUri) {
+   if (form.userId.value == "") {
+      alert("사용자 ID를 입력하십시오.");
+      form.userId.focus();
+      return false;
+   }
+   if (form.password.value == "") {
+      alert("비밀번호를 입력하십시오.");
+      form.password.focus();
+      return false;
+   }
+   if (form.password.value != form.password2.value) {
+      alert("비밀번호가 일치하지 않습니다.");
+      form.name.focus();
+      return false;
+   }
+   if (form.name.value == "") {
+      alert("이름을 입력하십시오.");
+      form.name.focus();
+      return false;
+   }
+   var emailExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+   if(emailExp.test(form.email.value)==false) {
+      alert("이메일 형식이 올바르지 않습니다.");
+      form.email.focus();
+      return false;
+   }
+   var phoneExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+   if(phoneExp.test(form.phone.value)==false) {
+      alert("전화번호 형식이 올바르지 않습니다.");
+      form.phone.focus();
+      return false;
+   }
+   moveTarget(targetUri);
+}
 
+function moveTarget(targetUri) {
+	   form.action = targetUri;
+	   form.submit();
+	}
+
+function check() {
+	if(existingUser(form.userId.value) == 1)
+		alert("해당 아이디는 사용중입니다.");
+	else
+		alert("해당 아이디는 사용 가능 합니다.");
 	
+}
+
+</script>
 </head>
 <body>
 
@@ -113,20 +111,11 @@
 		<c:if test="${registerFailed}">
 	      <font color="red"><c:out value="${exception.getMessage()}" /></font>
 	    </c:if>
-	    <c:if test="${noDuplication == 1}" >
-		      <font color="red"><c:out value="사용가능한 id입니다." /></font>
-	    </c:if>
 		<form name="form" method="POST" action="" class="form-horizontal" style="margin-top: 10%;"> <!-- form에 action이 있으면 서브밋 타입의 버튼이 아니여도 보내줌. -->
 			<div class="form-group form-inline">
     				<label for="userId" style="margin-left: 15%;">ID*: </label>
-    				<c:if test="${!(empty user.userId)}">
-    					<input type="text" class="form-control" name="userId" id="userId" value="${user.userId }">
-    				</c:if>
-    				<c:if test="${empty user.userId}">
-    					<input type="text" class="form-control" name="userId" id="userId" placeholder="Enter ID">
-    				</c:if>
-    				
-    				<button type="button" class="btn btn-info" style="margin-top: 10px;" onClick="moveTarget('<c:url value='/user/register'><c:param name="submitBtn" value="0" /></c:url>')">중복 확인</button>
+    				<input type="text" class="form-control" name="userId" id="userId" placeholder="Enter ID">
+    				<button type="submit" class="btn btn-info" style="margin-top: 10px;">중복 확인</button>
     		</div>	
 			<div class="form-group form-inline">
     				<label for="pwd">Password*: </label>
@@ -139,34 +128,19 @@
     		</div>	
     		<div class="form-group form-inline">
     				<label for="name">이름*: </label>
-    				<c:if test="${!(empty user.name)}">
-    					<input type="text" class="form-control" name="name" id="name" value="${user.name }">
-    				</c:if>
-    				<c:if test="${empty user.name}">
-    					<input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
-    				</c:if>
+    				<input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
     		</div>	
     		<div class="form-group form-inline">
     				<label for="phoneNum">전화번호*: </label>
-    				<c:if test="${!(empty user.phone)}">
-    					<input type="tel" class="form-control phoneNumber" name="phone" id="phoneNum" value="${user.phone }">
-    				</c:if>
-    				<c:if test="${empty user.phone}">
-    					<input type="tel" class="form-control phoneNumber" name="phone" id="phoneNum" placeholder="Enter Phone Number">
-    				</c:if>
+    				<input type="tel" class="form-control" name="phone" id="phoneNum" placeholder="Enter Phone Number">
     		</div>	
     		<div class="form-group form-inline">
 			    <label for="email">Email*:</label>
-			    <c:if test="${!(empty user.email)}">
-			   		<input type="email" class="form-control" id="email" value="${user.email }" name="email">
-    			</c:if>
-    			<c:if test="${empty user.email}">
-    				<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-    			</c:if>
+		    	<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
 			</div>
 			<div class="form-group form-inline" style="margin-top: 0;">
 				<button type="reset" class="btn btn-info">취소</button>
-				<button class="btn btn-info" onClick="userCreate('<c:url value='/user/register'><c:param name="submitBtn" value="1" /></c:url>')">확인</button>
+				<button class="btn btn-info" onClick="userCreate('<c:url value='/user/register' />')">확인</button>
 			</div>
 		</form>
 	</div>

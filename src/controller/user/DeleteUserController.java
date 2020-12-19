@@ -53,7 +53,7 @@ public class DeleteUserController implements Controller {
 		//request.setAttribute("deleteClear", true);
 		int userNo = user.getUserNo();
 		
-		int result = manager.removeUser(userNo); 
+		manager.removeUser(userNo); 
 		
 		//logout처리
 		return "redirect:/user/logout";
