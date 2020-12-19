@@ -22,7 +22,6 @@ public class RegisterUserController implements Controller {
 
       try {
             if(request.getMethod().equals("GET")){
-            	request.setAttribute("noDuplication", 0);
                 return "/user/registerForm.jsp";
             }
 
@@ -38,6 +37,7 @@ public class RegisterUserController implements Controller {
             
 
             Manager manager = Manager.getInstance();
+
 
             String userId = request.getParameter("userId");
             if( manager.existingUser(userId) ) {
@@ -59,6 +59,7 @@ public class RegisterUserController implements Controller {
             
 
             log.debug("Create User : {}", user);
+
 
             manager.createUser(user);
     
