@@ -72,7 +72,7 @@
            		List<SimpleArtworkInfo> artworkList = (List<SimpleArtworkInfo>)request.getAttribute("artworkList");
            		List<Exhibition> exhList = (List<Exhibition>)request.getAttribute("exhibitionList");
            		
-           		if(artworkList.size() < 1 && exhList.size() < 1) {
+           		if(artworkList == null && exhList == null || artworkList.size() < 1 && exhList.size() < 1) {
            			out.println("<p style='text-align:center;'>검색결과가 없습니다.</p>");
            			return;           			
            		}

@@ -13,8 +13,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link type="text/css" rel="stylesheet" href="../css/base.css" >
-    <link type="text/css" rel="stylesheet" href="../css/detail.css" >
+     <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
+    <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
+  	<link type="text/css" rel="stylesheet" href="<c:url value='/css/detail.css' />" >
+    <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script src="<c:url value='/js/base.js' />" ></script>
+
     <style>
     	section {
     		width: 100%;
@@ -23,13 +27,14 @@
     		margin:0;
     	}
 		#left {
-
+			border: 1px solid black;
 			padding: 0;
 			width: 100%;
-			height: 70%;
+			height: auto;
 		}
 		#right {
 			/*border: 1px solid black; */
+			border: 1px solid black;
 			width: 80%;
 			height: 70%;
 			margin-right: auto;
@@ -39,7 +44,8 @@
 		}
 		#full_img {
 			width: 100%;
-			height: 100%;
+			height: auto;
+			
 		}
 		.btns {
 			width: 10%;
