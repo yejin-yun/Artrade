@@ -27,16 +27,16 @@
     		margin:0;
     	}
 		#left {
-			border: 1px solid black;
+			/*border: 1px solid black; */
 			padding: 0;
 			width: 100%;
 			height: auto;
 		}
 		#right {
 			/*border: 1px solid black; */
-			border: 1px solid black;
+			
 			width: 80%;
-			height: 70%;
+			height: 80%;
 			margin-right: auto;
 			margin-left: auto;
 			margin-top: 5%;
@@ -72,7 +72,7 @@
         <button onClick="history.go(-1)">되돌아 가기</button>
         </div>
     </section>
-    <footer class="w3-center" style="margin-top: 500px;">
+    <footer class="w3-center" style="margin-top: 80%;">
         <div style="padding: 30px 0;"><p>Copyright (c) Artrade  |    2018년 5월 22일~ </p><p>대표: 윤 예진</p></div>
     </footer>
 </body>

@@ -115,7 +115,7 @@
           </form>
        </div>
     </section>
-    <footer class="w3-center" style="margin-top: 500px;">
+    <footer class="w3-center" style="margin-top: 50%;">
         <div style="padding: 30px 0;"><p>Copyright (c) Artrade  |    2018년 5월 22일~ </p><p>대표: 윤 예진</p></div>
     </footer>
 </body>

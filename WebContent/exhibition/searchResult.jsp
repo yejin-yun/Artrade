@@ -69,10 +69,9 @@
            <table>
            <%
            		System.out.println("here is....view.jsp");
-           		List<SimpleArtworkInfo> artworkList = (List<SimpleArtworkInfo>)request.getAttribute("artworkList");
            		List<Exhibition> exhList = (List<Exhibition>)request.getAttribute("exhibitionList");
            		
-           		if(artworkList.size() < 1 && exhList.size() < 1) {
+           		if(exhList == null) {
            			out.println("<p style='text-align:center;'>검색결과가 없습니다.</p>");
            			return;           			
            		}
@@ -83,15 +82,11 @@
            		int startIndex = 0; 
            		int lastIndex = 0;
            		int i = -1;
-           		int resultNum;
            		
-           		resultNum = artworkList.size() + exhList.size();
-           		System.out.println("resultNum = " + resultNum);
-           		
-           		if(artworkList.size() > 0) {
+           		if(exhList.size() > 0) {
 					System.out.println("artworkList is not null");
 
-	           		total = artworkList.size();
+	           		total = exhList.size();
 	           		
 	           		System.out.println("test_curPage = " + curPage);
 	           		System.out.println("test_sIndex = " + request.getAttribute("sIndex"));
@@ -107,98 +102,16 @@
 	           		startIndex = rpp * (curPage - 1);
 	           		lastIndex = rpp * curPage - 1;
 	           		
-	           		allPage = (artworkList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
+	           		allPage = (exhList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
 					
 	           		for(i = startIndex; i <= lastIndex && i <total; i++) {
-	           			SimpleArtworkInfo artwork = artworkList.get(i);
+	           			Exhibition exhibition = exhList.get(i);
 	           			if((i + 1) % 3 == 1) {
 	           				out.println("<tr style='margin-bottom: 30px;'>");
 	           			}
 
            %>
-           		<td>
-           			<div class="w3-card-4 work">
-           				<c:set var="wish_val" value="<%= artwork.getIsInWishlist() %>" />  
-                        <c:set var="artworkNo" value="<%= artwork.getArtworkNo() %>" />
-                       <%--
-                        <a href="<c:url value="/artwork/detail" var="detail">
-                        		<c:param name="artworkNo" value="${artworkNo}" />
-                        	</c:url>"> --%>
-	                        <div class="img_div">
-	                        	<a href="<c:url value='/artwork/detail'>
-	            				<c:param name='artworkNo' value='${artworkNo}' />
-	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
-	                            <img class="main_img" src="<c:url value='<%= artwork.getImage() %>' />" /></a>
-	                        </div>
-                        	<div class="content">
-                        		<a href="<c:url value='/artwork/detail'>
-	            				<c:param name='artworkNo' value='${artworkNo}' />
-	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
-	                            <h2><%= artwork.getTitle() %></h2></a>
-	                            <c:if test="${wish_val == 1}" >
-	        						<c:set var="like_src" value="/images/bagic/heart-full.png" />
-	        					</c:if>
-	        					<c:if test="${wish_val == 0}" >
-	        						<c:set var="like_src" value="/images/bagic/heart-thin.png" />
-	        					</c:if>
-	                            <a href="<c:url value='/user/wishlistLike'>
-	                            	<c:if test="${wish_val == 0}" >
-	        							<c:param name="like" value="1" />
-	        						</c:if>
-	        						<c:if test="${wish_val == 1}" >
-	        							<c:param name="like" value="0" />
-	        						</c:if>
-	        						<c:param name="isLogined" value="1" /> <%-- 이걸 쓰려면 controller에서 isLogined를 쓰면 안됨 --%>
-	        						<c:param name="artworkNo" value="${artworkNo}" />
-	        						</c:url>">
-	                            	<img src="<c:url value='${like_src}' />" id="like_img"
-	                                	alt="하트(좋아요)" class="heart"
-	                                	style="padding-bottom: 10px; float: right; padding-right: 10px;"/>
-	                            </a>
-	                            <p><%= artwork.getArtistName() %></p>
-	                            <p><%= artwork.getPrice() %>원</p>
-                        </div>
-                    </div>
-                  </td>
-			<%
-						if(resultNum > 3){
-							if((i + 1) % 3 == 0) {
-			   					out.println("</tr>");
-			   				}
-						}
-           			}
-           		}
-           		
-           		if(resultNum < 3) {
- 	        	   if((3 - resultNum - 1) != i) { //i는 0부터 시작하니까 -1해준 거. 
- 			  		   for(int t = 0; t < 3 - resultNum; t++) {
- 			  			   out.println("<td></td>");
- 			  		   }
- 		  		   }
- 		  	   }	
-           		if(exhList.size() > 0) {
-           			System.out.println("exhList is not null");
-           			if(i == -1) {
-    	           		if(request.getAttribute("sIndex") != null && !request.getAttribute("sIndex").equals("")) {
-    	           			curPage = Integer.parseInt((String)request.getAttribute("sIndex"));
-    	           		} else { //널이라면 페이지를 처음 방문한 것임.
-    	           			curPage = 1;
-    	           		}
-    	           		       		
-           			}
-           			startIndex = rpp * (curPage - 1);
-	           		lastIndex = rpp * curPage - 1;
-           			total = exhList.size();
-	           		allPage = (exhList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
-	           		for(int j = startIndex; j <= lastIndex && j <total; j++) {
-	           			Exhibition exhibition = exhList.get(j);
-	           			if(resultNum > 3) {
-		           			if((j + 1) % 3 == 1) {
-		           				out.println("<tr style='margin-bottom: 30px;'>");
-		           			}		
-	           			}
-           %>
-           	<td>
+        	<td>
            		<div class="w3-card-4 work">
                    <c:set var="exhibitionNo" value="<%= exhibition.getExhibitionNo() %>" />
 	                    <div class="img_div">
@@ -236,13 +149,7 @@
           	</div>
                   </td>
            <%
-           				if(resultNum < 3) {
-           					for(int t = 0; t < 3 - resultNum; t++) {
-           						out.println("<td></td>");
-           						
-           					}
-           				}
-			       		if((j + 1) % 3 == 0) {
+			       		if((i + 1) % 3 == 0) {
 			  				out.println("</tr>");
 			  			}
 			  		}
@@ -278,4 +185,3 @@
     </div>
     </body>
 </html>
-
