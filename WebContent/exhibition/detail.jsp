@@ -19,22 +19,33 @@
     	section {
     		width: 100%;
     		height: 100%;
+    		padding:0;
+    		margin:0;
     	}
 		#left {
-			float: left;
-			width: 70%;
-			height: 100%;
+
+			padding: 0;
+			width: 100%;
+			height: 70%;
 		}
 		#right {
-			float: right;
-			width: 30%;
-			height: 100%;
-			padding-left: 3%;
+			/*border: 1px solid black; */
+			width: 80%;
+			height: 70%;
+			margin-right: auto;
+			margin-left: auto;
+			margin-top: 5%;
 			background-color: white;
 		}
 		#full_img {
 			width: 100%;
 			height: 100%;
+		}
+		.btns {
+			width: 10%;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 5%;
 		}
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
@@ -43,13 +54,16 @@
 <body>
 	<%@ include file="../main/header.jsp" %>
     <section>
-              <div class="img_div" id="left">
-                 <img class="full_img" src="<c:url value='/images/artwork/모네_수련_연작.jpg'/>" />
+        <div class="img_div" id="left">
+                 <img class="full_img" src="<c:url value='${artwork.image}'/>" />
               </div>
               <div class="content" id="right">
-              <h2>작가: 모네</h2>
-              <p>제목: 산책</p>
+              <h2>작가: ${artwork.artist}</h2>
+              <p>제목: ${artwork.title}</p>
               <p style="margin-top: 15px;">설명: ${artwork.description}</p>
+        </div>
+        <div class="btns">
+        <button onClick="history.go(-1)">되돌아 가기</button>
         </div>
     </section>
     <footer class="w3-center" style="margin-top: 500px;">

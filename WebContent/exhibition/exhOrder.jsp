@@ -183,10 +183,10 @@
                                 <label> <%-- detail.jsp?artworkNo=${ads.artwork.artworkNo}&isLogined=1&userNo=${ads.artwork(심플아트워크 담는 객체 변수의 이름).userNo} --%>
                                     <input type="checkbox" name="payment_product" value="${exh.exhibitionNo}" checked />    
                                     <%-- <a href="<c:url value='/${frontServletPath}/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />"> --%>
-                                    	<img src="<c:url value='${exh.image}' />" class="artwork_img" />
-                                    <span><br>${exh.title}<br>가격: ${exh.price}원</span></a>
+                                    	<img src="<c:url value='${exhibition.image}' />" class="artwork_img" />
+                                    <span><br>${exhibition.title}<br>가격: ${exhibition.price}원</span></a>
                                 </label> <!-- 라벨은 있는 게 좋은지 없는 게 좋은지 모르겠다... -->
-                                <c:set var="totalCost" value="${exh.price}" />
+                                <c:set var="totalCost" value="${exhibition.price}" />
                             </div>
                         </li>
                         </ul>
