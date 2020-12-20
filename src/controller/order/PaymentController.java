@@ -20,12 +20,10 @@ public class PaymentController implements Controller {
 		Manager manager = Manager.getInstance();
 		
 		
-		// 로그인 안했는데 결제하려고 하니까 login 페이지로 이동시켜주기 
     	if (!UserSessionUtils.hasLogined(request.getSession())) {
             return "redirect:/user/login";	
         }    
         
-    	// 결제로 넘어가는 페이지에서는 userNo과 isInCart값, artworkNo or artworList(setAtt로 보내주기..)를 PaymentController쪽으로 넘겨줘야 한다...
     	
     	System.out.println("isInCart = " + request.getParameter("isInCart"));
     	System.out.println("userNo = " + request.getParameter("userNo"));
@@ -41,15 +39,14 @@ public class PaymentController implements Controller {
     	request.setAttribute("isInCart", isInCart);
     	
     	List<Artwork> artworkList = null; 
+    	List<Artwork> artworkList2 = null; 
     	String[] artworkNoList = null;
     	
     	if(request.getMethod().equals("GET")) {
-    		// 카트에서 온건지, artwork/detail 페이지에서 온건지. 
     		String servletPath = request.getParameter("servletPath");
     		String[] array = servletPath.split("/");
  
     		request.setAttribute("frontServletPath", array[1]);
-    		if(isInCart == 0) { //  artwork/detail 페이지에서 온 것이다. 
     			Artwork artwork = manager.findArtworkForUser(userNo, Integer.parseInt(request.getParameter("artworkNo")));
     			request.setAttribute("artworkNo", Integer.parseInt(request.getParameter("artworkNo")));
     			request.setAttribute("artwork", artwork);
@@ -71,7 +68,6 @@ public class PaymentController implements Controller {
     		return "/user/order.jsp";
     		
     	}
-    	// 결제 완료에서 넘어온 경우 결제 정보를 저장함. 
     	
     	ArtworkOrder artworkOrder = new ArtworkOrder();
     	artworkOrder.setUserNo(userNo);
@@ -81,20 +77,29 @@ public class PaymentController implements Controller {
     	
     	
 
-    	if(isInCart == 0) {
-    		artworkList = new ArrayList<Artwork>();
+    		artworkList = (List<Artwork>)request.getAttribute("artworkList");
     		System.out.println("pay = " + request.getParameter("artworkNo"));
     		Artwork artwork = manager.findArtworkForUser(userNo, Integer.parseInt((String)request.getParameter("artworkNo")));
     		artworkList.add(artwork);
     	} else {
-    		artworkNoList = request.getParameterValues("cartArtwork");
+    		artworkNoList = request.getParameterValues("payment_product");
+    		
+    		artworkList2 = new ArrayList<Artwork>();
+        	for(String artworkNo : artworkNoList) {
+        		System.out.println("userNo... = " + userNo);
+        		int an = Integer.parseInt(artworkNo);
+        		System.out.println("an = " + an);
+        		artworkList2.add(manager.findArtworkForUser(userNo, an));
+        		
+        	}
+        	
     	}
     	
     	
     	
-    	manager.createArtworkOrder(artworkOrder, artworkList);
+    	manager.createArtworkOrder(artworkOrder, artworkList2);
 		
-    	for(Artwork a : artworkList) {
+    	for(Artwork a : artworkList2) {
     		
     		manager.updateSoldOut(a.getArtworkNo());
     	}
@@ -127,12 +132,12 @@ public class PaymentController implements Controller {
 		Manager manager = Manager.getInstance();
 		int isInCart = Integer.parseInt((String)request.getParameter("isInCart"));
 		
-		// 로그인 안했는데 결제하려고 하니까 login 페이지로 이동시켜주기 
+		// 濡쒓렇�씤 �븞�뻽�뒗�뜲 寃곗젣�븯�젮怨� �븯�땲源� login �럹�씠吏�濡� �씠�룞�떆耳쒖＜湲� 
     	if (!UserSessionUtils.hasLogined(request.getSession())) {
-            return "redirect:/user/login";		// login form 요청으로 redirect
+            return "redirect:/user/login";		// login form �슂泥��쑝濡� redirect
         }    
         
-    	// 결제로 넘어가는 페이지에서는 userNo과 isInCart값, artworkNo or artworList(setAtt로 보내주기..)를 PaymentController쪽으로 넘겨줘야 한다...
+    	// 寃곗젣濡� �꽆�뼱媛��뒗 �럹�씠吏��뿉�꽌�뒗 userNo怨� isInCart媛�, artworkNo or artworList(setAtt濡� 蹂대궡二쇨린..)瑜� PaymentController履쎌쑝濡� �꽆寃⑥쨾�빞 �븳�떎...
     	
     	int userNo = Integer.parseInt(request.getParameter("userNo"));
     	
@@ -140,13 +145,13 @@ public class PaymentController implements Controller {
     	request.setAttribute("isInCart", isInCart);
     	
     	if(request.getMethod().equals("GET")) {
-    		// 카트에서 온건지, artwork/detail 페이지에서 온건지. 
+    		// 移댄듃�뿉�꽌 �삩嫄댁�, artwork/detail �럹�씠吏��뿉�꽌 �삩嫄댁�. 
     		String servletPath = request.getParameter("servletPath");
     		String[] array = servletPath.split("/");
     		//System.out.println("request.getServletPath() = " + request.getServletPath());
         	//System.out.println("array[0] = " + array[1]);
     		request.setAttribute("frontServletPath", array[1]);
-    		if(isInCart == 0) { //  artwork/detail 페이지에서 온 것이다. 
+    		if(isInCart == 0) { //  artwork/detail �럹�씠吏��뿉�꽌 �삩 寃껋씠�떎. 
     			Artwork artwork = manager.findArtworkForUser(userNo, Integer.parseInt(request.getParameter("artworkNo")));
     			request.setAttribute("artworkNo", Integer.parseInt(request.getParameter("artworkNo")));
     			request.setAttribute("artwork", artwork);
@@ -157,7 +162,7 @@ public class PaymentController implements Controller {
     		return "/user/order.jsp";
     		
     	}
-    	// 결제 완료에서 넘어온 경우 결제 정보를 저장함. 
+    	// 寃곗젣 �셿猷뚯뿉�꽌 �꽆�뼱�삩 寃쎌슦 寃곗젣 �젙蹂대�� ���옣�븿. 
     	
     	ArtworkOrder artworkOrder = new ArtworkOrder();
     	artworkOrder.setUserNo(Integer.parseInt(request.getParameter("userNo")));

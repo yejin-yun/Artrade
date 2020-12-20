@@ -108,11 +108,9 @@
   
     <div class="section">
     <section>
-<<<<<<< HEAD
+
     	<form method="GET" id="payment_form" name="form">
-=======
-    	<%-- <form method="POST" action="<c:url value=' ' />" id="payment_form" name="form"> --%>
->>>>>>> d5f2a1e2fef8cbf48288068bec7be5a015722d89
+
            <table>
            <%
                  System.out.println("here is....view.jsp");
@@ -251,10 +249,7 @@
                  //out.println("<a href='<c:url value=\'/artwork/list\' var=\'artlist\'>
                //      <c:param name=\'sindex\' value=\'i\' /></c:url>'>" + i + "</a>");
          %>
-<<<<<<< HEAD
-=======
-         <!-- </form> -->
->>>>>>> d5f2a1e2fef8cbf48288068bec7be5a015722d89
+
     </section>
     </div>
     <div class="footer">
