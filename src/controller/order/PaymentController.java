@@ -40,6 +40,9 @@ public class PaymentController implements Controller {
     	request.setAttribute("userNo", userNo);
     	request.setAttribute("isInCart", isInCart);
     	
+    	List<Artwork> artworkList = null; 
+    	String[] artworkNoList = null;
+    	
     	if(request.getMethod().equals("GET")) {
     		// 카트에서 온건지, artwork/detail 페이지에서 온건지. 
     		String servletPath = request.getParameter("servletPath");
@@ -51,8 +54,19 @@ public class PaymentController implements Controller {
     			request.setAttribute("artworkNo", Integer.parseInt(request.getParameter("artworkNo")));
     			request.setAttribute("artwork", artwork);
     		} else {
-    			request.setAttribute("artworkList", (List<Artwork>) request.getAttribute("artworkList"));
+    			//request.setAttribute("artworkList", (List<Artwork>) request.getAttribute("artworkList"));
+    			artworkNoList = request.getParameterValues("cartArtwork");
+    			
+        		artworkList = new ArrayList<Artwork>();
+            	for(String artworkNo : artworkNoList) {
+            		System.out.println("userNo... = " + userNo);
+            		int an = Integer.parseInt(artworkNo);
+            		System.out.println("an = " + an);
+            		artworkList.add(manager.findArtworkForUser(userNo, an));
+            		request.setAttribute("artworkList", artworkList);
+            	}
     		}
+
     		
     		return "/user/order.jsp";
     		
@@ -60,24 +74,28 @@ public class PaymentController implements Controller {
     	// 결제 완료에서 넘어온 경우 결제 정보를 저장함. 
     	
     	ArtworkOrder artworkOrder = new ArtworkOrder();
-    	artworkOrder.setUserNo(Integer.parseInt(request.getParameter("userNo")));
+    	artworkOrder.setUserNo(userNo);
     	artworkOrder.setDestination(request.getParameter("destination"));
     	artworkOrder.setReceiver(request.getParameter("receiver"));
     	artworkOrder.setPhone(request.getParameter("phone"));
     	
-    	List<Artwork> artworkList; 
+    	
+
     	if(isInCart == 0) {
     		artworkList = new ArrayList<Artwork>();
     		System.out.println("pay = " + request.getParameter("artworkNo"));
     		Artwork artwork = manager.findArtworkForUser(userNo, Integer.parseInt((String)request.getParameter("artworkNo")));
     		artworkList.add(artwork);
     	} else {
-    		artworkList = (List<Artwork>) request.getAttribute("artworkList");
+    		artworkNoList = request.getParameterValues("cartArtwork");
     	}
+    	
+    	
     	
     	manager.createArtworkOrder(artworkOrder, artworkList);
 		
     	for(Artwork a : artworkList) {
+    		
     		manager.updateSoldOut(a.getArtworkNo());
     	}
     	
