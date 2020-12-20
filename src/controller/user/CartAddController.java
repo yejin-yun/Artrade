@@ -13,19 +13,19 @@ public class CartAddController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Manager manager = Manager.getInstance();
 		
-		// 로그인 여부 확인
+		// 濡쒓렇�씤 �뿬遺� �솗�씤
     	if (!UserSessionUtils.hasLogined(request.getSession())) {
     		
     		return "redirect:/user/login";
         } 
     	
-    	//로그인한 사용자 아이디 
+    	//濡쒓렇�씤�븳 �궗�슜�옄 �븘�씠�뵒 
     	String userId = UserSessionUtils.getLoginUserId(request.getSession());
-        //아이디로 사용자번호 찾기
+        //�븘�씠�뵒濡� �궗�슜�옄踰덊샇 李얘린
 		User user = manager.findUserById(userId);
 		int userNo = user.getUserNo();
 		
-		int artworkNo = (int)request.getAttribute("artworkNo");
+		int artworkNo = Integer.parseInt(request.getParameter("artworkNo"));
 		
 		int result = manager.addCartArtwork(userNo, artworkNo);
 		
@@ -36,8 +36,8 @@ public class CartAddController implements Controller {
 		/*request.setAttribute("curUserId", 
 				UserSessionUtils.getLoginUserId(request.getSession()));		*/
 
-		//cartlist로 보내버리기
-		return "/user/cartlist.jsp";
+		//cartlist濡� 蹂대궡踰꾨━湲�
+		return "/user/cartlist";
 	}
 
 }

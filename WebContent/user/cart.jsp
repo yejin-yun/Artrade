@@ -17,7 +17,25 @@
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/view.css' />" >
     <style>
-
+		.btns {
+			 margin-top: 10%;
+		}
+		
+		.btns input {
+			padding: 5px;
+			background-color: white;
+			border: 1px solid #646EFF;
+			color: #646EFF;
+			border-top-left-radius: 5px; 
+			border-bottom-left-radius: 5px;
+			border-top-right-radius: 5px; 
+			border-bottom-right-radius: 5px;
+		}
+		.btns input:hover
+		{ 	
+			color:white; 
+			background-color: #646EFF; 
+		}
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     <script src="<c:url value='/js/base.js' />" ></script>
@@ -29,6 +47,25 @@
             form.submit();
          }
         
+        function payment(targetUri) {
+ 	       var isChk = false;
+ 	       var products = document.getElementsByName("cartArtwork");
+ 	       console.log('console' + products[0]);
+ 	       for(var i=0;i<products.length;i++){
+ 	           if(products[i].checked == true) {
+ 	               isChk = true;
+ 	               break;
+ 	           }
+ 	       }
+ 	       
+ 	     if(!isChk) {
+ 	    	 alert("상품을 한개 이상 선택해주세요.");
+ 	         return false;
+ 	     }
+ 	     
+ 	     target(targetUri);
+        }
+             
        function deletes(targetUri) {
 	       var isChk = false;
 	       var products = document.getElementsByName("cartArtwork");
@@ -56,10 +93,8 @@
 	                select_obj += ', ';
 	            }
 	            select_obj += $(this).val();
-	        });
-	 
+	    });
 	        alert(select_obj);
-	        
 	        target(targetUri);
 	    }
      
@@ -84,8 +119,8 @@
                  
                  //System.out.println("size = " + cart.size());
                  
-                 if(cart == null) {
-                    out.println("<p style='text-align:center;'>상품이 없습니다.</p>");
+                 if(cart == null || cart.size() == 0) {
+                    out.println("<p style='text-align:center;'>장바구니에 담긴 상품이 없습니다.</p>");
                     return;
                  }
                  int total = cart.size();
@@ -99,11 +134,11 @@
                  int lastIndex = 0;
                  
                  if(request.getParameter("sIndex") != null && !request.getParameter("sIndex").equals("")) {
-                    curPage = Integer.parseInt(request.getParameter("sIndex"));
-                    System.out.println("sIndex = " + curPage);
-                 } else { //널이라면 페이지를 처음 방문한 것임.
-                    curPage = 1;
-                 }
+                     curPage = Integer.parseInt(request.getParameter("sIndex"));
+                     System.out.println("sIndex = " + curPage);
+                  } else { //널이라면 페이지를 처음 방문한 것임.
+                     curPage = 1;
+                  }
                  
                  //page=1, rpp=9라면 시작인덱스는 0이고, 마지막인덱스는 8이어야 함.
                  startIndex = rpp * (curPage - 1);
@@ -116,22 +151,32 @@
                        out.println("<tr style='margin-bottom: 30px;'>");
                     }
            %>
+           
+           
+           		<form>
                  <td>
                   <label> <%-- detail.jsp?artworkNo=${ads.artwork.artworkNo}&isLogined=1&userNo=${ads.artwork(심플아트워크 담는 객체 변수의 이름).userNo} --%>
                     <!-- <input type="checkbox" name="cartArtwork" value="<%= i %>"/> -->
-                    <input type="checkbox" name="cartArtwork" value="${artworkNo}"/>    
                     <div class="w3-card-4 work card">
-                        <c:set var="artworkNo" value="<%= cartArtwork.getArtworkNo() %>" />    
-                        <c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" /> 
+                    <c:set var="artworkNo" value="<%= cartArtwork.getArtworkNo() %>" />    
+                    <c:set var="userNo" value="<%= request.getAttribute(\"userNo\") %>" />
+                    
+                    <input type="checkbox" name="cartArtwork" value="${artworkNo}"/>    
+                    
+                        
                            <div class="img_div">
-                           	<a href="<c:url value='/artwork/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />" > 
-                               <img class="main_img" src="<c:url value='<%= cartArtwork.getImage() %>' />" /></a>
+                           	<a href="<c:url value='/artwork/detail'>
+                          	 	<c:param name='artworkNo' value='${artworkNo}' />
+	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
+                                <img class="main_img" src="<c:url value='<%= cartArtwork.getImage() %>' />" /></a>
                            </div>
                         	<div class="content">
-                        	<a href="<c:url value='/artwork/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />" > 
-                            <h2><%= cartArtwork.getTitle() %></h2><br>
-                            <h2><%= cartArtwork.getArtistName() %></h2><br>
-                            <h2><%= cartArtwork.getPrice() %></h2></a> 
+                        	<a href="<c:url value='/artwork/detail'>
+	            				<c:param name='artworkNo' value='${artworkNo}' />
+	            				<c:param name='isLogined' value='${isLogined}' /></c:url>"> 
+                            <h2><%= cartArtwork.getTitle() %></h2>
+                            <p><%= cartArtwork.getArtistName() %></p>
+                            <p><%= cartArtwork.getPrice() %>원</p></a> 
                           <%--<form method="post" id="wish_form"
                             action="<c:url value="/user/cart/like" var="wish"> --%>  
                            <div>
@@ -141,18 +186,36 @@
                     </div>
                     </label>
                   </td>
+                  
          <%
                if((i + 1) % 3 == 0) {
                      out.println("</tr>");
-                  }
-               }
-                 out.println("</table>");
+              		 }
+                } 
+                 out.println("</table>");        
+                  
          %>
+         
          <div class="w3-center"> 
-			<input type="button" value="선택 상품 삭제" onClick="value_check('<c:url value='/user/cartRemove' />', ${artworkNo})"/>
-			 <input type="button" value="결제" onClick="target('<c:url value='/order/payment' />')"/>
+         	<div class="btns">
+			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/cartRemove' />')"/>
+			 
+			 
+			 <c:set var="isInCart" value="1"/>
+			 <input type="button" value="결제" onClick="payment('<c:url value='/order/payment' />')"/>
+		    <a href="<c:url value='/order/payment'>
+            	<c:param name="isInCart" value="1" />
+            	<c:param name="artworkNo" value="${artwork.artworkNo}" />
+            	<c:param name="servletPath" value="<%= request.getServletPath() %>" />
+            </c:url>">
+            </a>
+           	</div>
+		 </form>
+		 
 		 </div>
+		 
          <%
+                 
                  if(total != 0) {
                     out.println("<div class='w3-center' style='margin-top: 50px;'>");
                     for(int i = 1; i <= allPage; i++) {
@@ -165,10 +228,10 @@
                        } else { //현재 페이지가 아닌 페이지의 경우 링크를 달아 클릭이 가능하게 해야함. 
                           //request.setAttribute("sIndex", i);
                           if(i == allPage) {
-                             out.println("<a href='/artrade/user/cart?sIndex=" + i + "'>" + i + "</a>");
+                             out.println("<a href='/artrade/user/cartlist?sIndex=" + i + "'>" + i + "</a>");
                         
                           } else {   
-                             out.println("<a href='/artrade/user/cart?sIndex=" + i + "'>" + i + "</a>|");
+                             out.println("<a href='/artrade/user/cartlist?sIndex=" + i + "'>" + i + "</a>|");
                         
                           }
                         }
