@@ -31,7 +31,6 @@
 	<%@ include file="../main/header.jsp" %>
    	  <div class="container">         
 	  <table class="table table-hover" style="caption-side: top;">
-	  	<caption style="text-align: center; margin-top: 0; margin-bottom: 5%; color: #148CFF;"><h2> 구매 내역 상세보기</h2></caption>
 	    <thead>
 	      <tr>
 	        <th>구매상품</th>

@@ -108,9 +108,7 @@
   
     <div class="section">
     <section>
-
     	<form method="GET" id="payment_form" name="form">
-
            <table>
            <%
                  System.out.println("here is....view.jsp");
@@ -249,7 +247,6 @@
                  //out.println("<a href='<c:url value=\'/artwork/list\' var=\'artlist\'>
                //      <c:param name=\'sindex\' value=\'i\' /></c:url>'>" + i + "</a>");
          %>
-
     </section>
     </div>
     <div class="footer">

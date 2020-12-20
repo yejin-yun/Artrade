@@ -31,7 +31,7 @@ public class MoveFromWishToCartController implements Controller {
 			manager.addCartArtwork(userNo, artworkNo);
 		}
 		
-		return "redirect:/user/wishlist";
+		return "redirect:/user/cartlist";
 	}
 
 }

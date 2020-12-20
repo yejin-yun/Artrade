@@ -35,8 +35,8 @@
         	margin-top: 5%;
         }
         .artwork_img {
-        	width: 50px;
-        	height: 30px;
+        	width: 100px;
+        	height: 50px;
         }
         .menu li {
         	margin: 10px;
@@ -194,7 +194,7 @@
         	</c:url>" id="payment_form">
             <div class="menu"> --%>
             <form method="POST" action="<c:url value='/order/payment'>
-            	<c:param name='isInCart' value='${isInCart}' /><c:param name='userNo' value='${userNo}' /><c:param name='artworkNo' value='${artworkNo}' /></c:url>" id="payment_form" name="form">
+            	<c:param name='isInCart' value='${isInCart}' /><c:param name='userNo' value='${userNo}' /><c:param name='artworkNo' value='${artwork.artworkNo}' /></c:url>" id="payment_form" name="form">
             	
             <div class="menu">
                     <h3>상품 정보</h3>
@@ -224,14 +224,16 @@
                     </c:if>
                     <c:if test="${isInCart == 1}" >
                     <c:forEach var="ads" items="${artworkList}" varStatus="status" > 
-                    	 <c:set var="totalCost" value="${totalCost + artwork.price}" />
+                    	 <c:set var="totalCost" value="${totalCost + ads.price}" />
                         <li>
                             <div class="product">
                                 <label> <%-- detail.jsp?artworkNo=${ads.artwork.artworkNo}&isLogined=1&userNo=${ads.artwork(심플아트워크 담는 객체 변수의 이름).userNo} --%>
-                                    <input type="checkbox" name="payment_product" value="${status.count}" checked />     
-                                    <a href="<c:url value='/${frontServletPath}/detail.jsp?artworkNo=${artworkNo}&isLogined=1&userNo=${userNo}' />">
-                                    	<img src="<c:url value='${ads.artwork.image}' />" class="artwork_img" >
-                                    <span>작가: ${ads.artwork.artistName}<br>작품명: ${ads.artwork.artistName}<br>가격: ${ads.artwork.price}원</span></a>
+                                    <input type="checkbox" name="payment_product" value="${ads.artworkNo}" checked />     
+                                    <a href="<c:url value='/artwork/detail'>
+	            					<c:param name='artworkNo' value='${ads.artworkNo}' />
+	            					<c:param name='isLogined' value='${isLogined}' /></c:url>">
+                                    	<img src="<c:url value='${ads.image}' />" class="artwork_img" >
+                                    <span><br>작가: ${ads.artistName}<br>작품명: ${ads.artistName}<br>가격: ${ads.price}원</span></a>
                                 </label> <!-- 라벨은 있는 게 좋은지 없는 게 좋은지 모르겠다... -->
                             </div>
                         </li>
@@ -276,7 +278,7 @@
             <div style="margin: 20px;">
                 <span>최종 결제 금액: </span> ${totalCost}원
             </div>
-            <div class="container" style="margin-top:0;">
+            <div class="container" style="margin-top:0; margin-bottom: 10%;">
 	  			<button type="button" class="btn btn-default" style="padding-right: 10px;">취소</button>
 	  			<button type="button" class="btn btn-default" id="btn_buy" onClick="buy()" >구매</button>
   			</div>
@@ -284,8 +286,5 @@
         </form>
         </div>
     </section>
-	<footer class="w3-center" style="margin-top: 500px;">
-        <div style="padding: 30px 0;"><p>Copyright (c) Artrade  |    2018년 5월 22일~ </p><p>대표: 윤 예진</p></div>
-    </footer>
 </body>
 </html>

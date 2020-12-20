@@ -42,7 +42,7 @@
            		System.out.println("here is....view.jsp");
            		List<Artwork> artworkList = (List<Artwork>)request.getAttribute("artworkList");
 
-           		if(artworkList == null) {
+           		if(artworkList == null || artworkList.size() == 0) {
            			out.println("<p style='text-align:center;'>작품이 없습니다.</p>");
            			return;
            		}
@@ -143,11 +143,6 @@
 					//		<c:param name=\'sindex\' value=\'i\' /></c:url>'>" + i + "</a>");
 			%>
     </section>
-    </div>
-    <div class="footer">
-        <footer class="w3-center" style="margin-top: 10%;">
-            <div style="padding: 30px 0;"><p>Copyright (c) Artrade  |    2018년 5월 22일~ </p><p>대표: 윤 예진</p></div>
-        </footer>
     </div>
     </body>
 </html>
