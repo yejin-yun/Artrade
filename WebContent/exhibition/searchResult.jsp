@@ -82,6 +82,7 @@
            		int startIndex = 0; 
            		int lastIndex = 0;
            		int i = -1;
+           		int ratioIndex;
            		
            		if(exhList.size() > 0) {
 					System.out.println("artworkList is not null");
@@ -101,6 +102,8 @@
 	           		//page=1, rpp=9라면 시작인덱스는 0이고, 마지막인덱스는 8이어야 함.
 	           		startIndex = rpp * (curPage - 1);
 	           		lastIndex = rpp * curPage - 1;
+	           		
+	           		ratioIndex = (curPage - 1) * rpp; 
 	           		
 	           		allPage = (exhList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
 					
@@ -132,7 +135,6 @@
 			        <div class="modal-header">
 			          <button type="button" class="close" data-dismiss="modal">&times;</button>
 			          <h2 class="modal-title"><%= exhibition.getTitle() %></h2>
-			          <h3>전시회 정보</h3>
 			        </div>
 			        <div class="modal-body">
 			          <p>설명: <%= exhibition.getDescription() %></p>
@@ -149,9 +151,20 @@
           	</div>
                   </td>
            <%
+           
+			           int temp = ratioIndex % rpp;
+					    if((temp) < 2) {
+						  	for(int t = 0; t < 2 - (temp); t++) {
+						  		System.out.println("temp = " + temp + "ratioIndex = " + ratioIndex + "size = " + exhList.size());
+						  		if(exhList.size() > (ratioIndex + (2 - temp)) || (exhList.size() - ratioIndex >= 2)) break;
+						  		//artworkList.size() - ratioIndex >= 2이면 한 페이지에 작품 2개 이상이 나온다는 건데, 2개 이상 나올 때는 1개일때 <td>를 수행하면 안됨.  
+						  		out.println("<td></td>");
+						  	}
+				  	   }	
 			       		if((i + 1) % 3 == 0) {
 			  				out.println("</tr>");
 			  			}
+			       		ratioIndex++;
 			  		}
            		}
            		out.println("</table>");
@@ -179,7 +192,7 @@
     </section>
     </div>
     <div class="footer">
-        <footer class="w3-center">
+        <footer class="w3-center" >
             <div style="padding: 30px 0;"><p>Copyright (c) Artrade  |    2018년 5월 22일~ </p><p>대표: 윤 예진</p></div>
         </footer>
     </div>

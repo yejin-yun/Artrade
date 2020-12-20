@@ -78,6 +78,7 @@
            		int curPage = 0;
            		int startIndex = 0; 
            		int lastIndex = 0;
+           		int ratioIndex;
            		System.out.println("test_curPage = " + curPage);
            		System.out.println("test_sIndex = " + request.getAttribute("sIndex"));
            		if(request.getAttribute("sIndex") != null && !request.getAttribute("sIndex").equals("")) {
@@ -91,6 +92,8 @@
            		//page=1, rpp=9라면 시작인덱스는 0이고, 마지막인덱스는 8이어야 함.
            		startIndex = rpp * (curPage - 1);
            		lastIndex = rpp * curPage - 1;
+           		
+           		ratioIndex = (curPage - 1) * rpp; //ratioIndex = 0으로 하면 새로운 페이지로 넘어가면 ratio는 0이 됨.  
            		
            		allPage = (artworkList.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
            		for(int i = startIndex; i <= lastIndex && i <total; i++) {
@@ -144,16 +147,19 @@
                     </div>
                   </td>
 			<%
-					if(artworkList.size() < 3) {
-			        	   if((3 - artworkList.size() - 1) != i) { //i는 0부터 시작하니까 -1해준 거. 
-					  		   for(int t = 0; t < 3 - artworkList.size(); t++) {
-					  			   out.println("<td></td>");
-					  		   }
-				  		   }
-				  	   }	
+					int temp = ratioIndex % rpp;
+				    if((temp) < 2) {
+					  	for(int t = 0; t < 2 - (temp); t++) {
+					  		System.out.println("temp = " + temp + "ratioIndex = " + ratioIndex + "size = " + artworkList.size());
+					  		if(artworkList.size() > (ratioIndex + (2 - temp)) || (artworkList.size() - ratioIndex >= 2)) break;
+					  		//artworkList.size() - ratioIndex >= 2이면 한 페이지에 작품 2개 이상이 나온다는 건데, 2개 이상 나올 때는 1개일때 <td>를 수행하면 안됨.  
+					  		out.println("<td></td>");
+					  	}
+			  	   }	
 					if((i + 1) % 3 == 0) {
 		   				out.println("</tr>");
 		   			}
+					ratioIndex++;
            		}
            		out.println("</table>");
            		if(total != 0) {

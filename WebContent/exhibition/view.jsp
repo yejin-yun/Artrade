@@ -69,7 +69,6 @@
                  <div class="modal-header">
                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                    <h2 class="modal-title">${exh.title}</h2>
-                   <h3>전시회 정보</h3>
                  </div>
                  <div class="modal-body">
                    <p>설명: ${exh.description}</p>
