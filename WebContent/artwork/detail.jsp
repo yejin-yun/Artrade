@@ -1,43 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="model.*, model.dao.*" %>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <% request.setCharacterEncoding("UTF-8"); %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Arteade</title>
+    <title>Artrade</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-   <link type="text/css" rel="stylesheet" href="<c:url value='/css/base.css' />" >
-    <link type="text/css" rel="stylesheet" href="<c:url value='/css/detail.css' />" >
+    <link type="text/css" rel="stylesheet" href="../css/base.css" >
+    <link type="text/css" rel="stylesheet" href="../css/detail.css" >
     <style>
-    
+    .btns{
+			 margin-top: 10%;
+		}
+		.btns button {
+			padding: 5px;
+			background-color: white;
+			border: 1px solid #646EFF;
+			color: #646EFF;
+			border-top-left-radius: 5px; 
+			border-bottom-left-radius: 5px;
+			border-top-right-radius: 5px; 
+			border-bottom-right-radius: 5px;
+		}
+		.btns button:hover
+		{ 	
+			color:white; 
+			background-color: #646EFF; 
+		}
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
-    <script src="<c:url value='/js/base.js' />" ></script>
-    <script>
-    	function checkInWish(wishFlag) {
-    		if(wishFlag == 1) {
-    			alert('이미 위시리스트에 있습니다.');
-    		}
-    	}
-    </script>
+    <script src="../js/base.js"></script>
 </head>
 <body>
      <%@ include file="../main/header.jsp" %>        
     <div class="container">
     <aside id="right">
-        <h2>작가: ${artwork.artworkNo} </h2>
-        <p>작품 명: ${artwork.title} </p>
+        <h2>작가: ${artwork.artistName} </h2>
+        <p>작품명: ${artwork.title} </p>
         <p>가격: ${artwork.price}원</p>
         <p>사이즈: ${artwork.workSize} </p>
         <c:set var="wish_val" value="${artwork.isInWishList }" />
+        <c:set var="cart_val" value="${artwork.isInCart }" />
+        
+        <div class="w3-center">
+        <div class="btns">
         <form class="btn">
             <a href="<c:url value='/order/payment'>
             	<c:param name="isInCart" value="0" />
@@ -45,21 +58,52 @@
             	<c:param name="servletPath" value="<%= request.getServletPath() %>" />
             </c:url>">
             <button type="button" id="buy">주문하기</button></a>
-            <a href=""><button type="button" id="cart">장바구니에 담기</button></a>
-            <%--  <c:set var="wish_val" value="<%= artwork.getIsInWishlist() %>" /> --%> 
+            
+            
             <c:set var="artworkNo" value="${artwork.artworkNo}" /> 
-             <a href="<c:url value='/user/wishlistLike'>
+            
+            <c:set var="isInCart" value="${artwork.isInCart}" /> 
+            <c:choose>
+            	<c:when test="${isInCart eq 0}">
+            		<a href="<c:url value='/user/cartAdd'>
+            	<c:param name="isLogined" value="1" />
+            	<c:param name="artworkNo" value="${artworkNo}" />
+           			 </c:url>">
+            		<button type="button" id="cartlist">장바구니에 담기</button>
+            </a>
+            	</c:when>
+            
+            <c:when test="${isInCart eq 1}">
+            
+            <button type="button" id="cartlist" onClick="alert('장바구니에 같은 상품이 이미 존재합니다.')">장바구니에 담기</button>
+            </c:when>
+            
+            
+            </c:choose>
+            
+            
+            <%-- <a href="<c:url value='/user/cartAdd'>
+            	<c:param name="isLogined" value="1" />
+            	<c:param name="artworkNo" value="${artworkNo}" />
+            </c:url>">
+            <button type="button" id="cartlist">장바구니에 담기</button>
+            </a> --%>
+  
+            <c:set var="artworkNo" value="${artwork.artworkNo}" /> 
+            <a href="<c:url value='/user/wishlistLike'>
 	                            	<c:if test="${wish_val == 0}" >
 	        							<c:param name="like" value="1" />
 	        						</c:if>
 	        						<c:if test="${wish_val == 1}" >
-	        							<c:param name="like" value="-1" />
+	        							<c:param name="like" value="0" />
 	        						</c:if>
 	        						<c:param name="isLogined" value="1" /> <%-- 이걸 쓰려면 controller에서 isLogined를 쓰면 안됨 --%>
 	        						<c:param name="artworkNo" value="${artworkNo}" />
 	        						</c:url>">
-        	<button type="button" id="wishlist" onClick="checkInWish('${wish_val}')">위시리스트에 담기</button></a>
+        	<button type="button" id="wishlist">위시리스트에 담기</button></a>
         </form>
+        </div>
+        </div>
     </aside>   
 
    <section id="section1">
