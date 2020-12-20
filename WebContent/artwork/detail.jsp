@@ -33,7 +33,7 @@
      <%@ include file="../main/header.jsp" %>        
     <div class="container">
     <aside id="right">
-        <h2>작가: ${artwork.artworkNo} </h2>
+        <h2>작가: ${artwork.arttistName} </h2>
         <p>작품 명: ${artwork.title} </p>
         <p>가격: ${artwork.price}원</p>
         <p>사이즈: ${artwork.workSize} </p>
