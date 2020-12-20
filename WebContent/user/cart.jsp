@@ -108,7 +108,11 @@
   
     <div class="section">
     <section>
+<<<<<<< HEAD
+    	<form method="GET" id="payment_form" name="form">
+=======
     	<%-- <form method="POST" action="<c:url value=' ' />" id="payment_form" name="form"> --%>
+>>>>>>> d5f2a1e2fef8cbf48288068bec7be5a015722d89
            <table>
            <%
                  System.out.println("here is....view.jsp");
@@ -132,6 +136,7 @@
                  int curPage = 0;
                  int startIndex = 0; 
                  int lastIndex = 0;
+                 int ratioIndex;
                  
                  if(request.getParameter("sIndex") != null && !request.getParameter("sIndex").equals("")) {
                      curPage = Integer.parseInt(request.getParameter("sIndex"));
@@ -144,6 +149,8 @@
                  startIndex = rpp * (curPage - 1);
                  lastIndex = rpp * curPage - 1;
                  
+                 ratioIndex = (curPage - 1) * rpp; 
+                 
                  allPage = (cart.size() / rpp) + (total % rpp == 0 ? 0 : 1); // 상품이 18개면 2페이지가 필요하고, 20개면 3페이지가 필요함.
                  for(int i = startIndex; i <= lastIndex && i <total; i++) {
                     Artwork cartArtwork = cart.get(i);
@@ -151,9 +158,6 @@
                        out.println("<tr style='margin-bottom: 30px;'>");
                     }
            %>
-           
-           
-           		<form>
                  <td>
                   <label> <%-- detail.jsp?artworkNo=${ads.artwork.artworkNo}&isLogined=1&userNo=${ads.artwork(심플아트워크 담는 객체 변수의 이름).userNo} --%>
                     <!-- <input type="checkbox" name="cartArtwork" value="<%= i %>"/> -->
@@ -168,7 +172,7 @@
                            	<a href="<c:url value='/artwork/detail'>
                           	 	<c:param name='artworkNo' value='${artworkNo}' />
 	            				<c:param name='isLogined' value='${isLogined}' /></c:url>">
-                                <img class="main_img" src="<c:url value='<%= cartArtwork.getImage() %>' />" /></a>
+                                <img class="main_img" src="<c:url value='<%= cartArtwork.getImage() %>' />" class="checkWish"/></a>
                            </div>
                         	<div class="content">
                         	<a href="<c:url value='/artwork/detail'>
@@ -188,32 +192,36 @@
                   </td>
                   
          <%
+         
+		         int temp = ratioIndex % rpp;
+				    if((temp) < 2) {
+					  	for(int t = 0; t < 2 - (temp); t++) {
+					  		System.out.println("temp = " + temp + "ratioIndex = " + ratioIndex + "size = " + cart.size());
+					  		if(cart.size() > (ratioIndex + (2 - temp)) || (cart.size() - ratioIndex >= 2)) break;
+					  		//artworkList.size() - ratioIndex >= 2이면 한 페이지에 작품 2개 이상이 나온다는 건데, 2개 이상 나올 때는 1개일때 <td>를 수행하면 안됨.  
+					  		out.println("<td></td>");
+					  	}
+			  	   }	
                if((i + 1) % 3 == 0) {
                      out.println("</tr>");
               		 }
+               ratioIndex++;
                 } 
                  out.println("</table>");        
                   
          %>
-         
+         <input type="text" value="1" name="isInCart" style="display:none;" readonly />
+         <input type="text" value="<%= request.getServletPath() %>'/>" name="servletPath" style="display:none;" readonly />
          <div class="w3-center"> 
          	<div class="btns">
 			<input type="button" value="선택 상품 삭제" onClick="deletes('<c:url value='/user/cartRemove' />')"/>
-			 
-			 
-			 <c:set var="isInCart" value="1"/>
-			 <input type="button" value="결제" onClick="payment('<c:url value='/order/payment' />')"/>
-		    <a href="<c:url value='/order/payment'>
+			 <input type="submit" value="결제" onClick="payment('<c:url value='/order/payment'>
             	<c:param name="isInCart" value="1" />
-            	<c:param name="artworkNo" value="${artwork.artworkNo}" />
             	<c:param name="servletPath" value="<%= request.getServletPath() %>" />
-            </c:url>">
-            </a>
+            </c:url>')"/>
            	</div>
-		 </form>
-		 
 		 </div>
-		 
+		 </form>
          <%
                  
                  if(total != 0) {
@@ -243,7 +251,10 @@
                  //out.println("<a href='<c:url value=\'/artwork/list\' var=\'artlist\'>
                //      <c:param name=\'sindex\' value=\'i\' /></c:url>'>" + i + "</a>");
          %>
+<<<<<<< HEAD
+=======
          <!-- </form> -->
+>>>>>>> d5f2a1e2fef8cbf48288068bec7be5a015722d89
     </section>
     </div>
     <div class="footer">
