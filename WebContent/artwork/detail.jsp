@@ -88,19 +88,21 @@
             </c:url>">
             <button type="button" id="cartlist">장바구니에 담기</button>
             </a> --%>
-  
-            <c:set var="artworkNo" value="${artwork.artworkNo}" /> 
-            <a href="<c:url value='/user/wishlistLike'>
-	                            	<c:if test="${wish_val == 0}" >
-	        							<c:param name="like" value="1" />
-	        						</c:if>
-	        						<c:if test="${wish_val == 1}" >
-	        							<c:param name="like" value="0" />
-	        						</c:if>
+  			
+  			<c:choose>
+  				<c:when test="${wish_val == 0}">
+  					<a href="<c:url value='/user/wishlistLike'>
+	        						<c:param name="like" value="1" />
 	        						<c:param name="isLogined" value="1" /> <%-- 이걸 쓰려면 controller에서 isLogined를 쓰면 안됨 --%>
 	        						<c:param name="artworkNo" value="${artworkNo}" />
 	        						</c:url>">
         	<button type="button" id="wishlist">위시리스트에 담기</button></a>
+  				</c:when>
+  				<c:when test="${wish_val == 1}">
+  					<button type="button" id="wishlist" onClick="alert('이미 위시리스트에 담긴 상품입니다.')">위시리스트에 담기</button>
+  				</c:when>
+  			</c:choose>
+ 
         </form>
         </div>
         </div>

@@ -53,6 +53,24 @@
 			margin-right: auto;
 			margin-top: 5%;
 		}
+		
+		.btns button 
+		{
+			margin-right: 10px;
+			padding: 5px;
+			background-color: white;
+			border: 1px solid #646EFF;
+			color: #646EFF;
+			border-top-left-radius: 5px; 
+			border-bottom-left-radius: 5px;
+			border-top-right-radius: 5px; 
+        	border-bottom-right-radius: 5px;
+      }
+		.btns button:hover
+		{ 	
+			color:white; 
+			background-color: #646EFF; 
+		}
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     <script src="<c:url value='/js/base.js' />" ></script>

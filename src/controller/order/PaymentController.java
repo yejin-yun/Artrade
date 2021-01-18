@@ -87,15 +87,23 @@ public class PaymentController implements Controller {
     		Artwork artwork = manager.findArtworkForUser(userNo, Integer.parseInt((String)request.getParameter("artworkNo")));
     		artworkList.add(artwork);
     	} else {
-    		artworkNoList = request.getParameterValues("cartArtwork");
+    		artworkNoList = request.getParameterValues("payment_product");
+    		System.out.println("artworkNoList= " + artworkNoList);
+    		artworkList = new ArrayList<Artwork>();
+    		for(String artworkNo : artworkNoList) {
+        		System.out.println("userNo... = " + userNo);
+        		int an = Integer.parseInt(artworkNo);
+        		System.out.println("an = " + an);
+        		artworkList.add(manager.findArtworkForUser(userNo, an));
+        	}
     	}
     	
     	
     	
     	manager.createArtworkOrder(artworkOrder, artworkList);
-		
+    	System.out.println("artworkList= " + artworkList);
     	for(Artwork a : artworkList) {
-    		
+    		System.out.println("a.getArtworkNo() = " + a);
     		manager.updateSoldOut(a.getArtworkNo());
     	}
     	
